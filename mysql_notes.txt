@@ -1,0 +1,159 @@
+
+MySQL notes 1:
+
+DBMS
+Relational database
+MySQL Workbench 
+
+SELECT
+FROM
+WHERE
+AS
+DISTINCT
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+MySQL notes 2:
+
+; ends a statement like USE
+
+Only give a prefix to a table if it is not a part of current DB
+
+JOIN for multiple tables, ON condition = condition
+
+composite primary key
+
+Be aware of implicit joined syntax (using WHERE, better to use JOIN ON
+
+(INNER) JOIN vs (OUTER) JOIN
+
+LEFT JOIN, RIGHT JOIN
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+MySQL notes 3:
+
+avoid using RIGHT JOIN, use LEFT JOIN instead 
+
+Self OUTER JOIN also possible 
+
+USING (when column name is exactly the same)
+
+*NATURAL JOIN *(guessing is not good, so not recommended)
+
+CROSS JOIN (combine results from multiple queries)
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+MySQL notes 4:
+
+UNION
+
+Database design mode: shows attributes of each column
+
+VARCHAR is less wasteful and is usually preferred to CHAR
+
+PK: Primary Key
+
+NN: Not Nullable (required)
+
+AI: Auto Increment (MySQL will generate new value by adding 1 for each new entry)
+
+Default: value that MySQL will insert if query uses DEFAULT
+
+DEFAULT is preferred to writing explicit value 
+
+‘Strings’ and ‘DATE-01-15’ should be in quotes
+
+INSERT INTO, values can be listed in any order, as long as column name is correct 
+
+VALUES (  ,   ,  )
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+MySQL notes 5:
+
+inserting multiple values:
+INSERT INTO shippers (name)
+VALUES ('Shipper1'), ('Shipper2'), ('Shipper3')
+
+INSERT INTO products (name, quantity_in_stock, unit_price)
+VALUES ('1', '1','1'), ('2', '2', '2'), ('3', '3', '3')
+
+even after data is deleted, MySQL will remember last id for AI values
+
+VALUES
+(LAST_INSERT_ID(), 1, 2)
+
+CREATE TABLE table_name AS
+SELECT
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+MySQL Notes 6:
+
+UPDATE: update 1 or more records in a table
+
+SET: specify new value for 1 or more columns
+
+To update/set single rows: 
+WHERE client_id = 3
+To update/set multiple rows:
+WHERE client_id IN (3, 4, 5)
+
+Replace = with IN operator for multiple results
+
+A subsquery is a SELECT statement that is within another SQL statement. A query in parenthesis is executed first as a sub query
+
+Deleting data:
+DELETE FROM invoices
+WHERE client_id = (
+SELECT *
+FROM clients
+WHERE name = 'Myworks’)
+
+As a best practrice should use SELECT * FROM before running UPDATE or DELETE anything
+
+Restoring databases in MySQL Workbench:
+File -> Open SQL Script -> (then execute the script to recreate all the databases)
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+MySQL Notes 7:
+
+SELECT
+  'fitting data name' AS new_header_column,
+  SUM(column_a) AS total_sales,
+  SUM(column_b) AS total_payments,
+  SUM(column_a - column_b) AS what_we_expect
+UNION
+
+use UNION for joining multiple rows of queries
+
+Aggregate functions are used for solving business problems - queries that summarize data
+
+Aggregate functions only operate on non-NULL values
+
+SUM can include two columns and perform subtraction, multiplication and other operations as well
+
+other aggregate functions:
+MAX()
+MIN()
+AVG()
+COUNT(): number of entries
+
+to get total number of entries irrespective of value being non-null then should use COUNT(*)
+
+COUNT(DISTINCT client_id) as total_records
+
+To count only unique values and avoid duplicates should use DISTINCT
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
