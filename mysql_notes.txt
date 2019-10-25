@@ -140,20 +140,54 @@ Aggregate functions are used for solving business problems - queries that summar
 
 Aggregate functions only operate on non-NULL values
 
-SUM can include two columns and perform subtraction, multiplication and other operations as well
-
 other aggregate functions:
 MAX()
 MIN()
 AVG()
+
+SUM()
+: SUM can include two columns and perform subtraction, multiplication and other operations as well
+
 COUNT(): number of entries
 
-to get total number of entries irrespective of value being non-null then should use COUNT(*)
+COUNT(*)
+: to get total number of entries irrespective of value being non-null
 
 COUNT(DISTINCT client_id) as total_records
-
-To count only unique values and avoid duplicates should use DISTINCT
+: to count only unique values and avoid duplicates then should use DISTINCT
 
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
+
+SQL Notes 8:
+
+GROUP BY 
+: group data by 1 or more columns
+
+GROUP BY 
+  c.customer_id,
+  c.first_name, 
+  c.last_name
+
+GROUP BY date, payment_method
+: will combine all data from same date and payment_method into one entry
+
+Order of clauses refresher:
+SELECT -> FROM -> WHERE -> GROUP BY -> ORDER BY
+
+When combining multiple columns using GROUP BY we get one result for each unique combination
+
+As a rule of thumb whenever we have an aggregate function and we're grouping data, we should group by all the columns in the SELECT clause
+
+HAVING
+: able to filter data after our rows are grouped (WHERE is for before data is grouped)
+: just like with WHERE clause we can type out one or more conditions (using AND)
+: columns have to be referred to from SELECT clause
+
+WITH ROLLUP
+GROUP BY pm.name WITH ROLLUP
+: powerful operation summarizing data, used with GROUP BY ... WITH ROLLUP
+: only applies to columns that aggregate values (like SUM, AVG, etc.)
+: this operation is only available in MySQL (not available in SQL server or Oracle)
+: when you use the ROLLUP operator we can't use a column alias in the GORUP BY clause - in that case should type the actual name of the column
