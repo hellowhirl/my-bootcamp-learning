@@ -191,3 +191,6 @@ GROUP BY pm.name WITH ROLLUP
 : only applies to columns that aggregate values (like SUM, AVG, etc.)
 : this operation is only available in MySQL (not available in SQL server or Oracle)
 : when you use the ROLLUP operator we can't use a column alias in the GORUP BY clause - in that case should type the actual name of the column
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
