@@ -159,7 +159,6 @@ COUNT(DISTINCT client_id) as total_records
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-
 SQL Notes 8:
 
 GROUP BY 
@@ -194,3 +193,4 @@ GROUP BY pm.name WITH ROLLUP
 
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
