@@ -21,6 +21,7 @@ MySQL notes 2:
 Only give a prefix to a table if it is not a part of current DB
 
 JOIN for multiple tables, ON condition = condition
+JOIN payment_methods pm ON  p.payment_method = pm.payment_method_id
 
 composite primary key
 
@@ -108,7 +109,8 @@ WHERE client_id IN (3, 4, 5)
 
 Replace = with IN operator for multiple results
 
-A subsquery is a SELECT statement that is within another SQL statement. A query in parenthesis is executed first as a sub query
+A subquery is a SELECT statement that is within another SQL statement. 
+A query in parenthesis is executed first as a subquery
 
 Deleting data:
 DELETE FROM invoices
@@ -159,7 +161,7 @@ COUNT(DISTINCT client_id) as total_records
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-SQL Notes 8:
+MySQL Notes 8:
 
 GROUP BY 
 : group data by 1 or more columns
@@ -177,7 +179,8 @@ SELECT -> FROM -> WHERE -> GROUP BY -> ORDER BY
 
 When combining multiple columns using GROUP BY we get one result for each unique combination
 
-As a rule of thumb whenever we have an aggregate function and we're grouping data, we should group by all the columns in the SELECT clause
+As a rule of thumb whenever we have an aggregate function and we're grouping data, 
+we should group by all the columns in the SELECT clause
 
 HAVING
 : able to filter data after our rows are grouped (WHERE is for before data is grouped)
@@ -189,8 +192,89 @@ GROUP BY pm.name WITH ROLLUP
 : powerful operation summarizing data, used with GROUP BY ... WITH ROLLUP
 : only applies to columns that aggregate values (like SUM, AVG, etc.)
 : this operation is only available in MySQL (not available in SQL server or Oracle)
-: when you use the ROLLUP operator we can't use a column alias in the GORUP BY clause - in that case should type the actual name of the column
+: when you use the ROLLUP operator we can't use a column alias in the GORUP BY clause - 
+in that case we should type the actual name of the column
+
+possible to join multiple tables with more than one JOIN clause:
+JOIN orders o USING (customer_id)
+JOIN order_items oi USING (order_id)
 
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
+MySQL Notes 9:
+
+Subquery example (just using parenthesis):
+
+SELECT
+	*
+FROM employees
+WHERE salary > (
+	SELECT
+        AVG(salary) AS Average_Salary
+	FROM employees
+)
+ORDER BY salary DESC
+
+
+Example: find the clients that do not have an invoice:
+
+SELECT *
+FROM clients
+WHERE client_id NOT IN (
+	SELECT DISTINCT client_id
+    FROM invoices
+)
+
+
+In the case when query is made complex using a subquery, it's better to use a JOIN - 
+for better readability (and vice versa)
+
+Example where it's cleaner to use JOIN clauses:
+
+SELECT
+	DISTINCT customer_id,
+    first_name,
+    last_name
+FROM customers
+JOIN orders USING (customer_id)
+JOIN order_items USING (order_id)
+WHERE product_id = 3
+
+
+ALL
+: return TRUE if the comparison is TRUE for ALL of the values in the column that the subquery returns
+: ALL vs MAX()
+: both are satisfactory ways for handling this business problem:
+  Select invoices larger than all invoices of client 3
+
+SELECT *
+FROM invoices
+WHERE invoice_total > ALL (
+	SELECT invoice_total
+    FROM invoices
+    WHERE client_id = 3
+)
+
+SELECT *
+FROM invoices
+WHERE invoice_total > (
+	SELECT MAX(invoice_total)
+	FROM invoices
+	WHERE client_id = 3
+)
+
+
+= ANY
+: same as IN when using subqueries
+
+Example: Select clients with at least 2 invoices
+
+SELECT *
+FROM clients
+WHERE client_id = ANY (
+	SELECT client_id
+	FROM invoices
+	GROUP BY client_id
+	HAVING COUNT(*) >=2
+)

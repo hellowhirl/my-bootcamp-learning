@@ -1,3 +1,6 @@
+// Exercise 1
+console.log('*** Exercise 1 ***');
+
 const address = {
     street: 246,
     city: 'Homsburg',
