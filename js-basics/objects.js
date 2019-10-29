@@ -138,10 +138,23 @@ const newTriangle = new Triangle(1);
 const newTriangle1 = new Triangle1(2);
 
 
-// when we use an object, that object is not stored in that variable
+let a = 10;
+let b = a; // a's value is copied into new variable
 
-let x = {value: 2}; // the address of that memory location is stored inside this variable
+a = 20;
+
+// these 2 variables are completely independent of each other
+console.log({a}); // 20
+console.log({b}); // 10
+
+
+console.log('when we use an object, that object is not stored in that variable - that object is stored somewhere in memory');
+
+let x = {value: 30}; // the address of that memory location is stored inside this variable
 let y = x; // the address (or reference) is copied
+
+console.log(x);
+console.log(y);
 
 
 let number = 10; // variable is independent of each other
