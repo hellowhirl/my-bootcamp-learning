@@ -61,7 +61,7 @@ console.log(findCourseIndex);
 
 // remove function keyword, separate parameters of function from body with =>
 // with single parameter we can get rid of the paranthesis
-// single line of code can be written in one line, remove curly braces and return statement
+// if single line of code (single value, etc.) can be written in one line, remove curly braces and 'return' statement
 const arrowCourse = courses.find(course => course.name === 'a' )
 
 // we read this expression as "course goes to course.name === a" - we are finding a course with name equal to 'a'
@@ -251,3 +251,83 @@ const againNumbers = [1, -1, 2, 3];
 const filteredArray = againNumbers.filter(n => n >= 0) // made into arrow function, we can exclude 'return'
 
 console.log('filteredArray', filteredArray); // returns a new array of values according to filter criteria
+
+
+
+console.log(`************************
+*** Mapping an array ***
+************************`);
+// Mapping an array
+// map() - able to map each item an array to something else (string or object)
+
+// string example
+
+const newNumbers = [1, 2, 3, -1];
+
+const newFiltered = newNumbers.filter(n => n >= 0)
+
+const items = newFiltered.map(n => '<li>' + n + '</li>' );
+const html = '<ul>' + items.join('') + '</ul>';
+console.log(items);
+console.log(html);
+
+// object example
+
+const objectItems = newFiltered.map(n => {
+    const obj = {value: n};
+    return obj;
+});
+
+console.log('objectItems', objectItems);
+
+// chainable methods - when result from a constant is not used anywhere throughout your code (no need to declare 'const obj')
+// in this case we can simply return object without declaring a constant
+// should put each method call on a seperate line for cleaner code
+
+const objectItemImproved = newFiltered.map(n => ({value: n}));
+
+console.log('objectItemImproved', objectItemImproved);
+
+const chainedMethods = newFiltered
+    .filter(n => n >= 0)
+    .map(n => ({value: n}))
+    .filter(obj => obj.value > 1)
+    .map(obj => obj.value);
+    // .filter(n => n >= 0)
+// .map(n => ({ value: n }))
+console.log(chainedMethods);
+
+
+
+// Reducing an array
+
+const purchaseNumbers = [1, -1, 2, 3];
+
+// old way:
+let sum = 0;
+for(let n of purchaseNumbers)
+    sum += n;
+console.log(sum);
+
+// let sumOfReduced = purchaseNumbers.reduce((accumulatr, currentValue) => {
+//     return accumulatr + currentValue;
+// }, 100); // '0' is initial value for accumulator
+
+
+// more elegant way:
+
+// what's happening below - convert all elements in array into a single value:
+// a = 1, c = 1, a = 1
+// a = 1, c = -1, a = 0
+// a = 2, c = 2, a = 2
+// a = 2, c = 3, a = 5
+let sumOfReduced = purchaseNumbers.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue;
+}, 100); // '100' is initial value for accumulator - default is '0' if left unset
+
+console.log(sumOfReduced);
+
+
+let betterSumOfReduced = purchaseNumbers.reduce((accumulator, currentValue) => accumulator + currentValue);
+
+console.log(betterSumOfReduced);
