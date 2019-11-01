@@ -264,7 +264,7 @@ console.log(`************************
 
 const newNumbers = [1, 2, 3, -1];
 
-const newFiltered = newNumbers.filter(n => n >= 0)
+const newFiltered = newNumbers.filter(n => n >= 0);
 
 const items = newFiltered.map(n => '<li>' + n + '</li>' );
 const html = '<ul>' + items.join('') + '</ul>';
@@ -299,7 +299,7 @@ console.log(chainedMethods);
 
 
 
-// Reducing an array
+// Reducing an array (to single value)
 
 const purchaseNumbers = [1, -1, 2, 3];
 
