@@ -87,7 +87,7 @@ console.log(start); // 1
 
 // Remove from middle
 const extraNumbers = [1, 2, 3, 4, 5];
-const middle = extraNumbers.splice(2, 2); // again we use splice method, but without adding fial arguments
+const middle = extraNumbers.splice(2, 2); // again we use splice method, but without adding final arguments
 console.log(extraNumbers); // 1, 2, 5
 console.log(middle); // 3, 4 - from index 2 removed 2 elements
 
@@ -152,7 +152,7 @@ console.log(combineAgain);
 const betterCombination = [...first, ...second];
 console.log('betterCombination', betterCombination);
 
-const copy = [...betterCombination];
+const copy = [...betterCombination]; // clones (or copy) of original array
 console.log(copy);
 
 

@@ -66,3 +66,47 @@ function except(array, excluded) {
     }
     return finalArray;
 }
+
+
+
+// Exercise 4
+lazy();
+
+const fourthNumbers = [1, 2, 3, 4];
+
+const result = move(fourthNumbers, 1, 2);
+
+console.log(result);
+
+// tutorial solution:
+function move(array, index, offset) {
+    const newPosition = (index + offset);    
+    if(newPosition < 0 || newPosition >= array.length) {
+        console.error('Invalid offset');
+        return;
+    }
+    
+    const output = [...array];
+    const element = output.splice(index, 1)[0]; // [0] is necessary here to extract value from the array
+    output.splice(newPosition, 0, element);
+    return output;
+}
+
+// my original solution:
+function mySolution(array, index, offset) {
+    const copy = array.slice();
+    const removed = copy
+        .splice(index, 1) // remove one number
+        .join();
+    const integer = Number(removed);
+    const newPosition = (index + offset);
+
+    if(newPosition >= 0 && newPosition <= copy.length) {
+        copy.splice(newPosition, 0, integer);
+        return copy;
+    }
+    else console.error('Invalid offset');
+}
+
+
+
