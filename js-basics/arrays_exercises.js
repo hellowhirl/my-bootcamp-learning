@@ -110,3 +110,124 @@ function mySolution(array, index, offset) {
 
 
 
+// Exercise 5
+lazy();
+
+const fifthNumbers = [1, 2, 3, 4, 1, 1];
+
+// const count = countOccurences(fifthNumbers, 3);
+// console.log(count);
+
+// function countOccurences(array, searchElement) {
+//     let counter = 0;
+//     for(let n of array) {
+//         if (n === searchElement) {            
+//             counter++;
+//         }
+//     }
+//     return counter;
+// }
+
+
+// my solution:
+const test = 1;
+
+let countedNumbers = fifthNumbers.reduce((accumulator, currentValue) => { 
+    if(currentValue === test)
+        accumulator++
+    return accumulator;
+}, 0);
+
+// console.log(countedNumbers);
+
+
+// tutorial solution:
+
+function countOccurences(array, searchElement) {
+
+    return array.reduce((accumulator, currentValue) => { // always remember to 'return' a value somewhere in a function
+        const count = (currentValue === searchElement) ? 1 : 0; // ????? adds 1  to accumulator if true, adds 0 if false
+        console.log(accumulator, currentValue, searchElement)
+        return accumulator + count; // ????? how does count get appended to accumulator?
+    }, 0)
+}
+
+console.log(countOccurences(fifthNumbers, 1));
+
+
+
+// Exercise 6
+lazy();
+
+const sixthNumbers = [10, 32, 20, 53, 4];
+
+const maxNumber = getMax(sixthNumbers);
+console.log(maxNumber);
+
+
+// my original solution:
+
+function getMax(array) {
+    if(array.length === 0) return undefined; // some developers prefer to put as one single line of code
+
+    let currentMax = array[0];
+
+    for(let i = 1; i < array.length; i++){
+        console.log(array[i]);
+        if(array[i] > currentMax)
+            currentMax = array[i];
+    }
+    return currentMax;
+}
+
+
+// using reduce method solution:
+
+function getMax(array) {
+    if(array.length === 0) return undefined; // some developers prefer to put as one single line of code
+
+    return array.reduce((a, b) => { // reudce method is used here to find single value that is the largest
+        console.log(a, b); // renamed these 2 parameters for cleaner code, original was currentValue, accumulator
+        return (a > b) ? a : b; // shifting order of these operand, easier to understand
+    })
+}
+
+
+
+// Exercise 7
+lazy();
+
+// All movies in the year 2018
+// Rating greater than 4
+// Sort by rating in descending order
+// Only pick title property
+// Result: 'b' 'a'
+
+const movies = [
+    {title: 'a', year: 2018, rating: 4.5},
+    {title: 'b', year: 2018, rating: 4.7},
+    {title: 'c', year: 2018, rating: 3},
+    {title: 'd', year: 2017, rating: 4.5}
+]
+
+
+function find(movies) {
+    let result = [];
+    for(movie of movies){
+        if(movie.year === 2018 && movie.rating > 4)
+            result.push(movie.title);        
+    }
+    return result.reverse();
+}
+
+
+const finder = movies
+    .filter(n => n.year === 2018 && n.rating > 4)
+    .sort((a, b) => a.rating - b.rating) // or reverse order of a.rating and b.rating to get .reverse() effect
+    .reverse()
+    .map(a => a.title)
+;
+
+console.log(finder);
+
+
