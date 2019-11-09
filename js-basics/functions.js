@@ -245,3 +245,63 @@ function Video(title) {
 }
 
 const v = new Video('a'); // insteaed of the window object, we get this new Video object {}
+
+
+
+// Changing 'this' - 3 approaches
+
+function playVideo(a, b) {
+    console.log(this);
+    console.log(a, b);
+}
+
+// able to change value of 'this' for above function with below methods
+
+playVideo.call( {name: 'Geo'}, 1, 2); // first parameter is thisArg - so we can pass an object and 'this' references that object
+playVideo.apply( {name: 'George'}, [1, 2]); // only difference is that for multiple arguments they need to be passed as an array
+
+// .bind() returns a new function (does not call original function) and sets 'this' to point to the passed object permanently
+const fn = playVideo.bind( {name: 'Georgia'}, 3, 4 ); 
+fn();
+
+playVideo.bind( {name: 'Giorgio Armani' }, 5, 6)(); // we can call the function that is returned from bind method using () after
+
+// Approach 1
+const approach1 = { // not preferred approach, but it's common
+    measurement: 11,
+    tags: ['a', 'b', 'c'],
+    feature() {
+        const self = this;
+        this.tags.forEach(function(tag){
+            console.log(self.measurement, tag);
+        })
+    }
+}
+// Approach 2
+const approach2 = { // 2nd solution
+    measurement: 22,
+    tags: ['a', 'b', 'c'],
+    feature() {
+        this.tags.forEach(function(tag){
+            console.log(this.measurement, tag);
+        }.bind(this)) // call the bind() method and embeded it after function - pass 'this' because it's within a method
+    }
+}
+// Approach 3
+const approach3 = { // best modern practice
+    measurement: 33,
+    tags: ['a', 'b', 'c'],
+    feature() {
+        this.tags.forEach(tag => { // arroy functions inherit the 'this' value - inherit 'this' from the containing function
+            console.log(this.measurement, tag); // 'this' is not rebound to a new object
+        })
+    }
+}
+
+
+
+approach1.feature();
+approach2.feature();
+approach3.feature();
+
+
