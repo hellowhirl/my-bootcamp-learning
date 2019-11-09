@@ -107,3 +107,141 @@ function interest(principal, rate = 3.5, years = 5) { // cleaner way to do in ES
 }
 
 console.log(interest(10000));
+
+
+
+// Getters & Setters
+
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    get fullName() { // this is just 'function fullName() {}' with 'function' dropped
+        return `${person.firstName} ${person.lastName}`;
+    },
+    set fullName(value) {
+        const parts = value.split(' ');
+        this.firstName = parts[0];
+        this.lastName = parts[1];
+    }
+}
+
+person.fullName = 'Billy Bub';
+console.log(person); // in console it may show '...' because it is a getter
+
+
+
+// Try & Catch - defensive programming
+
+const personTry = {
+    firstName: "John",
+    lastName: "Doe",
+    set fullName(value) {
+        if(typeof value !== 'string')
+            throw new Error('Value must be a string'); // if we don't catch the exception the error will simply be "Uncaught Error"
+        
+        const parts = value.split(' ');
+            if(parts.length !== 2)
+                throw new Error('Please enter a first and last name');
+            this.firstName = parts[0];
+            this.lastName = parts[1];
+    }
+};
+
+try { // a try block can have one or more statements - at least one can throw an exception
+    personTry.fullName = '';
+}
+catch (e) { // 'e' is the error object that we are throwing
+    console.log(e); // or alert()
+}
+console.log(personTry); // in console it may show '...' because it is a getter
+
+
+
+// Scope - Global vs Local
+
+{
+const message = 'hi';
+} // variables's access is limited to the block that they are defined
+
+const color = 'blue'; // global variable - should avoid
+function trial() {
+    return color; // will return global variable already defined or be overwritten with same named variable within local scope
+}
+
+console.log(trial());
+
+function test() {
+    const weight = 75; // ok to use same name variables with different values in multiple functions
+}
+
+function another() {
+    const weight = 80;
+    for(let i = 0; i < 5; i++) { // 'i' is limited to this 'for block'
+        console.log(i);
+    }
+}
+
+another();
+
+
+
+// let vs var
+// should avoid defining variables with 'var' - it creates function-scope variables
+// let, const: block-scoped variables
+
+function start() {
+    for(var i = 100; i < 105; i++) {
+        console.log(i) // should only log until 104
+    }
+    console.log(i); // but with using 'var' we can mistakenly log 105 here, as var is bound by function scope
+}
+
+start();
+
+var attached = 'bad global variable'; // as global variable it attachees to 'window' object - not good
+let notAttached = 'good';
+
+console.log(window.attached); // "bad"
+console.log(window.notAttached); // undefined
+
+
+function sayHi() { // attachees to 'window' object - not good
+    console.log('say hi');
+}
+
+
+
+// The 'this' keyword
+// references the object that is executing the current function
+// method => object
+// function =>  global (window, global)
+
+function table() {
+    console.log(this);
+}
+
+const video = {
+    prop: 1,
+    message: 'hello',
+    tags: ['a', 'b', 'c'],
+    total() {
+        console.log(this);
+    },
+    show() {
+        this.tags.forEach(function(tag){ // a function like this would normally refer to global window object
+            console.log(this.prop, tag);
+        }, this) // forEach 2nd parameter is 'thisArg' - and 'this' will reference this 'video' object
+    }
+};
+
+table(); // will reference this as 'window' object
+video.total(); // will pull all properties from within 'video' variable
+
+video.show();
+
+function Video(title) {
+    this.title = title;
+    console.log(this);
+}
+
+const v = new Video('a'); // insteaed of the window object, we get this new Video object {}
