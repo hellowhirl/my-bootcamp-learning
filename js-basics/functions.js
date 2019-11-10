@@ -298,10 +298,6 @@ const approach3 = { // best modern practice
     }
 }
 
-
-
 approach1.feature();
 approach2.feature();
 approach3.feature();
-
-
