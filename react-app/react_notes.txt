@@ -1,0 +1,36 @@
+// React notes
+
+// Each component is a piece of UI - build them separately and put together to build complex UI'separately
+// React elements are just JS objects that maps to a DOM elements (just represents DOM elememnt in memory)
+
+// Don't need to write code to query and manipulate DOM or attach event handlers to DOM elements
+
+
+// Both below are similar in component based architecture;
+// Angular is a complete solution framework
+// Reach is simply a library that handles the View - making sure view is in sync with the state
+
+// create-react-app
+// installs Web Development Server, Webpack, Babel
+// zero config setup - but possible with running command "npm run eject"
+
+// JSX: JavaScript XML
+// Babel converts JSX code to browswer readable JavaScript
+
+// id="root" is container for our React app
+
+- react-scripts:
+
+"start": "react-scripts start", // start dev server
+"build": "react-scripts build", // build application for production for optimized pacckage
+"test": "react-scripts test", // for running unit tests
+"eject": "react-scripts eject" // eject from create-react app and customize configs for this project
+
+- all the complex configs (babel, webpack, etc.) are hidden
+
+*only use if you know what you're doing*
+    npm run eject
+- this will make all dependencies visible and you can also see 'config' folder
+
+
+- Full-stack: JavaScript / Node + Express + MongoDB
