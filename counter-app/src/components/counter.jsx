@@ -32,10 +32,17 @@ class Counter extends Component {
   // experimental way to bind event handlers (set 'this') - if this breaks later then do tried and true constructor approach
   // arrow function dont' rebind the 'this' keyword, they inherit it
   // set a method to an arrow function by using '=' operator
-  handleIncrement = () => {
+  handleIncrement = product => {
+    // here we are able to pass arguments with our event - here we are passing the id of a product
+    console.log(product);
     // 'setState' method tells React to update the state - syncs DOM with vDOM
     this.setState({ count: this.state.count + 1 }); // we pass an object, and the property we set is same as in state, or new props
   };
+
+  //   doHandleIncrement = () => {
+  //     // writiing code like this is messy - dont' want to write a wrapper method for antoher event handler
+  //     this.handleIncrement({ id: 1 });
+  //   };
 
   render() {
     // below code was refactored into getBadgeClasses() method - to render a className dynamically
@@ -54,7 +61,8 @@ class Counter extends Component {
           {this.formatCount()}
         </span>
         <button
-          onClick={this.handleIncrement} // not calling the method but simply passing a reference to it (unlike in vanilla JS)
+          //   onClick={this.handleIncrement} // not calling the method but simply passing a reference to it (unlike in vanilla JS)
+          onClick={() => this.handleIncrement({ id: 1 })} // use inline function here: whenever you need to pass an argument through event handlers, pass an arrow function, in body of function call the event handler, and pass an argument
           style={{ fontSize: 30 }}
           className="btn btn-secondary btn-sm"
         >
