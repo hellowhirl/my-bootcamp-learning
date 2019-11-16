@@ -12,16 +12,23 @@
 
 // create-react-app
 // installs Web Development Server, Webpack, Babel
-// zero config setup - but possible with running command "npm run eject"
+// zero config setup - but possible with running command
+    $ npm run eject
 
 // JSX: JavaScript XML
 // Babel converts JSX code to browswer readable JavaScript
+
+Helpful plugins
+- Prettier
+- Simple React Snippets
+    shortcuts like: imrc, cc
 
 // id="root" is container for our React app
 
 - react-scripts:
 
-"start": "react-scripts start", // start dev server
+"start": "react-scripts start", // start dev server 
+    $ npm start
 "build": "react-scripts build", // build application for production for optimized pacckage
 "test": "react-scripts test", // for running unit tests
 "eject": "react-scripts eject" // eject from create-react app and customize configs for this project
@@ -29,8 +36,26 @@
 - all the complex configs (babel, webpack, etc.) are hidden
 
 *only use if you know what you're doing*
-    npm run eject
+    $ npm run eject
 - this will make all dependencies visible and you can also see 'config' folder
 
 
 - Full-stack: JavaScript / Node + Express + MongoDB
+
+- better to use .jsx for file names in 'components' - we get better code completion
+
+Simple React Snippets
+- imrc: import React / Component
+- cc: Class Coomponent
+
+Setting attribute:
+<img src={this.state.imageUrl} alt="" />
+
+we can't use 'class' because it's a reserved keyword in JS, so we use 'className' in JSX
+
+refactor shortcut in VS code : CTRL + SHIFT + R
+
+alias for npm install
+    $ npm i
+
+- when we build an application webpack will pull in files that we have specified on index.js with 'import' and put them in a final bundle

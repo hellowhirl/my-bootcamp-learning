@@ -30,7 +30,7 @@ class Counter extends Component {
   }
 
   // experimental way to bind event handlers (set 'this') - if this breaks later then do tried and true constructor approach
-  // arrow function dont' rebind the 'this' keyword, they inherit it
+  // arrow functions don't rebind the 'this' keyword, they inherit it
   // set a method to an arrow function by using '=' operator
   handleIncrement = product => {
     // here we are able to pass arguments with our event - here we are passing the id of a product
