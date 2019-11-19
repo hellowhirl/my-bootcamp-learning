@@ -7,26 +7,31 @@ class Movies extends Component {
   };
 
   handleDelete = movie => {
-    console.log(movie);
+    // const movieIndex = this.state.movies.indexOf(movie);
+    // this.setState({ movie: this.state.movies.splice(movieIndex, 1) }); // my fitst solution: somehow this worked too?
+
+    // create new array of movies that contains all movies except the movie we have passed here, targetng with '._id' property
+    const movies = this.state.movies.filter(m => m._id !== movie._id);
+    // this.setState({ movies: movies }); // this works too, but better implementation is below
+    this.setState({ movies: movies }); // in modern JS if key and value are same name we can simplify by removing repitition
   };
 
   render() {
+    const { length: moviesCount } = this.state.movies; // refactoring this number into a separate constant - give it alias of "moviesCount"
+
+    if (moviesCount === 0) return <p>There are no movies in the database</p>;
     return (
-      <div>
-        {this.state.movies.length === 0 && (
-          <p>There are no movies in the database</p>
-        )}
-        {this.state.movies.length > 0 && (
-          <p>There are {this.state.movies.length} movies in the database</p>
-        )}
+      <React.Fragment>
+        {/* for returning multiple elements we should wrap with a parent like 'React.Fragment */}
+        <p>Showing {moviesCount} movies in the database</p>
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">Title</th>
-              <th scope="col">Genre</th>
-              <th scope="col">Stock</th>
-              <th scope="col">Rating</th>
-              <th scope="col"></th>
+              <th>Title</th>
+              <th>Genre</th>
+              <th>Stock</th>
+              <th>Rating</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -39,9 +44,9 @@ class Movies extends Component {
                   <td>{movie.dailyRentalRate}</td>
                   <td>
                     <button
-                      onClick={this.handleDelete}
+                      onClick={() => this.handleDelete(movie)}
                       type="button"
-                      className="btn btn-danger"
+                      className="btn btn-danger btn-sm"
                     >
                       Delete
                     </button>
@@ -51,7 +56,7 @@ class Movies extends Component {
             })}
           </tbody>
         </table>
-      </div>
+      </React.Fragment>
     );
   }
 }
