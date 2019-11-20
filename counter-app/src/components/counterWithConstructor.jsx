@@ -5,9 +5,7 @@ class Counter extends Component {
   // defining properties in a class: setting them = to an object
   // this state object includes any data that this component needs
   state = {
-    value: this.props.value, // state properties will be merged or overwritten by 'setState'
-    // rename "count" to "value" to be more consistent with the property that we are setting from the outside
-    // it's more meaningful to say the "counter" has a "value"
+    count: 1, // state properties will be merged or overwritten by 'setState'
     imageUrl: "https://picsum.photos/200"
   };
 
@@ -15,6 +13,15 @@ class Counter extends Component {
     fontSize: 20,
     fontWeight: "bold"
   };
+
+  // constructor(){}: a method that is called when an object of this type is created
+  // because we add 'constructor' in this cihld class first we have to call super() of parent class
+  constructor() {
+    super();
+    // function in JS are objects, so they have properties and methods
+    // this bind method will return a new instance (function) of handleIncrement() which we reset to this.handleIncrement
+    this.handleIncrement = this.handleIncrement.bind(this); // 'this' will always reference the current Counter object
+  }
 
   // convention used for click handles is to name method starting with "handle___"
   handleIncrement2() {
@@ -28,7 +35,7 @@ class Counter extends Component {
     // here we are able to pass arguments with our event - here we are passing the id of a product
     console.log(product);
     // 'setState' method tells React to update the state - syncs DOM with vDOM
-    this.setState({ value: this.state.value + 1 }); // we pass an object, and the property we set is same as in state, or new props
+    this.setState({ count: this.state.count + 1 }); // we pass an object, and the property we set is same as in state, or new props
   };
 
   //   doHandleIncrement = () => {
@@ -37,7 +44,7 @@ class Counter extends Component {
   //   };
 
   render() {
-    console.log("props", this.props);
+    console.log("props", this.props.value);
     // below code was refactored into getBadgeClasses() method - to render a className dynamically
     // let classes = "badge m-2 badge-";
     // classes += this.state.count === 0 ? "warning" : "primary";
@@ -69,13 +76,13 @@ class Counter extends Component {
   // always use descriptive names that determine the intention of the code
   getBadgeClasses() {
     let classes = "badge m-2 badge-"; // includes all the classes that we pass to className
-    classes += this.state.value === 0 ? "warning" : "primary"; // if(conditon) then append String a, else append String b
+    classes += this.state.count === 0 ? "warning" : "primary"; // if(conditon) then append String a, else append String b
     return classes;
   }
 
   formatCount() {
     // const x = <h1>Example</h1>; // able to define a constant and set it to a JSX expression - perfectly fine
-    const { value: count } = this.state;
+    const { count } = this.state;
     // return this.state.count === 0 ? "empty" : this.state.count; // this.state.count is repeated - best to use object destrcturing
     // JSX expressions gets compiled to React elements - JSX expressions are just like normal JS objects
     return count === 0 ? <span>Zero</span> : count; // this.state.count is repeated - best to use object destrcturing

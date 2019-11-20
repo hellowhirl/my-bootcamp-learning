@@ -35,7 +35,8 @@ class Movies extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.movies.map(movie => {
+            {// for rendering list of movies
+            this.state.movies.map(movie => {
               return (
                 <tr key={movie._id}>
                   <td>{movie.title}</td>

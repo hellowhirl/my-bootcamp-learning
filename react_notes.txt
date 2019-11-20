@@ -59,3 +59,22 @@ alias for npm install
     $ npm i
 
 - when we build an application webpack will pull in files that we have specified on index.js with 'import' and put them in a final bundle
+
+
+- real world applications consist of a "tree of components"
+
+Zen coding with Emmet: create table with class "container" with <thead> enclosing <tr> enclosing 4 <td> tags
+table.container>thead>tr>td*4
+
+
+Correct v. Incorrect:
+
+{this.state.counters.map(c => (
+    <Counter key={c.id} />
+))}
+
+{this.state.counters.map(c => {
+    <Counter key={c.id} />;
+})}
+
+
