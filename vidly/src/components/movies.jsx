@@ -12,11 +12,13 @@ class Movies extends Component {
 
     // create new array of movies that contains all movies except the movie we have passed here, targetng with '._id' property
     const movies = this.state.movies.filter(m => m._id !== movie._id);
+    // should not directly update state, instead should use 'setState' method of component
     // this.setState({ movies: movies }); // this works too, but better implementation is below
-    this.setState({ movies: movies }); // in modern JS if key and value are same name we can simplify by removing repitition
+    this.setState({ movies }); // in modern JS if key and value are same name we can simplify code by removing repitition, only passing 'movies'
   };
 
   render() {
+    // object destructuring
     const { length: moviesCount } = this.state.movies; // refactoring this number into a separate constant - give it alias of "moviesCount"
 
     if (moviesCount === 0) return <p>There are no movies in the database</p>;
@@ -36,6 +38,7 @@ class Movies extends Component {
           </thead>
           <tbody>
             {// for rendering list of movies
+            // every time we use map method we need to set 'key' attribute for the element that we are repeating
             this.state.movies.map(movie => {
               return (
                 <tr key={movie._id}>
@@ -45,7 +48,7 @@ class Movies extends Component {
                   <td>{movie.dailyRentalRate}</td>
                   <td>
                     <button
-                      onClick={() => this.handleDelete(movie)}
+                      onClick={() => this.handleDelete(movie)} // to pass an argument we use an arrow function, pass "movie"
                       type="button"
                       className="btn btn-danger btn-sm"
                     >

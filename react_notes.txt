@@ -67,7 +67,7 @@ Zen coding with Emmet: create table with class "container" with <thead> enclosin
 table.container>thead>tr>td*4
 
 
-Correct v. Incorrect:
+Correct v. Incorrect ES6 syntax:
 
 {this.state.counters.map(c => (
     <Counter key={c.id} />
