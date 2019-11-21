@@ -28,6 +28,19 @@ class Counters extends Component {
     this.setState({ counter });
   };
 
+  handleIncrement = counter => {
+    // create a new "counters" array, clone exact same array of objects that we have in the state object
+    const counters = [...this.state.counters];
+    // mark index for "counter" that we receive as a parameter
+    const index = counters.indexOf(counter);
+    // clone "counter" at given location so we'll have different object than the one in the state
+    counters[index] = { ...counter };
+    // increment "value" by 1 to value property only for given location (counters[index])
+    counters[index].value++;
+    // set the state with new "counters" array, and have React update the state
+    this.setState({ counters });
+  };
+
   render() {
     return (
       <div>
@@ -37,16 +50,12 @@ class Counters extends Component {
 
         {this.state.counters.map(counter => (
           <Counter
-            key={counter.id} // 'key' does not appear in 'this.props' because it is a special attribute for identifying elements
-            // 'key' is used internally by React and is not accesible in component
-            // value={counter.value}
-            selected={true}
-            trueAsDefault // if we exclude value here then by default it will be set to 'true'
-            // id={counter.id}
+            key={counter.id}
             onDelete={
               // here we are passing reference to delete method via props to <Counter/>
               this.handleDelete
             }
+            onIncrement={this.handleIncrement}
             counter={
               // instead of setting 'value' and 'counter' properites seperately, we could simply pass 'counter' object itself, which contains all the data about a counter - just make sure to make appropriate changes in <Counter/>. For example: this.props.value => this.props.counter.value
               counter
