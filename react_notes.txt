@@ -102,3 +102,12 @@ Local state is different from outside components problem:
 - if we don't have a single source of truth, state can be changed but it won't be reflected in the DOM
 - each component have their own local state - so values are disconnected
 
+
+- Controlled Componnet: has no local state but receives data via props and raises events when data needs to be changed - it is entirely controlled by its parent
+
+Keeping multple components in sync:
+- "lift the state up": when there is no parent/child relationship between 2 componenets and you want to share data between them
+- if we lift state up to <App /> then it can be parent to other child components, then state can be passed using props
+
+Lifting the state up:
+- lifted up state from counters componenet to its parent (App componenet) - now we can share state with chilren of this component via props, and with this technique now we have multiple componenets in sync
