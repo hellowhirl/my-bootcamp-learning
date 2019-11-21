@@ -67,7 +67,7 @@ Zen coding with Emmet: create table with class "container" with <thead> enclosin
 table.container>thead>tr>td*4
 
 
-Correct v. Incorrect ES6 syntax:
+Correct vs Incorrect ES6 syntax:
 
 {this.state.counters.map(c => (
     <Counter key={c.id} />
@@ -77,4 +77,28 @@ Correct v. Incorrect ES6 syntax:
     <Counter key={c.id} />;
 })}
 
+
+- In developer tools '$0' indicates the latest element we have selected in dev tools
+- For example, on <button> we can use $0.click() and activate the button 
+
+Props vs State
+
+- props is data that we give to a component - eg. input to component like value={counter.value} - cannot access the state of other component
+    - props is read-only: we cannot change input to component inside of the component
+    Cannot do this code within a component:
+        this.props.value = 0;
+        (will get error: "Cannot assign to read only property 'value' of object '#<Object>')
+        - instead we should use state and 'setState' creating method within the life cycle of the component
+
+- state is data that is local (private) to a component (not accessible to other components)
+    - sometimes a component will not have a state, it may get all of its data through props
+
+- "The component that owns a piece of the state, should be the one modifying it"
+
+- The whole point of using objects is to encapsulate related values
+
+Local state is different from outside components problem:
+- Single source of truth: remove the local state in the child component and have a single source of truth
+- if we don't have a single source of truth, state can be changed but it won't be reflected in the DOM
+- each component have their own local state - so values are disconnected
 

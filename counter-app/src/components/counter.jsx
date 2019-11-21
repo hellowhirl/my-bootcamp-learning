@@ -5,7 +5,9 @@ class Counter extends Component {
   // defining properties in a class: setting them = to an object
   // this state object includes any data that this component needs
   state = {
-    value: this.props.value, // state properties will be merged or overwritten by 'setState'
+    // here we are using 'props' to initialize the 'state'
+    value: this.props.counter.value,
+    // state properties will be merged or overwritten by 'setState'
     // rename "count" to "value" to be more consistent with the property that we are setting from the outside
     // it's more meaningful to say the "counter" has a "value"
     imageUrl: "https://picsum.photos/200"
@@ -37,7 +39,7 @@ class Counter extends Component {
   //   };
 
   render() {
-    console.log("props", this.props);
+    console.log("props", this.props); // 'key' does not appear in 'this.props' because it is a special attribute
     // below code was refactored into getBadgeClasses() method - to render a className dynamically
     // let classes = "badge m-2 badge-";
     // classes += this.state.count === 0 ? "warning" : "primary";
@@ -50,6 +52,12 @@ class Counter extends Component {
       // in between {} we can write any JS expression - something that produces a value
       // this.state.count is how we access dynamic property values
       <div>
+        {this.props.children}
+        {
+          // there are times when we want to pass complex elements to a child componenet (like dialogue box)
+          // also possible to achieve passing 'passing childrem' effect with below code
+        }
+        <h5>Counter # {this.props.id}</h5>
         <span style={this.styles} className={this.getBadgeClasses()}>
           {this.formatCount()}
         </span>
@@ -60,6 +68,16 @@ class Counter extends Component {
           className="btn btn-secondary btn-sm"
         >
           increment
+        </button>
+        <button
+          style={this.styles}
+          className="btn btn-danger btn-sm m-2"
+          onClick={
+            // here we raise the event with name of our prop: 'onDelete'
+            () => this.props.onDelete(this.props.counter.id)
+          }
+        >
+          Delete
         </button>
       </div>
     ); // automatic semicolon insertion for 'return' on one line - so we should put parenthesis after return ()
