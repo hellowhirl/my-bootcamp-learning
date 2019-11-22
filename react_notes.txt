@@ -111,3 +111,9 @@ Keeping multple components in sync:
 
 Lifting the state up:
 - lifted up state from counters componenet to its parent (App componenet) - now we can share state with chilren of this component via props, and with this technique now we have multiple componenets in sync
+
+Stateless Functional Components:
+- Zen coding shortcut: sfc
+
+- for classes that have a single method (like return()) and no state we can convert into a Stateless Functional Component
+- simply define a function that returns a React element (instead of using class that extends Component class with render method

@@ -1,19 +1,23 @@
 import React, { Component } from "react";
 
-class NavBar extends Component {
-  render() {
-    console.log(this.props.totalCounters);
-    return (
-      <nav className="navbar navbar-light bg-light">
-        <a className="navbar-brand" href="#">
-          Navbar{" "}
-          <span className="badge badge-pill badge-secondary">
-            {this.props.totalCounters}
-          </span>
-        </a>
-      </nav>
-    );
-  }
-}
+// Refactored from Class to Stateless Functional Component
+// both are OK, but depends on personal preference
+
+const NavBar = ({ totalCounters }) => {
+  return (
+    <nav className="navbar navbar-light bg-light">
+      <a className="navbar-brand" href="#">
+        Navbar{" "}
+        <span className="badge badge-pill badge-secondary">
+          {
+            // 'this.props' only works in class components
+            // in functional compoennts we need to add 'props' as a parameter to pass
+            totalCounters
+          }
+        </span>
+      </a>
+    </nav>
+  );
+};
 
 export default NavBar;

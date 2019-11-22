@@ -3,26 +3,28 @@ import Counter from "./counter";
 
 class Counters extends Component {
   render() {
+    // for object destructuring we can define a constant and pick properties of props object that we want to use
+    const { onReset, counters, onDelete, onIncrement } = this.props;
     return (
       <div>
         <button
           onClick={
             // change to property name that we set on the props object
-            this.props.onReset
+            onReset
           }
           className="reset btn-primary btn-md"
         >
           Reset
         </button>
 
-        {this.props.counters.map(counter => (
+        {counters.map(counter => (
           <Counter
             key={counter.id}
             onDelete={
               // here we are passing reference to delete method via props to <Counter/>
-              this.props.onDelete
+              onDelete
             }
-            onIncrement={this.props.onIncrement}
+            onIncrement={onIncrement}
             counter={
               // instead of setting 'value' and 'counter' properites seperately, we could simply pass 'counter' object itself, which contains all the data about a counter - just make sure to make appropriate changes in <Counter/>. For example: this.props.value => this.props.counter.value
               counter
