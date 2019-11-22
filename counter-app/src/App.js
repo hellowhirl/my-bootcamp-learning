@@ -49,6 +49,16 @@ class App extends Component {
     this.setState({ counters });
   };
 
+  handleDecrement = counter => {
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index] = { ...counter };
+    if (counters[index].value > 0) {
+      counters[index].value--;
+      this.setState({ counters });
+    }
+  };
+
   handleDelete = counterID => {
     // "The component that owns a piece of the state, should be the one modifying it"
     // here we will handle event from <Counter/>
@@ -74,6 +84,7 @@ class App extends Component {
             // now this Counters componenet is a controlled componenet - has no state, simply receives data and methods to modify data (it is controlled by its parent)
             onReset={this.handleReset}
             onIncrement={this.handleIncrement}
+            onDecrement={this.handleDecrement}
             onDelete={this.handleDelete}
             counters={this.state.counters}
           />

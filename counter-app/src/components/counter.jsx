@@ -26,34 +26,46 @@ class Counter extends Component {
   };
 
   render() {
+    console.log("this.props", this.props);
     console.log("Counter - MOUNTING PHASE - render");
     return (
-      <div>
+      <div className="row">
         <span style={this.styles} className={this.getBadgeClasses()}>
           {this.formatCount()}
         </span>
         <button
           onClick={() => this.props.onIncrement(this.props.counter)}
           style={{ fontSize: 20 }}
-          className="btn btn-secondary btn-sm"
+          className="btn btn-secondary btn-sm col-1 m-2"
         >
-          increment
+          +
+        </button>
+        <button
+          onClick={() => this.props.onDecrement(this.props.counter)}
+          style={{ fontSize: 20 }}
+          className={`${this.disableButtonClass()} btn btn-secondary btn-sm col-1 m-2`}
+        >
+          -
         </button>
         <button
           style={this.styles}
-          className="btn btn-danger btn-sm m-2"
+          className="btn btn-danger btn-sm col-1 m-2"
           onClick={() => this.props.onDelete(this.props.counter.id)}
         >
-          Delete
+          X
         </button>
       </div>
     );
   }
 
   getBadgeClasses() {
-    let classes = "badge m-2 badge-"; // includes all the classes that we pass to className
+    let classes = "col-1 badge m-2 badge-"; // includes all the classes that we pass to className
     classes += this.props.counter.value === 0 ? "warning" : "primary"; // if(conditon) then append String a, else append String b
     return classes;
+  }
+
+  disableButtonClass() {
+    if (this.props.counter.value === 0) return "disabled";
   }
 
   formatCount() {
