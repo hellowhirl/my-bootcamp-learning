@@ -3,6 +3,7 @@ import Counter from "./counter";
 
 class Counters extends Component {
   render() {
+    console.log("Counters - MOUNTING PHASE - render");
     // for object destructuring we can define a constant and pick properties of props object that we want to use
     const { onReset, counters, onDelete, onIncrement } = this.props;
     return (

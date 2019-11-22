@@ -15,7 +15,7 @@ class Counter extends Component {
   };
 
   // constructor(){}: a method that is called when an object of this type is created
-  // because we add 'constructor' in this cihld class first we have to call super() of parent class
+  // because we add 'constructor' in this child class first we have to call super() of parent class
   constructor() {
     super();
     // function in JS are objects, so they have properties and methods

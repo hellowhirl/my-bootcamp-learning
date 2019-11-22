@@ -6,12 +6,27 @@ class Counter extends Component {
   // remove the local state and only rely on the props to receive the data this component needs
   // find any references to 'this.state' and update them accordingly
 
+  componentDidUpdate(prevProps, prevState) {
+    console.log("Counter - UPDATE - componentDidUpdate");
+    console.log("prevProps", prevProps);
+    console.log("prevState", prevState);
+    if (prevProps.counter.value !== this.props.counter.value) {
+      // Do Ajax call and get new data from server
+    }
+  }
+
+  // this is called just before an element like <Counter/> is removed from the DOM
+  componentWillUnmount() {
+    console.log("Counter - UNMOUNT - componentWillUnmount");
+  }
+
   styles = {
     fontSize: 20,
     fontWeight: "bold"
   };
 
   render() {
+    console.log("Counter - MOUNTING PHASE - render");
     return (
       <div>
         <span style={this.styles} className={this.getBadgeClasses()}>

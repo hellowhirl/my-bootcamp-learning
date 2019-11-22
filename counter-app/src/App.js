@@ -14,6 +14,20 @@ class App extends Component {
     ]
   };
 
+  // constructor is only called once when an instance of a class is created
+  // this is where we can intialize the properties in that instance
+  constructor(props) {
+    super(props);
+    console.log("App - MOUNTING PHASE - constructor", this.props);
+    // common case is to set the state from the props that we receive on the outside - for example:
+    // and we will also need to pass 'props' as parameter to this constructor and to constructor of base class - super(props)
+    // this.state = this.props.something;
+  }
+
+  componentDidMount() {
+    console.log("App - MOUNTING PHASE - componentDidMount");
+  }
+
   handleReset = () => {
     const counters = this.state.counters.map(c => {
       c.value = 0;
@@ -38,12 +52,15 @@ class App extends Component {
   handleDelete = counterID => {
     // "The component that owns a piece of the state, should be the one modifying it"
     // here we will handle event from <Counter/>
+    // as a result of deleting a <Counter/> the state of <App/> is changed, and entire componenet tree will be rerendered
     console.log("Event Handler called", counterID);
     const counters = this.state.counters.filter(m => m.id !== counterID);
     this.setState({ counters });
   };
 
   render() {
+    console.log("App - MOUNTING PHASE - render");
+    // following this all the children will be rendered recursively
     return (
       <React.Fragment>
         <NavBar

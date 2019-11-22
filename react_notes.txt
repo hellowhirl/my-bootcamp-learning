@@ -117,3 +117,21 @@ Stateless Functional Components:
 
 - for classes that have a single method (like return()) and no state we can convert into a Stateless Functional Component
 - simply define a function that returns a React element (instead of using class that extends Component class with render method
+
+Lifecycle Hooks* (below are used 90% of time)
+
+== MOUNT ==
+constructor
+render
+componentDidMount - App gets mounted and goes into DOM
+
+== UPDATE ==
+render
+componentDidUpdate - used for if we want to make ajax call to get new data based on changes to state and props objects
+
+== UNMOUNT ==
+componentWillUnmount - gives us opportunity to do clean up (timers and listeneres) and prevent memory leaks
+
+* cannot use lifecycle hooks in stateless functional components - they can only be used with class components
+
+- when a component is rendered we get a React element which updates virtual DOM - so we have 2 object references in memory for old virtual DOM and new virtual DOM, then React will update DOM based on the difference only

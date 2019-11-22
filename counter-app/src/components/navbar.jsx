@@ -4,6 +4,7 @@ import React, { Component } from "react";
 // both are OK, but depends on personal preference
 
 const NavBar = ({ totalCounters }) => {
+  console.log("NavBar - output is rendered");
   return (
     <nav className="navbar navbar-light bg-light">
       <a className="navbar-brand" href="#">
