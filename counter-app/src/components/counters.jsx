@@ -23,25 +23,23 @@ class Counters extends Component {
         >
           Reset
         </button>
-        <div className="container">
-          {counters.map(counter => (
-            <Counter
-              key={counter.id}
-              onDelete={
-                // here we are passing reference to delete method via props to <Counter/>
-                onDelete
-              }
-              onIncrement={onIncrement}
-              onDecrement={onDecrement}
-              counter={
-                // instead of setting 'value' and 'counter' properites seperately, we could simply pass 'counter' object itself, which contains all the data about a counter - just make sure to make appropriate changes in <Counter/>. For example: this.props.value => this.props.counter.value
-                counter
-              }
-            >
-              <h5>Counter #{counter.id}</h5>
-            </Counter>
-          ))}
-        </div>
+        {counters.map(counter => (
+          <Counter
+            key={counter.id}
+            onDelete={
+              // here we are passing reference to delete method via props to <Counter/>
+              onDelete
+            }
+            onIncrement={onIncrement}
+            onDecrement={onDecrement}
+            counter={
+              // instead of setting 'value' and 'counter' properites seperately, we could simply pass 'counter' object itself, which contains all the data about a counter - just make sure to make appropriate changes in <Counter/>. For example: this.props.value => this.props.counter.value
+              counter
+            }
+          >
+            <h5>Counter #{counter.id}</h5>
+          </Counter>
+        ))}
       </div>
     );
   }

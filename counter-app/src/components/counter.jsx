@@ -21,7 +21,7 @@ class Counter extends Component {
   }
 
   styles = {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "bold"
   };
 
@@ -30,43 +30,51 @@ class Counter extends Component {
     console.log("Counter - MOUNTING PHASE - render");
     return (
       <div className="row">
-        <span style={this.styles} className={this.getBadgeClasses()}>
-          {this.formatCount()}
-        </span>
-        <button
-          onClick={() => this.props.onIncrement(this.props.counter)}
-          style={{ fontSize: 20 }}
-          className="btn btn-secondary btn-sm col-1 m-2"
-        >
-          +
-        </button>
-        <button
-          onClick={() => this.props.onDecrement(this.props.counter)}
-          style={{ fontSize: 20 }}
-          className={`${this.disableButtonClass()} btn btn-secondary btn-sm col-1 m-2`}
-        >
-          -
-        </button>
-        <button
-          style={this.styles}
-          className="btn btn-danger btn-sm col-1 m-2"
-          onClick={() => this.props.onDelete(this.props.counter.id)}
-        >
-          X
-        </button>
+        <div className="col-1">
+          <span style={this.styles} className={this.getBadgeClasses()}>
+            {this.formatCount()}
+          </span>
+        </div>
+        <div className="col">
+          <button
+            onClick={() => this.props.onIncrement(this.props.counter)}
+            style={{ fontSize: 20 }}
+            className="btn btn-secondary btn-sm"
+          >
+            +
+          </button>
+          <button
+            onClick={() => this.props.onDecrement(this.props.counter)}
+            style={{ fontSize: 20 }}
+            // another way to combine string and method in a JSX attribute
+            // className={`${this.disableButtonClass()} btn btn-secondary btn-sm m-2`}
+            className={"btn btn-secondary btn-sm m-2"}
+            // 'disabled' is a boolean attribute - the button becomes unusable/unclickable
+            disabled={this.props.counter.value === 0 ? "disabled" : ""}
+          >
+            -
+          </button>
+          <button
+            style={this.styles}
+            className="btn btn-danger btn-sm"
+            onClick={() => this.props.onDelete(this.props.counter.id)}
+          >
+            X
+          </button>
+        </div>
       </div>
     );
   }
 
   getBadgeClasses() {
-    let classes = "col-1 badge m-2 badge-"; // includes all the classes that we pass to className
+    let classes = "badge m-2 badge-"; // includes all the classes that we pass to className
     classes += this.props.counter.value === 0 ? "warning" : "primary"; // if(conditon) then append String a, else append String b
     return classes;
   }
 
-  disableButtonClass() {
-    if (this.props.counter.value === 0) return "disabled";
-  }
+  //   disableButtonClass() {
+  //     if (this.props.counter.value === 0) return "disabled";
+  //   }
 
   formatCount() {
     const { value: count } = this.props.counter;
