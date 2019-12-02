@@ -18,6 +18,10 @@ class Movies extends Component {
     this.setState({ movies }); // in modern JS if key and value are same name we can simplify code by removing repitition, only passing 'movies'
   };
 
+  handleLike() {
+    console.log("liked");
+  }
+
   render() {
     // object destructuring
     const { length: moviesCount } = this.state.movies; // refactoring this number into a separate constant - give it alias of "moviesCount"
@@ -48,7 +52,7 @@ class Movies extends Component {
                   <td>{movie.genre.name}</td>
                   <td>{movie.numberInStock}</td>
                   <td>{movie.dailyRentalRate}</td>
-                  <Like />
+                  <Like liked={movie.liked} movie={movie} />
                   <td>
                     <button
                       onClick={() => this.handleDelete(movie)} // to pass an argument we use an arrow function, pass "movie"
