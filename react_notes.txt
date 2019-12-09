@@ -141,3 +141,13 @@ componentWillUnmount - gives us opportunity to do clean up (timers and listenere
 
 Steps for when building a new component:
 1) Determine interface with inputs and/or events
+
+
+folders in React project:
+"common": components that can be used across other projects
+"utils": utility classes and functions
+
+- in order to chain methods in lodash we need to convert array into lodash wrapper
+
+VS Code shortcut:
+command + P and type '@': look at members of a class, and search from that
