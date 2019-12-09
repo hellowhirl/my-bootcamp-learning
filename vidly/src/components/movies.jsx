@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
 import Like from "./common/like";
 import Pagination from "./common/pagination";
+import { paginate } from "../utils/paginate";
 
 class Movies extends Component {
   state = {
@@ -36,10 +37,13 @@ class Movies extends Component {
   render() {
     // object destructuring
     const { length: moviesCount } = this.state.movies; // refactoring this number into a separate constant - give it alias of "moviesCount"
-
-    const { pageSize, currentPage } = this.state;
+    const { pageSize, currentPage, movies: allMovies } = this.state;
 
     if (moviesCount === 0) return <p>There are no movies in the database</p>;
+
+    // determine which movies to show after we run our paginate() method
+    const movies = paginate(allMovies, currentPage, pageSize);
+
     return (
       <React.Fragment>
         {/* for returning multiple elements we should wrap with a parent like 'React.Fragment */}
@@ -58,7 +62,7 @@ class Movies extends Component {
           <tbody>
             {// for rendering list of movies
             // every time we use map method we need to set 'key' attribute for the element that we are repeating
-            this.state.movies.map(movie => {
+            movies.map(movie => {
               return (
                 <tr key={movie._id}>
                   <td>{movie.title}</td>
