@@ -4,7 +4,6 @@ import _ from "lodash"; // "_" is common convention because lodash is optimized 
 
 const Pagination = props => {
   const { itemsCount, pageSize, currentPage, onPageChange } = props;
-  console.log(currentPage);
   const totalPages = Math.ceil(itemsCount / pageSize);
   if (totalPages === 1) return null; // edge case
   const pages = _.range(1, totalPages + 1); // add 1 to make sure last page is also included
