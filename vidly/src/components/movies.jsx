@@ -8,7 +8,7 @@ import ListGroup from "./listGroup";
 
 class Movies extends Component {
   state = {
-    movies: [],
+    movies: [], // initialize these properties to empty array because in real world application it will take some time to get the data from the server - so just making sure these properties are not 'undefined'
     genres: [],
     pageSize: 4,
     currentPage: 1
@@ -42,7 +42,7 @@ class Movies extends Component {
   };
 
   handleGenreSelect = genre => {
-    this.setState({ currentGenre: genre.name });
+    console.log(genre);
   };
 
   render() {
@@ -57,10 +57,12 @@ class Movies extends Component {
 
     return (
       <div className="row">
-        <div className="col-2">
+        <div className="col-3">
           <ListGroup
             items={this.state.genres}
             onItemSelect={this.handleGenreSelect}
+            textProperty="name" // specify name here for bracket notation so we can work with any kinds of objects
+            valueProperty="_id" // then we can access these properties dynamically
           />
         </div>
         <div className="col">
