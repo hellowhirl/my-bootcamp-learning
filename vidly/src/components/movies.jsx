@@ -1,10 +1,10 @@
 import React, { Component } from "react";
+import MoviesTable from "./moviesTable";
+import Pagination from "./common/pagination";
+import ListGroup from "./listGroup";
 import { getMovies } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
-import Like from "./common/like";
-import Pagination from "./common/pagination";
 import { paginate } from "../utils/paginate";
-import ListGroup from "./listGroup";
 
 class Movies extends Component {
   state = {
@@ -16,7 +16,9 @@ class Movies extends Component {
   };
 
   componentDidMount() {
-    this.setState({ movies: getMovies(), genres: getGenres() });
+    const genres = [{ name: "All Genres", _id: "0" }, ...getGenres()];
+
+    this.setState({ movies: getMovies(), genres });
   }
 
   handleDelete = movie => {
@@ -46,18 +48,27 @@ class Movies extends Component {
     // const currentGnnre = [...this.state.selectedGenre];
     // currentGnnre.name = genre;
 
-    this.setState({ selectedGenre: genre });
+    this.setState({ selectedGenre: genre, currentPage: 1 });
   };
 
   render() {
     // object destructuring
     const { length: moviesCount } = this.state.movies; // refactoring this number into a separate constant - give it alias of "moviesCount"
-    const { pageSize, currentPage, movies: allMovies } = this.state;
+    const {
+      pageSize,
+      currentPage,
+      movies: allMovies,
+      selectedGenre
+    } = this.state;
 
     if (moviesCount === 0) return <p>There are no movies in the database</p>;
 
+    const filtered =
+      selectedGenre && selectedGenre._id !== "0"
+        ? allMovies.filter(m => m.genre._id === selectedGenre._id)
+        : allMovies;
     // determine which movies to show after we run our paginate() method
-    const movies = paginate(allMovies, currentPage, pageSize);
+    const movies = paginate(filtered, currentPage, pageSize);
 
     return (
       <div className="row">
@@ -70,50 +81,14 @@ class Movies extends Component {
         </div>
         <div className="col">
           {/* for returning multiple elements we should wrap with a parent like 'div */}
-          <p>Showing {moviesCount} movies in the database</p>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Genre</th>
-                <th>Stock</th>
-                <th>Rating</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {// for rendering list of movies
-              // every time we use map method we need to set 'key' attribute for the element that we are repeating
-              movies.map(movie => {
-                return (
-                  <tr key={movie._id}>
-                    <td>{movie.title}</td>
-                    <td>{movie.genre.name}</td>
-                    <td>{movie.numberInStock}</td>
-                    <td>{movie.dailyRentalRate}</td>
-                    <td>
-                      <Like
-                        liked={movie.liked}
-                        onClick={() => this.handleLike(movie)}
-                      />
-                    </td>
-                    <td>
-                      <button
-                        onClick={() => this.handleDelete(movie)} // to pass an argument we use an arrow function, pass "movie"
-                        type="button"
-                        className="btn btn-danger btn-sm"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          <p>Showing {filtered.length} movies in the database</p>
+          <MoviesTable
+            movies={movies}
+            onLike={this.handleLike}
+            onDelete={this.handleDelete}
+          />
           <Pagination
-            itemsCount={moviesCount}
+            itemsCount={filtered.length}
             pageSize={pageSize}
             currentPage={currentPage}
             onPageChange={this.handlePageChange}

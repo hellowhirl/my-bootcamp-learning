@@ -8,10 +8,10 @@ export function paginate(items, pageNumber, pageSize) {
     .slice(startIndex)
     .take(pageSize)
     .value();
-  // go to start index and take all the items for the current page
+  // // go to start index and take all the items for the current page
   //   _.slice(items, startIndex);
-  // with new array we can go to this array and pick items for the current page
+  // // with new array we can go to this array and pick items for the current page
   //   _.take();
-  // convert to regular array
+  // // convert to regular array
   //   _.value();
 }

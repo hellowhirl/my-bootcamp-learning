@@ -151,3 +151,13 @@ folders in React project:
 
 VS Code shortcut:
 command + P and type '@': look at members of a class, and search from that
+
+
+levels of components:
+
+high level: simplified, abstract
+low level: detailed, elements
+
+symetry/consistency is when high level or low level components are grouped together - should be same level of abstraction
+
+object destructuring should be done at the beginning of everyt functional component
