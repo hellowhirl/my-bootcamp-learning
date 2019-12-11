@@ -11,7 +11,8 @@ class Movies extends Component {
     movies: [], // initialize these properties to empty array because in real world application it will take some time to get the data from the server - so just making sure these properties are not 'undefined'
     genres: [],
     pageSize: 4,
-    currentPage: 1
+    currentPage: 1,
+    selectedGenre: null
   };
 
   componentDidMount() {
@@ -42,7 +43,10 @@ class Movies extends Component {
   };
 
   handleGenreSelect = genre => {
-    console.log(genre);
+    // const currentGnnre = [...this.state.selectedGenre];
+    // currentGnnre.name = genre;
+
+    this.setState({ selectedGenre: genre });
   };
 
   render() {
@@ -61,8 +65,7 @@ class Movies extends Component {
           <ListGroup
             items={this.state.genres}
             onItemSelect={this.handleGenreSelect}
-            textProperty="name" // specify name here for bracket notation so we can work with any kinds of objects
-            valueProperty="_id" // then we can access these properties dynamically
+            selectedItem={this.state.selectedGenre}
           />
         </div>
         <div className="col">
