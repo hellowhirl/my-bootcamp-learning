@@ -1,38 +1,33 @@
 import React, { Component } from "react";
+import TableHeader from "./common/tableHeader";
 import Like from "./common/like";
 
 class MoviesTable extends Component {
   // in thi smethod we will have the logic for determining the sort order
-  raiseSort = path => {
-    const sortColumn = { ...this.props.sortColumn };
-    // first check which column we are in, works for in case we keep changing order for same column
-    if (sortColumn.path === path)
-      sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
-    else {
-      sortColumn.path = path;
-      sortColumn.order = "asc"; // should always be ascending when sorting on a new column
-    }
-    // lastly we need to raise the sort event
-    this.props.onSort(sortColumn);
-  };
+
+  // initializing 'columns' here - a simple property is sufficient
+  // doesn't have to be a part of the state - will not change throughout life cycle of this component
+  columns = [
+    { path: "title", title: "Title" },
+    { path: "genre.name", title: "Genre" },
+    { path: "numberInStock", title: "Stock" },
+    { path: "dailyRentalRate", title: "Rate" },
+    { key: "like" },
+    { key: "delete" }
+  ];
 
   render() {
     // since we are passing movies via props, we are not supposed to modify the props,
     // because actual state is stored in the Movies component
-    const { movies, onLike, onDelete } = this.props;
+    const { movies, onLike, onDelete, onSort, sortColumn } = this.props;
     // onLike and onDelete are function reference
     return (
       <table className="table">
-        <thead>
-          <tr>
-            <th onClick={() => this.raiseSort("title")}>Title</th>
-            <th onClick={() => this.raiseSort("genre.name")}>Genre</th>
-            <th onClick={() => this.raiseSort("numberInStock")}>Stock</th>
-            <th onClick={() => this.raiseSort("dailyRentalRate")}>Rating</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
+        <TableHeader
+          columns={this.columns}
+          sortColumn={sortColumn}
+          onSort={onSort}
+        />
         <tbody>
           {// for rendering list of movies
           // every time we use map method we need to set 'key' attribute for the element that we are repeating
