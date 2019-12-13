@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import TableHeader from "./common/tableHeader";
-import TableBody from "./common/tableBody";
+import Table from "./common/table";
+// import TableHeader from "./common/tableHeader";
+// import TableBody from "./common/tableBody";
 import Like from "./common/like";
 
 class MoviesTable extends Component {
@@ -8,6 +9,7 @@ class MoviesTable extends Component {
 
   // initializing 'columns' here - a simple property is sufficient
   // doesn't have to be a part of the state - will not change throughout life cycle of this component
+  // our implementation is very specific to movies based on the way we define 'columns' here
   columns = [
     { path: "title", title: "Title" },
     { path: "genre.name", title: "Genre" },
@@ -45,15 +47,14 @@ class MoviesTable extends Component {
     const { movies, onSort, sortColumn } = this.props;
     // onLike and onDelete are function reference
     return (
-      <table className="table">
-        <TableHeader
-          columns={this.columns}
-          sortColumn={sortColumn}
-          onSort={onSort}
-        />
-        {/* Here we want to be decoupled from movies - it knows nothing about movies */}
-        <TableBody data={movies} columns={this.columns} />
-      </table>
+      // this is a reusable able component - MoviesTable component is wrapping around Table
+      // Talbe has all the data that it needs from MovieTable
+      <Table
+        columns={this.columns}
+        sortColumn={sortColumn}
+        onSort={onSort}
+        data={movies}
+      />
     );
   }
 }

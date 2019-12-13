@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import _ from "lodash"; // "_" is common convention because lodash is optimized version of library called "underscore"
 
-const Pagination = props => {
-  const { itemsCount, pageSize, currentPage, onPageChange } = props;
+const Pagination = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
   const totalPages = Math.ceil(itemsCount / pageSize);
   if (totalPages === 1) return null; // edge case
   const pages = _.range(1, totalPages + 1); // add 1 to make sure last page is also included
