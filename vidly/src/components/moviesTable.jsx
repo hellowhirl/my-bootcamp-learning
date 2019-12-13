@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TableHeader from "./common/tableHeader";
+import TableBody from "./common/tableBody";
 import Like from "./common/like";
 
 class MoviesTable extends Component {
@@ -12,14 +13,36 @@ class MoviesTable extends Component {
     { path: "genre.name", title: "Genre" },
     { path: "numberInStock", title: "Stock" },
     { path: "dailyRentalRate", title: "Rate" },
-    { key: "like" },
-    { key: "delete" }
+    {
+      key: "like",
+      // here we set 'content' to a function (instead of React element) that takes a parameter like 'movie' and returns a React element
+      content: movie => (
+        <Like
+          liked={movie.liked}
+          // should raise events here and let Movies component like a given movie
+          onClick={() => this.props.onLike(movie)}
+        />
+      )
+    },
+    {
+      key: "delete",
+      // here we set 'content' to a function (instead of React element) that takes a parameter like 'movie' and returns a React element
+      content: movie => (
+        <button
+          // should raise events here and let Movies component delete a given movie
+          onClick={() => this.props.onDelete(movie)} // to pass an argument we use an arrow function, pass "movie"
+          className="btn btn-danger btn-sm"
+        >
+          Delete
+        </button>
+      )
+    }
   ];
 
   render() {
     // since we are passing movies via props, we are not supposed to modify the props,
     // because actual state is stored in the Movies component
-    const { movies, onLike, onDelete, onSort, sortColumn } = this.props;
+    const { movies, onSort, sortColumn } = this.props;
     // onLike and onDelete are function reference
     return (
       <table className="table">
@@ -28,37 +51,8 @@ class MoviesTable extends Component {
           sortColumn={sortColumn}
           onSort={onSort}
         />
-        <tbody>
-          {// for rendering list of movies
-          // every time we use map method we need to set 'key' attribute for the element that we are repeating
-          movies.map(movie => {
-            return (
-              <tr key={movie._id}>
-                <td>{movie.title}</td>
-                <td>{movie.genre.name}</td>
-                <td>{movie.numberInStock}</td>
-                <td>{movie.dailyRentalRate}</td>
-                <td>
-                  <Like
-                    liked={movie.liked}
-                    // should raise events here and let Movies component like a given movie
-                    onClick={() => onLike(movie)}
-                  />
-                </td>
-                <td>
-                  <button
-                    // should raise events here and let Movies component delete a given movie
-                    onClick={() => onDelete(movie)} // to pass an argument we use an arrow function, pass "movie"
-                    type="button"
-                    className="btn btn-danger btn-sm"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
+        {/* Here we want to be decoupled from movies - it knows nothing about movies */}
+        <TableBody data={movies} columns={this.columns} />
       </table>
     );
   }
