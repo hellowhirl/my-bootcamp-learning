@@ -161,3 +161,26 @@ low level: detailed, elements
 symetry/consistency is when high level or low level components are grouped together - should be same level of abstraction
 
 object destructuring should be done at the beginning of everyt functional component
+
+
+
+React Router
+
+- to add routing to our project we need to use following command
+
+npm i react-router-dom
+
+<Route> component looks at the current URL and if it matches 'path' attribute then it will return the component that is in the 'component' attribute - these attributes are passed as props
+
+props wrapped with a Route component:
+- history: to work with history object in the browser - with this we can send user to a different page
+- location: represents where app is at now
+- match: contains info about about how URL matches path we set in our route
+
+How to pass/retrieve route parameters
+- to define a parameter we should prefix that parameter with a colon
+- fetch from 'match.params'
+
+- when we define parameters in our route by detault those parameters are required
+- to make then not required we append a '?'
+
