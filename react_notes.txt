@@ -184,3 +184,6 @@ How to pass/retrieve route parameters
 - when we define parameters in our route by detault those parameters are required
 - to make then not required we append a '?'
 
+- programmatic navigation: 
+
+- nested routing: for example routing on top and bottom
