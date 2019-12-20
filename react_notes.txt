@@ -16,12 +16,16 @@
     $ npm run eject
 
 // JSX: JavaScript XML
-// Babel converts JSX code to browswer readable JavaScript
+// Babel converts JSX code to browser readable JavaScript
 
 Helpful plugins
 - Prettier
 - Simple React Snippets
     shortcuts like: imrc, cc
+- Code Runner
+- Auto Import - ES6, TS, JSX
+- File utils
+- Live Server
 
 // id="root" is container for our React app
 
