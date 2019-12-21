@@ -191,3 +191,9 @@ How to pass/retrieve route parameters
 - programmatic navigation: 
 
 - nested routing: for example routing on top and bottom
+
+Zen coding trick:
+    Route[path][component]*4
+
+Shortcut to tab through all methods in a component
+    SHIFT + CMD + >

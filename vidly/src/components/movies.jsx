@@ -92,7 +92,7 @@ class Movies extends Component {
 
     return (
       <div>
-        <div className="row pt-4">
+        <div className="row">
           <div className="col-3">
             <ListGroup
               items={this.state.genres}
