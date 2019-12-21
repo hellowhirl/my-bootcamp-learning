@@ -194,6 +194,16 @@ How to pass/retrieve route parameters
 
 Zen coding trick:
     Route[path][component]*4
+    form>(div.form-group>label+input.form-control)*2
 
 Shortcut to tab through all methods in a component
     SHIFT + CMD + >
+
+Shortcut from command palette (SHIFT + CMD + P)
+    Wrap with abbreviation (to surround selected text with a tag - also possible to do zen coding)
+
+Shortcut for editing multiple places in VS Code:
+    Hold ALT while selecting different places
+
+In React we should never work with the 'document' object - we are abstracting from it
+- also it makes our applications easier to maintain and unit test
