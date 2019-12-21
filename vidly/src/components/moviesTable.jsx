@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Table from "./common/table";
+import { Link } from "react-router-dom";
 // import TableHeader from "./common/tableHeader";
 // import TableBody from "./common/tableBody";
 import Like from "./common/like";
@@ -11,7 +12,7 @@ class MoviesTable extends Component {
   // doesn't have to be a part of the state - will not change throughout life cycle of this component
   // our implementation is very specific to movies based on the way we define 'columns' here
   columns = [
-    { path: "title", title: "Title" },
+    // { path: "title", title: "Title" },
     { path: "genre.name", title: "Genre" },
     { path: "numberInStock", title: "Stock" },
     { path: "dailyRentalRate", title: "Rate" },
@@ -38,6 +39,12 @@ class MoviesTable extends Component {
           Delete
         </button>
       )
+    },
+    {
+      path: "title",
+      title: "Title",
+      // here we set 'content' to a function (instead of React element) that takes a parameter like 'movie' and returns a React element
+      content: movie => <Link to={`/movies/${movie._id}`}>{movie.title}</Link>
     }
   ];
 
