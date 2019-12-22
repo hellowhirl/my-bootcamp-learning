@@ -4,6 +4,10 @@ class LoginForm extends Component {
   // accessing a DOM element in React: defining a property for 'ref' by creating a ref object
   username = React.createRef();
 
+  state = {
+    account: { username: "", password: "" }
+  };
+
   // better approach is to use 'autoFocus'
   //   componentDidMount() {
   //     this.username.current.focus();
@@ -21,6 +25,12 @@ class LoginForm extends Component {
     console.log("submitted");
   };
 
+  handleChange = e => {
+    const account = { ...this.state.account };
+    account.username = e.currentTarget.value;
+    this.setState({ account });
+  };
+
   render() {
     return (
       <div>
@@ -30,6 +40,7 @@ class LoginForm extends Component {
             <label htmlFor="username">Username</label>
             <input
               autoFocus // this solution is better for giving input field focus
+              onChange={this.handleChange}
               ref={this.username}
               id="username"
               type="text"

@@ -207,3 +207,9 @@ Shortcut for editing multiple places in VS Code:
 
 In React we should never work with the 'document' object - we are abstracting from it
 - also it makes our applications easier to maintain and unit test
+
+onChange event: 
+occurs when the value of an element has been changed.
+
+currentTarget event property: 
+returns the element whose event listeners triggered the event.
