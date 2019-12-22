@@ -218,3 +218,6 @@ returns the element whose event listeners triggered the event.
 
 VS code shortcut - Select all occurences
 CMD + SHIFT + L
+
+VS code shortcut - indenting line
+CMD + { OR }
