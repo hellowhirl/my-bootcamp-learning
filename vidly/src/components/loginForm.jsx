@@ -55,14 +55,14 @@ class LoginForm extends Component {
   };
 
   validateProperty = ({ name, value }) => {
-    if (name === "username") {
-      if (value.trim() === "") return "Username is required.";
-      // ...other rules...
-    }
-    if (name === "password") {
-      if (value.trim() === "") return "Password is required.";
-      // ...other rules...
-    }
+    const obj = { [name]: value }; // what ever 'name' is used at runtime, that will be used to set the key
+    const schema = { [name]: this.schema[name] };
+    const { error } = Joi.validate(obj, schema); // no need for 3rd argument, we don't want to abort early
+
+    // ternary operator below 2 lines:
+    // if (error) return null;
+    // return error.details[0].message;
+    return error ? error.details[0].message : null;
   };
 
   handleChange = ({ currentTarget: input }) => {
@@ -99,7 +99,9 @@ class LoginForm extends Component {
             onChange={this.handleChange}
             error={errors.password}
           />
-          <button className="btn btn-primary">Login</button>
+          <button disabled={this.validate()} className="btn btn-primary">
+            Login
+          </button>
         </form>
       </div>
     );
