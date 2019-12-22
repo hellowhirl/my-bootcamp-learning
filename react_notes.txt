@@ -213,3 +213,8 @@ occurs when the value of an element has been changed.
 
 currentTarget event property: 
 returns the element whose event listeners triggered the event.
+
+- When building a form we should set initialize the properties of state objects to empty string '' or some value from the server, otherwise we'll get an error
+
+VS code shortcut - Select all occurences
+CMD + SHIFT + L
