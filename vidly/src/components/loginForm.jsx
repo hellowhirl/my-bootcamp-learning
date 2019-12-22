@@ -43,6 +43,7 @@ class LoginForm extends Component {
               onChange={this.handleChange}
               ref={this.username}
               id="username"
+              value={this.state.account.username} // this input field will no longer have its own state - using props to set its value
               type="text"
               className="form-control"
             />
