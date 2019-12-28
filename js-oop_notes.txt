@@ -11,13 +11,29 @@ OOP: a programming paradigm centered around objects rather than functions
 4 pillars of OOP
 
 Encapsulation
- - Combine a group of related variables and functions that operate on them into a unit - an object with properties and methods
+- Combine a group of related variables and functions that operate on them into a unit - an object with properties and methods
 
 Abstraction
- - hide details and complexity and show only essentials; reduce complexity + isolate impact of changes
+- hide details and complexity and show only essentials; reduce complexity + isolate impact of changes
 
 Inheritance
- - remove redundant code by defining once in a generic object
+- remove redundant code by defining once in a generic object
 
 Polymorphism
- - method behaves differently depending on the object we are referencing; refactor ugly case/switch or if/eles statements
+- method behaves differently depending on the object we are referencing; refactor ugly case/switch or if/eles statements
+
+
+Object Literals
+
+- a function member of an object is refered to as a 'method'
+- other members are 'properties' which hold values
+- every object created like this comes from the built in Object constructor function: function Object() { }
+- other built-in constructors in JS like (new String(), new Boolean(), etc.) but we instead use literal versions
+
+ Factory functions
+
+ - if an object has one or more methods that object 'has behavior'
+
+
+ - every object in JS has a property called 'constructor' - references the function used to create that object
+
