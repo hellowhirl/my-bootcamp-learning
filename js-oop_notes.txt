@@ -1,0 +1,23 @@
+Object-oriented Programming
+
+OOP: a programming paradigm centered around objects rather than functions
+- it's not a language or tool
+- supported by Ruby, JavaScript, Python, Java, C#, and more
+
+- Before OOp there was procedural programming (too much interdepency)
+
+- In OOP we combine a group of related variables and functions into a unit - an object with properties and methods
+
+4 pillars of OOP
+
+Encapsulation
+ - Combine a group of related variables and functions that operate on them into a unit - an object with properties and methods
+
+Abstraction
+ - hide details and complexity and show only essentials; reduce complexity + isolate impact of changes
+
+Inheritance
+ - remove redundant code by defining once in a generic object
+
+Polymorphism
+ - method behaves differently depending on the object we are referencing; refactor ugly case/switch or if/eles statements
