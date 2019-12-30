@@ -60,10 +60,11 @@ HAMMERING THIS POINT HOME:
 - To apply abstraction we need to hide certain members from the outside
 
 About scope and closure:
+- scope: determines the accessibility (visibility) of variables.
 - closure: when you have a function it is intrinsically tied to the scope of its parent
+- when we have nested functions we create a 'scope chain' - and the variable that is closest to its own scope will be returned
 - variables within a function are created each time new and die whem the function ends
 - scope is temporary and it dies whereas closure stays there
-- when we have nested functions we create a 'scope chain' - and the variable that is closest to its own scope will be returned
 - a closure determines what variables will be accessible to an inner function
 
 
