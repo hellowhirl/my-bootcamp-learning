@@ -78,5 +78,95 @@ function Circle2(radius) {
 const neoCircle = new Circle2(10);
 neoCircle.location = { x: 1 };
 
-neoCircle["location"] = { x: 1 }; // useful for when we want to dynamically access a property name
+neoCircle["location"] = { x: 1 }; // bracket notation is useful for when we want to dynamically access a property name
 // also useful for special characters or a space
+
+const somethingUnknown = "unknown property";
+neoCircle[somethingUnknown] = { x: 5 }; // puts this property in the object for the first time
+console.log(
+  "bracket notation: neoCircle[somethingUnknown].x = ",
+  neoCircle[somethingUnknown].x
+);
+
+delete neoCircle["unknown property"]; // removes property with special characters
+
+// another real world example for adding a property:
+// user.token = 'asdfasdf';
+
+// enumerate over properties in an object
+for (let key in neoCircle) {
+  // to get value of preperties we use bracket notation
+  //   console.log(key, neoCircle[key]);
+}
+
+for (let key in neoCircle) {
+  // only display key preperties, and not methods
+  if (typeof neoCircle[key] !== "function") console.log(key);
+}
+
+const allKeys = Object.keys(neoCircle);
+console.log("allKeys", allKeys);
+
+if ("radius" in neoCircle) console.log(`'radius' key is in the object `);
+
+function Circle3(radius) {
+  this.radius = radius;
+
+  // 'defaultLocation' is an implementation detail we don't want accessible from the outside
+  // instead of defining it as a property we should define as a local variable
+  let defaultLocation = { x: 0, y: 0 };
+
+  let computeOptimumLocation = function(factor) {
+    // ...
+  };
+
+  this.draw = function() {
+    computeOptimumLocation(0.1);
+
+    // this inner function can also access below:
+    // defaultLocation
+    // this.radius;
+
+    console.log("drew");
+  };
+}
+
+const circle3 = new Circle3(3);
+console.log(circle3);
+
+// Private properties and methods
+function Circle4(radius) {
+  this.radius = radius;
+
+  // private property that we cannot access from the outside
+  let defaultLocation = { x: 0, y: 0 };
+
+  // not a good way because we don't want to run a method to return a value
+  this.getDefaultLocation = function() {
+    return defaultLocation;
+  };
+
+  this.draw = function() {
+    console.log("drew");
+  };
+
+  // to display or change value of 'defaultLocation' somewhere else in our application,
+  // we can use getters and setters
+  // 1st arg: object that is referenced by 'this' - the new circle4 object
+  // 2nd arg: name of our property
+  // 3rd arg: key/value pairs like 'get' or 'set' and a function
+  Object.defineProperty(this, "defaultLocation", {
+    // read-only
+    get: function() {
+      return defaultLocation;
+    },
+    // able to modify
+    set: function(value) {
+      if (!value.x || !value.y) throw Error("invalid location");
+      defaultLocation = value;
+    }
+  });
+}
+
+const circle4 = new Circle4(3);
+console.log(circle4.defaultLocation);

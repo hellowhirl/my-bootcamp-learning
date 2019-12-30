@@ -50,3 +50,21 @@ HAMMERING THIS POINT HOME:
 // Objects (Reference Types) are copied by their Reference Types 
 
 - in JS we can add properties to objects whenever we need to, which makes JS powerful and easy to work with
+
+- There are 3 ways to enumerate all members in an object:
+    'for in' loop
+    Object.keys()
+    'in' operator
+
+- Abstraction: hide the details, show the essentials (like buttons on a DVD player)
+- To apply abstraction we need to hide certain members from the outside
+
+About scope and closure:
+- closure: when you have a function it is intrinsically tied to the scope of its parent
+- variables within a function are created each time new and die whem the function ends
+- scope is temporary and it dies whereas closure stays there
+- when we have nested functions we create a 'scope chain' - and the variable that is closest to its own scope will be returned
+- a closure determines what variables will be accessible to an inner function
+
+
+Explain difference between scope and closure
