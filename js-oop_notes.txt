@@ -37,3 +37,16 @@ Object Literals
 
  - every object in JS has a property called 'constructor' - references the function used to create that object
 
+
+Functions are Objects
+
+- when we look at 'constructor' method for each object in JavaScript we can see the underlying built-in object that was used to create it
+Example: String(), Number(), Function(), Array(), Object(), etc.
+
+- takeaway: functionars are objects
+
+HAMMERING THIS POINT HOME:
+// Primitives are copied by their Value
+// Objects (Reference Types) are copied by their Reference Types 
+
+- in JS we can add properties to objects whenever we need to, which makes JS powerful and easy to work with

@@ -39,6 +39,19 @@ function Circle(radius) {
   };
 }
 
+// when we declare a function, internally it is represented like this:
+const Circle1 = new Function(
+  "radius",
+  `
+this.radius = radius;
+this.draw = function() {
+  console.log("drawn");
+}
+`
+);
+
+const circleObject = new Circle1(1); // same as how we are defining new 'const otherCircle' below
+
 // when we use new operator to call a function 3 things happen:
 // 1) creates an empty object
 // 2) it will set 'this' to point to that new object
@@ -47,5 +60,23 @@ function Circle(radius) {
 // * we are not using 'return this' as it happens automatically with 'new'
 const otherCircle = new Circle(2);
 
+// below and above are exactly same expressions...really??
+
+Circle.call({}, 2); // method that is available in functions, first arg is where we point 'this' to, next are our other parameters in function
+Circle.apply({}, [1, 2, 3]); // useful for passing arrays
+
 // JS engine uses internal constructor function as below:
 let x = {}; // let x = new Object();
+
+function Circle2(radius) {
+  this.radius = radius;
+  this.draw = function() {
+    console.log("drew");
+  };
+}
+
+const neoCircle = new Circle2(10);
+neoCircle.location = { x: 1 };
+
+neoCircle["location"] = { x: 1 }; // useful for when we want to dynamically access a property name
+// also useful for special characters or a space
