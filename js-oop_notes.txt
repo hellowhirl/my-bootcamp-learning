@@ -52,7 +52,7 @@ HAMMERING THIS POINT HOME:
 - in JS we can add properties to objects whenever we need to, which makes JS powerful and easy to work with
 
 - There are 3 ways to enumerate all members in an object:
-    'for in' loop
+    for ( in ) loop
     Object.keys()
     'in' operator
 
@@ -69,3 +69,73 @@ About scope and closure:
 
 
 Explain difference between scope and closure
+
+
+Classical Inheritance:
+- allows an object to take on the properties and methods of another object - makes it easy to reuse code in another part of the application
+
+Typically classes are examplained as below structure:
+
+Base/Super/Parent Class
+SHAPE
+CIRCLE SQUARE
+Derived/Sub/Child Class
+
+IS-A relationship
+
+CIRCLE is a SHAPE
+
+
+Prototypes and Prototypical Inheritance
+- whenever we hear 'prototype', just think of 'parent'
+- a prototype is a parent object of another object, refered to as JS engine walks up the prototype chain
+- it will refer to the first member (property or method) it finds, starting at the bottom going all the way up to the root object
+
+'__proto__' has been deprecated and should only be used for troubleshooting problems (never used in our code)
+
+- the root object in JS doesn't have a prototype (parent)
+
+
+Multilevel inheritance
+
+example with Array object:
+
+______________
+| objectBase | original methods like toString(), .hasOwnProperty(), etc.
+``````````````
+      ▲
+_____________
+| arrayBase | methods like .push(), .splice(), .shift(), etc.
+`````````````
+      ▲
+ ___________
+ | myArray | any methods or properties we define in this object
+ ```````````
+
+
+
+example with objects that have custom constructors:
+
+______________
+| objectBase | original methods like toString(), .hasOwnProperty(), etc.
+``````````````
+      ▲
+______________
+| circleBase | properties and methods we defined like radius and draw()
+``````````````
+      ▲
+  __________
+  | circle | created after we did 'const circle = new Circle();' - our custom constructor() sets prototype to circleBase
+  ``````````
+
+In summary: Objects created by a given constructor will have the same prototype.
+
+
+by default below properties are set to true:
+
+writable: able to set value or not (false will make it a read-only property)
+enumerable: members of object will show up for Object.keys() or not
+configurable: able to delete property or not
+
+- constructors also have a 'prototype' property
+- .__proto__ and .prototype return the same result

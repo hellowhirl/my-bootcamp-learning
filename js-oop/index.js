@@ -43,11 +43,11 @@ function Circle(radius) {
 const Circle1 = new Function(
   "radius",
   `
-this.radius = radius;
-this.draw = function() {
-  console.log("drawn");
-}
-`
+    this.radius = radius;
+    this.draw = function() {
+      console.log("drawn");
+    }
+  `
 );
 
 const circleObject = new Circle1(1); // same as how we are defining new 'const otherCircle' below
@@ -78,7 +78,7 @@ function Circle2(radius) {
 const neoCircle = new Circle2(10);
 neoCircle.location = { x: 1 };
 
-neoCircle["location"] = { x: 1 }; // bracket notation is useful for when we want to dynamically access a property name
+neoCircle["location"] = { x: 1 }; // bracket notation useful for dynamically accessing a property name before we know the name of the property
 // also useful for special characters or a space
 
 const somethingUnknown = "unknown property";
