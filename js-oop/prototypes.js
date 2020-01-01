@@ -22,8 +22,11 @@ console.log(descriptor);
 
 function Circle(radius) {
   this.radius = radius;
-  this.draw = function() {
-    console.log("drawn");
+  // this.draw = function() {
+  //   console.log("drawn");
+  // };
+  this.move = function() {
+    console.log("move");
   };
 
   Object.defineProperty(this, "radius", {
@@ -35,6 +38,26 @@ function Circle(radius) {
 
 const circle = new Circle(3);
 
-console.log(circle); // af  ter we look into '__proto__' of circle we can see that it has the constructor from Circle Object
-
 // constructor prototypes
+
+// below have the same output:
+console.log(circle); // after we look into '__proto__' of circle we can see that it has the constructor from Circle Object (circleBase)
+console.log("getPrototypeOf(circle):", Object.getPrototypeOf(circle)); // these/this are the parent object of circle
+console.log("__proto__ for circle  :", circle.__proto__); // we only use '__proto__' in browser developer tools
+// above and below reference same object in memory
+console.log("Circle.prototype      :", Circle.prototype);
+
+//
+
+Circle.prototype.draw = function() {
+  this.move(); // we can also reference the move method here in our prototype method
+  console.log("drawn");
+};
+
+// we can refer to more accessible property called 'toString', rather than refering to members in the above object parent, objectBase
+Circle.prototype.toString = function() {
+  console.log("Circle with radius " + this.radius);
+};
+
+const c1 = new Circle(1);
+const c2 = new Circle(2);

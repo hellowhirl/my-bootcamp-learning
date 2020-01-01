@@ -88,7 +88,7 @@ CIRCLE is a SHAPE
 
 Prototypes and Prototypical Inheritance
 - whenever we hear 'prototype', just think of 'parent'
-- a prototype is a parent object of another object, refered to as JS engine walks up the prototype chain
+- a prototype is a parent object of another object, refered to as JS engine walks up the prototype chain, starting from itself
 - it will refer to the first member (property or method) it finds, starting at the bottom going all the way up to the root object
 
 '__proto__' has been deprecated and should only be used for troubleshooting problems (never used in our code)
@@ -139,3 +139,10 @@ configurable: able to delete property or not
 
 - constructors also have a 'prototype' property
 - .__proto__ and .prototype return the same result
+
+IN SUMMARY:
+- when navigating through an object in JS, don't go deeper than what's inside a constructor
+
+Prototype vs Instance members
+- we can reference (or call) instance methods from a prototype member
+- we can reference (or call) prototype methods from an instance member
