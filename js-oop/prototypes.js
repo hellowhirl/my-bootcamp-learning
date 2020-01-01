@@ -31,8 +31,8 @@ function Circle(radius) {
 
   Object.defineProperty(this, "radius", {
     writable: false,
-    enumerable: false,
-    configurable: false
+    configurable: false,
+    enumerable: true
   });
 }
 
@@ -47,8 +47,7 @@ console.log("__proto__ for circle  :", circle.__proto__); // we only use '__prot
 // above and below reference same object in memory
 console.log("Circle.prototype      :", Circle.prototype);
 
-//
-
+// Prototype members
 Circle.prototype.draw = function() {
   this.move(); // we can also reference the move method here in our prototype method
   console.log("drawn");
@@ -61,3 +60,13 @@ Circle.prototype.toString = function() {
 
 const c1 = new Circle(1);
 const c2 = new Circle(2);
+
+// iterate over instance members
+console.log(Object.keys(c1));
+
+// iterate over all members (instance and prototype)
+for (let key in c1) console.log(key);
+
+// method to check if an object has its own property or not
+console.log(c1.hasOwnProperty("radius")); // true
+console.log(c1.hasOwnProperty("draw")); // false; because it's a prototype property
