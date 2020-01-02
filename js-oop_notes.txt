@@ -153,3 +153,7 @@ OTHER LIBRARIES MY DEPEND ON THESE BUILT-IN OBJECTS
 - don't overwrite methods
 - don't add new methods/properties
 - don't remove existing methods/properties
+❌Array.prototype.shuffle = function() { // ..}
+
+- Our objcts should always be in a valid state (reliable and trustworthy) - that's why we use abstraction
+PREMATURE OPTIMIZATION IS THE ROOT OF ALL EVIL
