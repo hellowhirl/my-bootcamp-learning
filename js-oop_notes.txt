@@ -157,3 +157,17 @@ OTHER LIBRARIES MY DEPEND ON THESE BUILT-IN OBJECTS
 
 - Our objcts should always be in a valid state (reliable and trustworthy) - that's why we use abstraction
 PREMATURE OPTIMIZATION IS THE ROOT OF ALL EVIL
+
+Method overriding: 
+- override a method that is defined in the base object (reimplementing a method in a child object)
+
+Polymorphism (poly: many, morph: form)
+
+- Don't overuse Inerhitanc - it can make your code complex and fragile
+- There is another technique for code reuse called "Composition"
+
+AVOID CREATING INHERITANCE HIERARCHIES - DO NOT GO ABOVE ONE LEVEL
+
+FAVOR COMPOSITION OVER INHERITANCE
+
+- Composition is achieved with Mixins

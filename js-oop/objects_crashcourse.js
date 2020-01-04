@@ -158,11 +158,11 @@ function Circle4(radius) {
   Object.defineProperty(this, "defaultLocation", {
     // read-only
     get: function() {
-      return defaultLocation;
+      return defaultLocation; // defaultLocation variable is part of the closure of this inner function, so we can access it here
     },
-    // able to modify
+    // able to modify and perform some validation
     set: function(value) {
-      if (!value.x || !value.y) throw Error("invalid location");
+      if (!value.x || !value.y) throw new Error("invalid location");
       defaultLocation = value;
     }
   });
