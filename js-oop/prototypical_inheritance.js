@@ -72,7 +72,7 @@ for (let shape of shapes) shape.duplicate();
 //
 // Mixins
 
-// creating a mixin function to make code more readable
+// creating a mixin function to make code more readable,
 // multiple optional number of arguments with rest operator (...)
 function mixin(TargetObject, ...sources) {
   Object.assign(TargetObject, ...sources);
