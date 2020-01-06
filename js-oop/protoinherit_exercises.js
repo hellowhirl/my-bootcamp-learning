@@ -48,5 +48,3 @@ HtmlSelectELement.prototype.constructor = HtmlSelectELement;
 
 const e = new HtmlElement();
 const h = new HtmlSelectELement([1, 2, 3, 4, 5]);
-
-console.log(h);

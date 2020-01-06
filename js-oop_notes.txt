@@ -143,6 +143,7 @@ configurable: able to delete property or not
 IN SUMMARY:
 - when navigating through an object in JS, don't go deeper than what's inside a constructor
 
+
 Prototype vs Instance members
 - we can reference (or call) instance methods from a prototype member
 - we can reference (or call) prototype methods from an instance member
@@ -163,7 +164,7 @@ Method overriding:
 
 Polymorphism (poly: many, morph: form)
 
-- Don't overuse Inerhitanc - it can make your code complex and fragile
+- Don't overuse Inerhitance - it can make your code complex and fragile
 - There is another technique for code reuse called "Composition"
 
 AVOID CREATING INHERITANCE HIERARCHIES - DO NOT GO ABOVE ONE LEVEL

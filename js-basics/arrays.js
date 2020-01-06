@@ -17,10 +17,10 @@ console.log(numbers);
 const example = [1, 2, 3, 1, 4];
 
 console.log(example.indexOf(6)); // -1
-console.log(example.indexOf(3)); // 0
+console.log(example.indexOf(3)); // 2
 console.log(example.indexOf("1")); // -1
 
-console.log(example.lastIndexOf(1));
+console.log(example.lastIndexOf(1)); // 3
 
 console.log(example.indexOf(1) !== -1); // works but it's ugly
 console.log(example.includes(1)); // better, new method
