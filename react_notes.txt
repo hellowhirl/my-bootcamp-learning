@@ -71,12 +71,14 @@ Zen coding with Emmet: create table with class "container" with <thead> enclosin
 table.container>thead>tr>td*4
 
 
-Correct vs Incorrect ES6 syntax:
+Correct vs Incorrect ES6 syntax for JSX React components:
 
+// Correct: when we are returning an object from an arrow function we need to put that object in parenthesis - otherwise JavaScript enging will parse {} as a code block instead of as an object
 {this.state.counters.map(c => (
     <Counter key={c.id} />
 ))}
 
+// Incorrect
 {this.state.counters.map(c => {
     <Counter key={c.id} />;
 })}

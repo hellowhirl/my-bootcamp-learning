@@ -67,7 +67,7 @@ const shapes = [new Square(), new Circle()];
 // Polymorphism in action
 // when we Encapulate variables and funcitons into objects and use Inheritance,
 // we can execute many forms of a method (Polymorphism) in a single line of code
-for (let shape of shapes) shape.duplicate();
+for (let shape of shapes) shape.duplicate(); // depending on the 'shape' object a different implementation (form) of the duplicate method will be called
 
 //
 // Mixins

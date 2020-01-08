@@ -115,7 +115,7 @@ const second = [4, 5, 6];
 const combined = first.concat(second); // combine arrays
 console.log(combined);
 
-let slice = combined.slice(2, 4); // 2 arguments indicate start index and end index that we will extract out of array
+let slice = combined.slice(2, 4); // 2 arguments indicate start index and index before which to end extraction
 console.log(slice); // [3, 4]
 
 slice = combined.slice(2); // 1 argument excluding end idnex - we get all the elements in original array starting from this index
@@ -170,12 +170,12 @@ console.log(hyphenMessage);
 
 // Sorting arrays
 
-const mixedNumbers = [2, 3, 1];
-mixedNumbers.sort(); // [1, 2, 3]
+const mixedNumbers = [2, 3, 1, 5, 4];
+mixedNumbers.sort(); // [1, 2, 3, 4, 5]
 console.log(mixedNumbers);
 
 mixedNumbers.reverse();
-console.log(mixedNumbers); // [3, 2, 1]
+console.log(mixedNumbers); // [5, 4, 3, 2, 1]
 
 // ASCII: American Standard Code for Information Interchange
 
@@ -253,8 +253,10 @@ const objectItems = newFiltered.map(n => {
 
 console.log("objectItems", objectItems);
 
-// chainable methods - when result from a constant is not used anywhere throughout your code (no need to declare 'const obj')
-// in this case we can simply return object without declaring a constant
+// chainable methods:
+// when the result from a constant is not used anywhere and the result value is reusable on the next method,
+// we can call one method after the other in a chain.
+// so there is no need to declare one-time constant variables
 // should put each method call on a seperate line for cleaner code
 
 const objectItemImproved = newFiltered.map(n => ({ value: n }));
