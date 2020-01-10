@@ -4,7 +4,7 @@ OOP: a programming paradigm centered around objects rather than functions
 - it's not a language or tool
 - supported by Ruby, JavaScript, Python, Java, C#, and more
 
-- Before OOp there was procedural programming (too much interdepency)
+- Before OOP there was procedural programming (too much interdepency)
 
 - In OOP we combine a group of related variables and functions into a unit - an object with properties and methods
 
@@ -43,7 +43,7 @@ Functions are Objects
 - when we look at 'constructor' method for each object in JavaScript we can see the underlying built-in object that was used to create it
 Example: String(), Number(), Function(), Array(), Object(), etc.
 
-- takeaway: functionars are objects
+- takeaway: functions are objects
 
 HAMMERING THIS POINT HOME:
 // Primitives are copied by their Value
@@ -60,15 +60,16 @@ HAMMERING THIS POINT HOME:
 - To apply abstraction we need to hide certain members from the outside
 
 About scope and closure:
-- scope: determines the accessibility (visibility) of variables.
-- closure: when you have a function it is intrinsically tied to the scope of its parent
+
+scope: 
+- determines the accessibility (visibility) of variables.
+- it is temporary - variables within a function are created each time new and die when the function ends
 - when we have nested functions we create a 'scope chain' - and the variable that is closest to its own scope will be returned
-- variables within a function are created each time new and die whem the function ends
-- scope is temporary and it dies whereas closure stays there
-- a closure determines what variables will be accessible to an inner function
 
-
-Explain difference between scope and closure
+closure: 
+- when you have a function it is intrinsically tied to the scope of its parent
+- determines what variables will be accessible to an inner function
+- remains after function has ended
 
 
 Classical Inheritance:
@@ -87,9 +88,14 @@ CIRCLE is a SHAPE
 
 
 Prototypes and Prototypical Inheritance
+
+Prototype:
 - whenever we hear 'prototype', just think of 'parent'
-- a prototype is a parent object of another object, refered to as JS engine walks up the prototype chain, starting from itself
-- it will refer to the first member (property or method) it finds, starting at the bottom going all the way up to the root object
+- a prototype is just a parent object of another object. 
+
+Prototypical Inheritance:
+- when you access a member (property or method) on an object JS engine looks for that member, starting from itself. 
+- if it can't find it then it will walk up the prototype chain until it can find the target member - all the way up to the root object.
 
 '__proto__' has been deprecated and should only be used for troubleshooting problems (never used in our code)
 
@@ -101,15 +107,15 @@ Multilevel inheritance
 example with Array object:
 
 ______________
-| objectBase | original methods like toString(), .hasOwnProperty(), etc.
+| objectBase | : original methods like toString(), .hasOwnProperty(), etc.
 ``````````````
       ▲
 _____________
-| arrayBase | methods like .push(), .splice(), .shift(), etc.
+| arrayBase | : methods like .push(), .splice(), .shift(), etc.
 `````````````
       ▲
  ___________
- | myArray | any methods or properties we define in this object
+ | myArray | : any methods or properties we define in this object
  ```````````
 
 
@@ -117,15 +123,15 @@ _____________
 example with objects that have custom constructors:
 
 ______________
-| objectBase | original methods like toString(), .hasOwnProperty(), etc.
+| objectBase | : original methods like toString(), .hasOwnProperty(), etc.
 ``````````````
       ▲
 ______________
-| circleBase | properties and methods we defined like radius and draw()
+| circleBase | : properties and methods we defined like radius and draw()
 ``````````````
       ▲
   __________
-  | circle | created after we did 'const circle = new Circle();' - our custom constructor() sets prototype to circleBase
+  | circle | : created after we did 'const circle = new Circle();' - our custom constructor() sets prototype to circleBase
   ``````````
 
 In summary: Objects created by a given constructor will have the same prototype.
@@ -150,7 +156,7 @@ Prototype vs Instance members
 
 
 WE SHOULD NOT MODIFY (BUILT-IN) OBJECTS THAT WE DON'T OWN IN JAVASCRIPT
-OTHER LIBRARIES MY DEPEND ON THESE BUILT-IN OBJECTS
+OTHER LIBRARIES MAY DEPEND ON THESE BUILT-IN OBJECTS
 - don't overwrite methods
 - don't add new methods/properties
 - don't remove existing methods/properties

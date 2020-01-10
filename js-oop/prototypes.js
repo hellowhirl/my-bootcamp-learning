@@ -18,7 +18,9 @@ let myArray = [];
 let person = { name: "Meh" };
 let objectBase = Object.getPrototypeOf(person); // pull up all the members of the __proto__ in that object
 let descriptor = Object.getOwnPropertyDescriptor(objectBase, "toString");
-console.log(descriptor);
+console.log("descriptor for toString on objectBase:", descriptor);
+let descriptorZ = Object.getOwnPropertyDescriptor(z, "toString");
+console.log("descriptor for toString on object   Z:", descriptorZ);
 
 function Circle(radius) {
   this.radius = radius;

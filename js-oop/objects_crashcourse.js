@@ -60,7 +60,7 @@ const circleObject = new Circle1(1); // same as how we are defining new 'const o
 // * we are not using 'return this' as it happens automatically with 'new'
 const otherCircle = new Circle(2);
 
-// below and above are exactly same expressions...really??
+// below and above are exactly same expressions...really ?????
 
 Circle.call({}, 2); // method that is available in functions, first arg is where we point 'this' to, next are our other parameters in function
 Circle.apply({}, [1, 2, 3]); // useful for passing arrays
