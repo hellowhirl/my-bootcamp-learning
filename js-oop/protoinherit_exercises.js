@@ -27,14 +27,21 @@ function HtmlSelectELement(items = []) {
   this.removeItem = function(item) {
     this.items.splice(this.items.indexOf(item), 1);
   };
+  this.render = function() {
+    const options = this.items.map(item => `<option>${item}</option>`).join("");
+    return `<select>${options}</select>`;
+  };
 }
 
-HtmlSelectELement.prototype = {
-  constructor: HtmlElement,
-  eat: function() {
-    console.log("nom nom nom");
-  }
-};
+function HtmlImageElement(src) {
+  this.src = src;
+  this.render = function() {
+    return `<img src="${this.src}" />`;
+  };
+}
+
+HtmlImageElement.prototype = new HtmlElement();
+HtmlImageElement.prototype.constructor = HtmlImageElement;
 
 // below creates an empty object that has its prototype set to HtmlElement - with this impolementation
 // we do not inherit the own method of click on the HtmlElement object to HtmlSelectElement
@@ -48,3 +55,10 @@ HtmlSelectELement.prototype.constructor = HtmlSelectELement;
 
 const e = new HtmlElement();
 const h = new HtmlSelectELement([1, 2, 3, 4, 5]);
+
+const elements = [
+  new HtmlSelectELement([1, 2, 3]),
+  new HtmlImageElement("http://")
+];
+
+for (let element of elements) console.log(element.render());
