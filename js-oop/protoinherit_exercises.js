@@ -21,6 +21,7 @@ HtmlElement.prototype.focus = function() {
 
 function HtmlSelectELement(items = []) {
   this.items = items;
+
   this.addItem = function(item) {
     items.push(item);
   };
@@ -28,13 +29,23 @@ function HtmlSelectELement(items = []) {
     this.items.splice(this.items.indexOf(item), 1);
   };
   this.render = function() {
-    const options = this.items.map(item => `<option>${item}</option>`).join("");
-    return `<select>${options}</select>`;
+    // const options = this.items.map(item => `<option>${item}</option>`).join("");
+    // return `<select>${options}</select>`;
+    // this code can be implemented as below:
+    return `
+<select>${this.items
+      .map(
+        item => `
+  <option>${item}</option>`
+      )
+      .join("")}
+</select>`;
   };
 }
 
 function HtmlImageElement(src) {
   this.src = src;
+
   this.render = function() {
     return `<img src="${this.src}" />`;
   };

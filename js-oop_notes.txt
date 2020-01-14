@@ -178,3 +178,5 @@ AVOID CREATING INHERITANCE HIERARCHIES - DO NOT GO ABOVE ONE LEVEL
 FAVOR COMPOSITION OVER INHERITANCE
 
 - Composition is achieved with Mixins
+
+- it's possible to have a template string inside of another template string
