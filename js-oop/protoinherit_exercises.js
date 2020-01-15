@@ -43,6 +43,8 @@ function HtmlSelectELement(items = []) {
   };
 }
 
+// arrow function example - function expression ?????
+
 function HtmlImageElement(src) {
   this.src = src;
 

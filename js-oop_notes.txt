@@ -180,3 +180,22 @@ FAVOR COMPOSITION OVER INHERITANCE
 - Composition is achieved with Mixins
 
 - it's possible to have a template string inside of another template string
+function HtmlSelectELement(items = []) {
+  this.render = function() {
+    return `
+<select>${this.items
+      .map(
+        item => `
+  <option>${item}</option>`
+      )
+      .join("")}
+</select>`;
+  };
+}
+
+In classical oritented langauge there are 2 types of methods
+- Instance methods
+
+Static methods: 
+- not working with a particular object - we are working a class itself
+- utility functions (like Math)
