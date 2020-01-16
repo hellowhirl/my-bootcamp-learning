@@ -173,23 +173,23 @@ class Circle5 {
     console.log("drawing");
   }
 }
+const c5 = new Circle5(5);
 //
 // setting up one WeakMap for all private members: this syntax is a little polluted
 //
-const cPrivProps = new CirPrivProps(5);
 
-const privaetProps = new WeakMap();
+const privateProps = new WeakMap();
 
 class CirPrivProps {
   constructor(radius) {
-    privaetProps.set(this, {
+    privateProps.set(this, {
       radius: radius,
       move: () => {
         console.log("moving", this);
       }
     });
 
-    privaetProps.get(this).radius; // in order to access 'radius' property
+    privateProps.get(this).radius; // in order to access 'radius' property
   }
 
   draw() {
