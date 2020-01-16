@@ -200,3 +200,93 @@ class CirPrivProps {
 }
 
 const cPrivProps = new CirPrivProps(5);
+
+//
+// Getters and Setters
+//
+const _radiusSimple = new WeakMap();
+
+class CircleSimple {
+  constructor(radius) {
+    _radiusSimple.set(this, radius);
+
+    // this syntax is convulated - in ES6 we can create a getter and setter much easier
+    // Object.defineProperty(this, 'radius') {
+    //   get: function() {
+
+    //   }
+    // }
+  }
+
+  // name should look like a property: 'radius'
+  // simply add the 'get' keyword at the front
+  // looks like a method but actually we can access it as a prperty
+  get radius() {
+    return _radiusSimple.get(this);
+  }
+
+  // with 'set' we can do validation just like before
+  set radius(value) {
+    if (value <= 0) throw new Error("invalid radius");
+    // set the '_radiusSimple' private property just like we do it in the constructor
+    _radiusSimple.set(this, value);
+  }
+}
+
+const cSimple = new CircleSimple(6);
+
+//
+// Implementing Inheritance with ES6 classes
+//
+class Shape {
+  constructor(color) {
+    this.color = color;
+  }
+
+  move() {
+    console.log(this);
+  }
+}
+
+// to have 'AnotherCircle' inherit from the 'Shape' class just use 'extends'
+// with 'extends' keyword we don't have to reset the 'constructor' back to the object itself
+class AnotherCircle extends Shape {
+  // if we have 'constructor' in the parent class and then we add a 'constructor' in the derived class,
+  // inside of the derived class 'constructor' we should call the parent 'constructor' first to initialize the base object
+  // to pass properties put them in the constructor as a paramter ('color')
+  constructor(color, radius) {
+    // 'super' references the parent object - to call the parent constructor we call it like a function
+    // and here we pass arguments (like 'color')
+    super(color); // here we in herit 'color' from our parent class
+    this.radius = radius; // here we add 'radius' on the 'AnotherCircle' class itself
+  }
+
+  draw() {
+    console.log("drawn");
+  }
+}
+
+const aCircle = new AnotherCircle("red", 7); // now we can call draw(), move(), and 'color' property
+
+//
+// Method Overriding:
+// changing implementation of method in a derirved class or derived object
+//
+
+class Car {
+  // here is a scenario where we want to reuse code we have implemented in the parent inputEnergy() method
+  inputEnergy() {
+    console.log("guzzle guzzle");
+  }
+}
+
+class ElectricVehicle extends Car {
+  // JS engine walks up the prototype tree which is why this implementation is used first
+  inputEnergy() {
+    super.inputEnergy(); // we can call method on parent object by using 'super' keyword
+    console.log("buzz buzz");
+  }
+}
+
+const prius = new ElectricVehicle();
+prius.inputEnergy();
