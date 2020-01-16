@@ -20,7 +20,7 @@ class Circle {
   }
 
   // Instance Method:
-  // available on an instance of a class, which is an object
+  // available upon an instance of a class, which is an object
   // properties and methods defined outside of constructor will end up on the prototype (Circle)
   // normally we define methods in the body of the class
   draw() {
@@ -41,7 +41,7 @@ class Circle {
 // classes are constructor functions - see below output
 console.log("typeof Circle:", typeof Circle); // "function" - look it's a function!
 
-const circle1 = new Circle(3);
+const circle1 = new Circle(1);
 console.log("circle1", circle1);
 
 const circle2 = Circle.parse('{ "radius": 4 }'); // not available on a Circle object but it's accessible here on the class reference itself (Circle)
@@ -113,3 +113,90 @@ class Circle3 {
 const c3 = new Circle3();
 const draw3 = c3.draw;
 console.log(draw3); // undefined
+
+//
+// Private Members using Symbols
+
+// Abstraction - to implement we use private properties and methods
+const _radius = Symbol(); // a 'Symbol' is a unique identifier for every time we call this function
+// we can use this unique value as the property name for an object
+// Symbol() is a function we call to generate a Symbol - this is not a constructor function so we CANNOT 'new' it
+const _draw = Symbol();
+
+class Circle4 {
+  constructor(radius) {
+    // this.radius = radius;
+    // this._radius = radius; // this is a terrible approach - don't use, because another dev can still access this property
+    this[_radius] = radius; // this property is "kind of private" because we can still access using 'Object.getOwnPropertySymbols'
+  }
+  // Computer Property Names (new in ES6) - add brackets, and inside of them we can add an expression
+  // when that expression is evaulated the resulting value will be used as a name of propety or method
+  // for '_draw' below we get a unique identifier - and that will be used as name of this method
+  [_draw]() {}
+}
+
+const c4 = new Circle4(4);
+
+// 3 approaches:
+// 1) _underscore property names: bad idea
+// 2) using Symbol to implement "kind of" private properties and methods
+// 3) setting up a WeakMap for each private member
+
+// WeakMaps:
+// a dictionary where keys are objects and values can be anything
+// "weak" is because the keys are weak - if there are no reference to these keys they will be garbage collected
+// for implementing private properties and methods in an object
+
+const _radius5 = new WeakMap();
+const _move = new WeakMap();
+
+class Circle5 {
+  constructor(radius) {
+    // this.radius = radius; // instead of setting the 'radius' property here, instead we'll work with '_radius5'
+    _radius5.set(this, radius); // .set(), first arg is 'key' which  has to be an Object (can't be a Symbol), 2nd is value
+    // technically we can access this 'radius' private property if we can access to this WeakMap
+
+    // as opposed to using 'function() {}' syntax as 2nd arg (which will make 'this' be rebounded to 'undefined')
+    // if we use an arrow function here then the 'this' value will be inherited from its containing function - in this case the 'constructor'
+    _move.set(this, () => {
+      console.log("moving", this);
+    });
+  }
+
+  // public method
+  draw() {
+    // to read the 'radius' property we can do something like below
+    // console.log(_radius5.get(this)); // 1st arg is 'key', which is instance of Circle5 object - this will return value of '_radius'
+
+    _move.get(this)(); // here we are using public method 'draw' to call private method 'move'
+
+    console.log("drawing");
+  }
+}
+//
+// setting up one WeakMap for all private members: this syntax is a little polluted
+//
+const cPrivProps = new CirPrivProps(5);
+
+const privaetProps = new WeakMap();
+
+class CirPrivProps {
+  constructor(radius) {
+    privaetProps.set(this, {
+      radius: radius,
+      move: () => {
+        console.log("moving", this);
+      }
+    });
+
+    privaetProps.get(this).radius; // in order to access 'radius' property
+  }
+
+  draw() {
+    _move.get(this)();
+
+    console.log("drawing");
+  }
+}
+
+const cPrivProps = new CirPrivProps(5);

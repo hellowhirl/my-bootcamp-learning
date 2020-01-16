@@ -250,7 +250,9 @@ function sum(limit) {
 
 // Exercise 9
 // Grades
-// Let's use the 'single responsibility principle'
+
+// single responsibility principle:
+// breaking up a complex function into smaller functions that focus on one thing
 
 const marks = [130, 80, 50];
 
