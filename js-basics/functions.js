@@ -102,9 +102,13 @@ console.log(interest(10000));
 
 // Getters & Setters
 
+// getters => access properties
+// setters => change (mutate) properties
+
 const person = {
   firstName: "John",
   lastName: "Doe",
+  // 'get' allows us to access a function like a property, so 'person.fullname' instead of 'person.fullname()'
   get fullName() {
     // this is just 'function fullName() {}' with 'function' dropped
     return `${person.firstName} ${person.lastName}`;
@@ -205,7 +209,7 @@ function table() {
 }
 
 const video = {
-  prop: 1,
+  propertyName: "A",
   message: "hello",
   tags: ["a", "b", "c"],
   total() {
@@ -214,7 +218,7 @@ const video = {
   show() {
     this.tags.forEach(function(tag) {
       // a function like this would normally refer to global window object
-      console.log(this.prop, tag);
+      console.log(this.propertyName, tag);
     }, this); // forEach 2nd parameter is 'thisArg' - and 'this' will reference this 'video' object
   }
 };
