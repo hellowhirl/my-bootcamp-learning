@@ -242,9 +242,9 @@ function playVideo(a, b) {
   console.log(a, b);
 }
 
-// able to change value of 'this' for above function with below methods
+// able to change value of 'this' for above function with below 3 methods
 
-playVideo.call({ name: "Geo" }, 1, 2); // first parameter is thisArg - so we can pass an object and 'this' references that object
+playVideo.call({ name: "Geo" }, 1, 2); // first parameter is 'thisArg' - so we can pass an object and 'this' references that object
 playVideo.apply({ name: "George" }, [1, 2]); // only difference is that for multiple arguments they need to be passed as an array
 
 // .bind() returns a new function (does not call original function) and sets 'this' to point to the passed object permanently
@@ -254,38 +254,38 @@ fn();
 playVideo.bind({ name: "Giorgio Armani" }, 5, 6)(); // we can call the function that is returned from bind method using () after
 
 // Approach 1
+// not preferred approach, but it's common
 const approach1 = {
-  // not preferred approach, but it's common
   measurement: 11,
   tags: ["a", "b", "c"],
   feature() {
-    const self = this;
+    const self = this; // also sometimes called 'that'
     this.tags.forEach(function(tag) {
       console.log(self.measurement, tag);
     });
   }
 };
 // Approach 2
+// 2nd solution, old way
 const approach2 = {
-  // 2nd solution
   measurement: 22,
   tags: ["a", "b", "c"],
   feature() {
     this.tags.forEach(
       function(tag) {
         console.log(this.measurement, tag);
-      }.bind(this)
-    ); // call the bind() method and embeded it after function - pass 'this' because it's within a method
+      }.bind(this) // call the bind() method after the function and pass 'this'
+    ); // here still in the 'feature' method 'this' will reference the 'approach2' object
   }
 };
 // Approach 3
+// best modern practice
 const approach3 = {
-  // best modern practice
   measurement: 33,
   tags: ["a", "b", "c"],
   feature() {
     this.tags.forEach(tag => {
-      // arroy functions inherit the 'this' value - inherit 'this' from the containing function
+      // arrow functions inherit the 'this' value from the containing function
       console.log(this.measurement, tag); // 'this' is not rebound to a new object
     });
   }
