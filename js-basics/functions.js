@@ -66,6 +66,7 @@ function sumMore() {
 // there can be 0 or more parameters preceeding the rest parameter, but not any after
 
 function rest(...args) {
+  console.log(args); // returns a real array - so then we can apply array methods on whatever is passed
   // '...' rest operator: takes all the arguments passed to function and puts them in an array
   return args.reduce((a, b) => a + b);
 }

@@ -20,7 +20,7 @@ class Circle {
   }
 
   // Instance Method:
-  // available upon an instance of a class, which is an object
+  // available on an instance of a class, which is an object
   // properties and methods defined outside of constructor will end up on the prototype (Circle)
   // normally we define methods in the body of the class
   draw() {
@@ -54,18 +54,18 @@ console.log(circle2);
 sayHello();
 // sayGoodBye(); // Cannot access 'sayGoodBye' before initialization
 
-// Class Declaration syntax
-// not hoisted
+// Function Declaration syntax (similar to Class Declaration syntax)
+// hoisted
 function sayHello() {
   console.log("hello");
 }
 
-// Class Expression syntax
-// not hoisted
+// Class Declaration syntax
+// not hoisted (unlike Function Declarations)
 class Triangle {} // simpler and cleaner syntax
 
-// Class Declaration syntax
-// hoisted
+// Class Expression syntax
+// not hoisted
 const Square = class {}; // no real life use case for this
 
 // Static Methods
@@ -118,18 +118,19 @@ console.log(draw3); // undefined
 // Private Members using Symbols
 
 // Abstraction - to implement we use private properties and methods
-const _radius = Symbol(); // a 'Symbol' is a unique identifier for every time we call this function
+const _radius = Symbol(); // a 'Symbol' is a function we call to generate a unique identifier
 // we can use this unique value as the property name for an object
 // Symbol() is a function we call to generate a Symbol - this is not a constructor function so we CANNOT 'new' it
 const _draw = Symbol();
 
 class Circle4 {
   constructor(radius) {
-    // this.radius = radius;
     // this._radius = radius; // this is a terrible approach - don't use, because another dev can still access this property
+    // this.radius = radius; // same as below
+    // this['radius'] = radius; // same as above
     this[_radius] = radius; // this property is "kind of private" because we can still access using 'Object.getOwnPropertySymbols'
   }
-  // Computer Property Names (new in ES6) - add brackets, and inside of them we can add an expression
+  // Computed Property Names (new in ES6) - add brackets, and inside of them we can add an expression
   // when that expression is evaulated the resulting value will be used as a name of propety or method
   // for '_draw' below we get a unique identifier - and that will be used as name of this method
   [_draw]() {}
