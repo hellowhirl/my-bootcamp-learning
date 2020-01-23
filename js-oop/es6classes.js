@@ -211,7 +211,7 @@ class CircleSimple {
   constructor(radius) {
     _radiusSimple.set(this, radius);
 
-    // this syntax is convulated - in ES6 we can create a getter and setter much easier
+    // this syntax is convoluted - in ES6 we can create a getter and setter much easier
     // Object.defineProperty(this, 'radius') {
     //   get: function() {
 
@@ -254,11 +254,11 @@ class Shape {
 class AnotherCircle extends Shape {
   // if we have 'constructor' in the parent class and then we add a 'constructor' in the derived class,
   // inside of the derived class 'constructor' we should call the parent 'constructor' first to initialize the base object
-  // to pass properties put them in the constructor as a paramter ('color')
+  // to pass properties put them in the constructor as a parameter ('color')
   constructor(color, radius) {
-    // 'super' references the parent object - to call the parent constructor we call it like a function
-    // and here we pass arguments (like 'color')
-    super(color); // here we in herit 'color' from our parent class
+    // in above constructor we pass arguments (like 'color')
+    // 'super' (for super constructor) references the parent object - to call the parent constructor we call it like a function()
+    super(color); // here we pass 'color' from to the super constructor
     this.radius = radius; // here we add 'radius' on the 'AnotherCircle' class itself
   }
 
