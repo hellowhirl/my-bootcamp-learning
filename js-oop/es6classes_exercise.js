@@ -1,25 +1,32 @@
 const _currentStack = new WeakMap();
 
 class Stack {
-  constructor(count = 0, stack = []) {
-    this.count = count;
-    _currentStack.set(this, stack);
+  constructor() {
+    _currentStack.set(this, []);
   }
 
   pop() {
-    if (this.count === 0) throw new Error("no items in stack");
-    this.count--;
-    _currentStack.get(this).pop();
+    const itemStack = _currentStack.get(this);
+
+    if (itemStack.length === 0) throw new Error("no items in stack");
+
+    itemStack.pop();
   }
 
   push(value) {
-    this.count++;
     _currentStack.get(this).push(value);
   }
 
   peek() {
-    if (this.count === 0) throw new Error("no items in stack");
-    return _currentStack.get(this)[this.count - 1];
+    const itemStack = _currentStack.get(this);
+
+    if (itemStack.length === 0) throw new Error("no items in stack");
+
+    return itemStack[itemStack.length - 1];
+  }
+
+  get count() {
+    return _currentStack.get(this).length;
   }
 }
 
