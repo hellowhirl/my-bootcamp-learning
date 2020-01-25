@@ -225,7 +225,7 @@ Babel:
 - a tool we give our modern JS code and it turns it into browser readable JS
 
 Webpack:
-- a module bundler: combines all our js files into one file - a bundler
+- a module bundler: combines all our js files into one file - a bundle
 - minifies and uglifies code
 
 
@@ -243,7 +243,7 @@ Benefit of using webpack-cli:
 command: 
 webpack-cli init
 result: 
-installs packages (webpack-cli, uglify)s, babel-cre, babel-loader, babel-preset-env, webpack (library itself))
+installs packages (webpack-cli, uglifyjs, babel-core, babel-loader, babel-preset-env, webpack (library itself))
 
 command: 
 npm init --yes
