@@ -11,7 +11,7 @@ OOP: a programming paradigm centered around objects rather than functions
 4 pillars of OOP
 
 Encapsulation
-- Combine a group of related variables and functions that operate on them into a unit - an object with properties and methods
+- grouping related variables and functions that operate on them into objects - an object with properties and methods
 
 Abstraction
 - hide details and complexity and show only essentials; reduce complexity + isolate impact of changes
@@ -204,3 +204,65 @@ Static methods:
 /////////////////
 // ES6 Tooling //
 /////////////////
+
+Module benfits:
+- Increase maintainability (better organized)
+- Reuse (throughout an application or different applications)
+- Abstract (hide complexity in a module and only expose essentials)
+
+Module formats:
+- CommonJS : Node.JS
+- ES6 Module (natively supported by JS) : Browser
+/////// Don't worry about these ///////
+// - AMD (Asyncronous Module Definition) : Browser
+// - UMD (Universal Module Definition) : Browser /Node.JS
+
+
+When using ES6 we need to use 2 tools: a transpiler and a bundler
+
+Babel:
+- a transpiler: translater and compiler
+- a tool we give our modern JS code and it turns it into browser readable JS
+
+Webpack:
+- a module bundler: combines all our js files into one file - a bundler
+- minifies and uglifies code
+
+
+npm:
+- tool we use to install 3rd party libraries and tools
+
+
+Workflow for Webpack:
+
+Benefit of using webpack-cli: 
+- we don't have to manually install babel packages
+- downloads other libraries and tools that we need
+- able to bundle CSS (as well as JS)
+
+command: 
+webpack-cli init
+result: 
+installs packages (webpack-cli, uglify)s, babel-cre, babel-loader, babel-preset-env, webpack (library itself))
+
+command: 
+npm init --yes
+result: 
+creates 'package.json' file
+detail: in 'scripts' section we can add a new command 'build' and set to 'webpack'
+
+command: 
+npm run build
+result: 
+creates a bundle (main.bundles.js) from files in /src folder
+detail:
+webpack runs our code through babel and converts to ES5 JS code and puts in 1 minified file
+
+NEXT:
+in 'index.html' change script 'src' to 'dist/main.bundle.js'
+
+FINALLY:
+Go live with modules in project
+
+OPTIMIZE:
+in 'scripts' change to 'webpack -w' for 'build' script
