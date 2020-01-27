@@ -33,7 +33,7 @@ Helpful plugins
 
 "start": "react-scripts start", // start dev server 
     $ npm start
-"build": "react-scripts build", // build application for production for optimized pacckage
+"build": "react-scripts build", // build application for production for optimized package
 "test": "react-scripts test", // for running unit tests
 "eject": "react-scripts eject" // eject from create-react app and customize configs for this project
 
