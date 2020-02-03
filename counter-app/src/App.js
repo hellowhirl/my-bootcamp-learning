@@ -14,7 +14,7 @@ class App extends Component {
     ]
   };
 
-  // constructor is only called once when an instance of a class is created
+  // constructor is called only once when an instance of a class is created
   // this is where we can intialize the properties in that instance
   constructor(props) {
     super(props);

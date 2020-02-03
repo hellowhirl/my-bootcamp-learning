@@ -36,7 +36,7 @@ person["last"] = "Joe";
 const walk = person.walk.bind(person); // here we are getting a new "walk" function
 // const walk = person.walk; // walk() should return undefined with React default settings for "use strict"
 
-walk(); // should return undefined with React default settings for "use strict"
+walk(); // should return 'undefined' with React default settings for "use strict"
 
 const square = function(number) {
   return number * number;
@@ -70,11 +70,17 @@ const human = {
       // this callback function is not a part of any objects - it's a standalone function (by default 'this' returns window object)
       console.log("this again", this);
     }, 1000);
+  },
+  badChat() {
+    setTimeout(function() {
+      console.log("will be window", this);
+    }, 1000);
   }
 };
 
 human.talk();
 human.chat();
+human.badChat(); // will point to 'window' object
 
 // Array.map() - used to render lists in React
 

@@ -20,12 +20,13 @@ class Counter extends Component {
     super();
     // function in JS are objects, so they have properties and methods
     // this bind method will return a new instance (function) of handleIncrement() which we reset to this.handleIncrement
-    this.handleIncrement = this.handleIncrement.bind(this); // 'this' will always reference the current Counter object
+    this.handleIncrement2 = this.handleIncrement2.bind(this); // 'this' will always reference the current Counter object
   }
 
-  // convention used for click handles is to name method starting with "handle___"
+  // convention used for click handles is to name method starting with "handle__(something)__"
   handleIncrement2() {
     console.log("increment logged", this);
+    this.setState({ count: this.state.count + 1 }); // we pass an object, and the property we set is same as in state, or new props
   }
 
   // experimental way to bind event handlers (set 'this') - if this breaks later then do tried and true constructor approach
@@ -62,7 +63,7 @@ class Counter extends Component {
         </span>
         <button
           //   onClick={this.handleIncrement} // not calling the method but simply passing a reference to it (unlike in vanilla JS)
-          onClick={() => this.handleIncrement({ id: 1 })} // use inline function here: whenever you need to pass an argument through event handlers, pass an arrow function, in body of function call the event handler, and pass an argument
+          onClick={() => this.handleIncrement2({ id: 1 })} // use inline function here: whenever you need to pass an argument through event handlers, pass an arrow function, in body of function call the event handler, and pass an argument
           style={{ fontSize: 20 }}
           className="btn btn-secondary btn-sm"
         >

@@ -1,6 +1,6 @@
 // React notes
 
-// Each component is a piece of UI - build them separately and put together to build complex UI'separately
+// Each component is a piece of UI - build them in isolation and then put them together to build complex UI's
 // React elements are just JS objects that maps to a DOM elements (just represents DOM elememnt in memory)
 
 // Don't need to write code to query and manipulate DOM or attach event handlers to DOM elements
