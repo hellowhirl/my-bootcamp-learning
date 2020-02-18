@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Like from "./common/like";
 
 class MoviesTable extends Component {
-  // in thi smethod we will have the logic for determining the sort order
+  // in this method we will have the logic for determining the sort order
 
   // initializing 'columns' here - a simple property is sufficient
   // doesn't have to be a part of the state - will not change throughout life cycle of this component

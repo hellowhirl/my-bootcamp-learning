@@ -57,7 +57,7 @@ class Movies extends Component {
     this.setState({ sortColumn });
   };
 
-  getPageData = () => {
+  getPagedData = () => {
     // with this new method we need some properties from the state object
     const {
       pageSize,
@@ -77,18 +77,21 @@ class Movies extends Component {
     // determine which movies to show after we run our paginate() method
     const movies = paginate(sorted, currentPage, pageSize);
 
+    // here we are returning an object
     return { totalCount: filtered.length, data: movies };
   };
 
   render() {
-    // object destructuring
-    const { length: moviesCount } = this.state.movies; // refactoring this number into a separate constant - give it alias of "moviesCount"
+    // object destructuring and give it alias like 'moviesCount'
+    const { length: moviesCount } = this.state.movies; // refactoring this number into a separate constant
     const { pageSize, currentPage, sortColumn } = this.state;
 
     if (moviesCount === 0) return <p>There are no movies in the database</p>;
 
-    // we can use object destructuring here as well to extract the properties that we need from the method
-    const { totalCount, data: movies } = this.getPageData();
+    // const result = this.getPagedData();
+    // instead fo just storing in a variable like 'result',
+    // here we can use object destructuring to extract the properties that we need from the method
+    const { totalCount, data: movies } = this.getPagedData();
 
     return (
       <div>

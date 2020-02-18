@@ -25,7 +25,7 @@ class App extends Component {
             <Route path="/login" component={LoginForm} />
             <Route path="/register" component={Register} />
             <Route path="/not-found" component={NotFound} />
-            <Redirect from="/" exact to="movies" />
+            <Redirect from="/" exact to="/movies" />
             <Redirect to="/not-found" />
           </Switch>
         </main>
