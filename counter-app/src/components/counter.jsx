@@ -68,8 +68,7 @@ class Counter extends Component {
 
   getBadgeClasses() {
     let classes = "badge m-2 badge-"; // includes all the classes that we pass to className
-    classes += this.props.counter.value === 0 ? "warning" : "primary"; // if(conditon) then append String a, else append String b
-    return classes;
+    return (classes += this.props.counter.value === 0 ? "warning" : "primary"); // if(conditon) then append String a, else append String b
   }
 
   //   disableButtonClass() {

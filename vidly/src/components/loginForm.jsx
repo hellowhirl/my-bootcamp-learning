@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
 
@@ -7,6 +7,7 @@ class LoginForm extends Form {
   //   username = React.createRef();
 
   state = {
+    // should initialize the properties of our state object with an empty string or value that we get from the server
     data: { username: "", password: "" },
     // the properties in 'error' object map to the name of our input fields
     errors: {}
@@ -21,7 +22,7 @@ class LoginForm extends Form {
       .label("Password")
   };
 
-  // better approach is to use 'autoFocus'
+  // better approach is to use the 'autoFocus' attribute
   //   componentDidMount() {
   //     this.username.current.focus();
   //   }
