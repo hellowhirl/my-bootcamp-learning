@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MoviesTable from "./moviesTable";
 import Pagination from "./common/pagination";
 import ListGroup from "./listGroup";
+import { Link } from "react-router-dom";
 import { getMovies } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
 import { paginate } from "../utils/paginate";
@@ -104,6 +105,9 @@ class Movies extends Component {
             />
           </div>
           <div className="col">
+            <Link to="movies/new" className="btn btn-primary mb-3">
+              New Movie
+            </Link>
             {/* for returning multiple elements we should wrap with a parent like 'div */}
             <p>Showing {totalCount} movies in the database</p>
             <MoviesTable

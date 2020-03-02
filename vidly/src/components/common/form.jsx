@@ -68,6 +68,20 @@ class Form extends Component {
     );
   }
 
+  renderSelect() {
+    return (
+      <div className="form-group">
+        <label htmlFor="rate">Genre</label>
+        <select className="form-control" id="cars">
+          <option value=""></option>
+          <option value="volvo">Action</option>
+          <option value="saab">Comedy</option>
+          <option value="opel">Thriller</option>
+        </select>
+      </div>
+    );
+  }
+
   renderInput(name, label, type = "text") {
     const { data, errors } = this.state;
 
