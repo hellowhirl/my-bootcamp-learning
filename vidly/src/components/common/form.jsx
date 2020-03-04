@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
+import Select from "./select";
 
 class Form extends Component {
   state = {
@@ -38,6 +39,8 @@ class Form extends Component {
     this.setState({ errors: errors || {} });
     if (errors) return;
 
+    this.doSubmit();
+
     // Call the server --> save the changes --> redirect user to different page
     // const username = document.getElementById('username').nodeValue; // this is the plain JS approach
 
@@ -68,17 +71,18 @@ class Form extends Component {
     );
   }
 
-  renderSelect() {
+  renderSelect(name, label, options) {
+    const { data, errors } = this.state;
+
     return (
-      <div className="form-group">
-        <label htmlFor="rate">Genre</label>
-        <select className="form-control" id="cars">
-          <option value=""></option>
-          <option value="volvo">Action</option>
-          <option value="saab">Comedy</option>
-          <option value="opel">Thriller</option>
-        </select>
-      </div>
+      <Select
+        name={name}
+        label={label}
+        options={options}
+        value={data[name]} // we can use bracket notation because we have property with same name in 2 objects
+        onChange={this.handleChange}
+        error={errors[name]} // we can use bracket notation because we have property with same name in 2 objects
+      />
     );
   }
 
