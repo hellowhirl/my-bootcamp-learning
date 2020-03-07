@@ -100,6 +100,10 @@ class Form extends Component {
       />
     );
   }
+
+  renderSearch() {
+    return <Input />;
+  }
 }
 
 export default Form;

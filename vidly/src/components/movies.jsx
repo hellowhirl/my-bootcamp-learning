@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MoviesTable from "./moviesTable";
 import Pagination from "./common/pagination";
 import ListGroup from "./listGroup";
+import SearchForm from "./common/searchForm";
 import { Link } from "react-router-dom";
 import { getMovies } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
@@ -15,7 +16,8 @@ class Movies extends Component {
     pageSize: 4,
     currentPage: 1,
     selectedGenre: null,
-    sortColumn: { path: "title", order: "asc" }
+    sortColumn: { path: "title", order: "asc" },
+    searchWord: ""
   };
 
   componentDidMount() {
@@ -51,7 +53,12 @@ class Movies extends Component {
     // const currentGnnre = [...this.state.selectedGenre];
     // currentGnnre.name = genre;
 
-    this.setState({ selectedGenre: genre, currentPage: 1 });
+    this.setState({ selectedGenre: genre, currentPage: 1, searchWord: "" });
+  };
+
+  handleSearch = query => {
+    // we use an empty string instaed of null because we are dealing with a 'controlled component'
+    this.setState({ searchWord: query, selectedGenre: null, currentPage: 1 });
   };
 
   handleSort = sortColumn => {
@@ -65,13 +72,21 @@ class Movies extends Component {
       currentPage,
       sortColumn,
       movies: allMovies,
-      selectedGenre
+      selectedGenre,
+      searchWord
     } = this.state;
+
+    const searched = allMovies.filter(movie => {
+      const returnedMovie = movie.title.toLowerCase();
+      const returnedSearch = searchWord.toLowerCase();
+
+      return returnedMovie.includes(returnedSearch);
+    });
 
     const filtered =
       selectedGenre && selectedGenre._id
         ? allMovies.filter(m => m.genre._id === selectedGenre._id)
-        : allMovies;
+        : searched;
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
@@ -85,7 +100,7 @@ class Movies extends Component {
   render() {
     // object destructuring and give it alias like 'moviesCount'
     const { length: moviesCount } = this.state.movies; // refactoring this number into a separate constant
-    const { pageSize, currentPage, sortColumn } = this.state;
+    const { pageSize, currentPage, sortColumn, searchWord } = this.state;
 
     if (moviesCount === 0) return <p>There are no movies in the database</p>;
 
@@ -110,6 +125,8 @@ class Movies extends Component {
             </Link>
             {/* for returning multiple elements we should wrap with a parent like 'div */}
             <p>Showing {totalCount} movies in the database</p>
+            {/* here we are using a controlled 'component' */}
+            <SearchForm value={searchWord} onChange={this.handleSearch} />
             <MoviesTable
               movies={movies}
               sortColumn={sortColumn}
