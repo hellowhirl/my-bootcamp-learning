@@ -126,7 +126,10 @@ class Movies extends Component {
             {/* for returning multiple elements we should wrap with a parent like 'div */}
             <p>Showing {totalCount} movies in the database</p>
             {/* here we are using a controlled 'component' */}
-            <SearchForm value={searchWord} onChange={this.handleSearch} />
+            <SearchForm
+              value={searchWord}
+              propForOnchange={this.handleSearch}
+            />
             <MoviesTable
               movies={movies}
               sortColumn={sortColumn}
