@@ -210,8 +210,6 @@ Shortcut for editing multiple places in VS Code:
 In React we should never work with the 'document' object - we are abstracting from it
 - also it makes our applications easier to maintain and unit test
 
-[ANKI NOTED UNTIL HERE]
-
 onChange event: 
 occurs when the value of an element has been changed.
 
@@ -236,3 +234,41 @@ by default terminates validation as soon as it finds an error
 then we can have a class we define inherit all the methods we have defined in the custom base class 
 
 - class components don't always need to have a render() method
+
+REST API's
+REST: Representational State Transfer 
+API's: endpoints (Application Programming Interfaces), an interface for our applications
+- JSONPlaceholder website provides endpoints that are publicly accessible over the Internet
+- We can set HTTP requests to these endpoints to get, create, update, delete data (CRUD operations)
+
+endpoint for 'posts':
+https://jsonplaceholder.typicode.com/posts
+
+Fetch API (browsers can natively send HTTP requests)
+jQuery AJAX (just like the old days)
+Axios (popular - Greek word that means "suitable")
+
+promise: an object that holds the result of an asynchronous operation (will complete in the future)
+
+
+Lifecycle of an HTTP request:
+
+201 Created
+The request has been fulfilled, resulting in the creation of a new resource.
+
+204 No Content
+The server successfully processed the request and is not returning any content.
+
+Request Method (in Headers): determines intent of the request
+GET (getting data)
+POST (creating data)
+PUT (updating data)
+DELETE (deleting data)
+OPTIONS (whenver an application sends an AJAX request to a different domain the browser will send an OPTIONS request)
+
+Request Payload: shows the object that we sent to the server
+
+Response Tab: the response the API returned to us
+
+
+Updating data:
