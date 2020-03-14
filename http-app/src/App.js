@@ -2,25 +2,51 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./App.css";
 
+const apiEndpoint = "https://jsonplaceholder.typicode.com/posts";
+
 class App extends Component {
   state = {
     posts: []
   };
 
   async componentDidMount() {
-    // pending
-    const { data: posts } = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
-    );
+    // axios.get() - sends HTTP request to get some data, first arg is url
+    // this method restores a promise
+    // initially a promise is in the 'pending' state
+    // then will turn into -> resolved (success) OR rejected (failure)
+
+    // we can see the object returned from the promise:
+    // const promise = axios.get("https://jsonplaceholder.typicode.com/posts");
+    // console.log(promise);
+    // we can see the internal properties like [[PromiseStatus]] and [[PromiseValue]]
+
+    // keyword 'await': awaits the promise so we can get the actual result,
+    // the outter function must also be decorated with 'async' keyword
+    const { data: posts } = await axios.get(apiEndpoint);
     this.setState({ posts });
   }
 
-  handleAdd = () => {
-    console.log("Add");
+  // handleAdd is a property that we are setting to a function so we apply 'async' in front of arrow function paramter
+  handleAdd = async () => {
+    const obj = { title: "a", body: "b" };
+    const { data: post } = await axios.post(apiEndpoint, obj);
+
+    const posts = [post, ...this.state.posts];
+    this.setState({ posts });
   };
 
-  handleUpdate = post => {
-    console.log("Update", post);
+  handleUpdate = async post => {
+    post.title = "Updated";
+    // axios.put(1st arg: specific url that includes post id, 2nd arg: data to send to server),
+    await axios.put(apiEndpoint + "/" + post.id, post);
+
+    // axios.patch(), sending only properties that should be updated
+    // await axios.put(apiEndpoint + "/" + post.id, { title: post.title });
+
+    const posts = [...this.state.posts];
+    const index = posts.indexOf(post);
+    posts[index] = { ...post };
+    this.setState({ posts });
   };
 
   handleDelete = post => {
