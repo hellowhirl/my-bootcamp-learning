@@ -20,8 +20,10 @@ class App extends Component {
     // console.log(promise);
     // we can see the internal properties like [[PromiseStatus]] and [[PromiseValue]]
 
-    // keyword 'await': awaits the promise so we can get the actual result,
+    // keyword 'await': awaits the promise so we can get the actual result from the response,
     // the outter function must also be decorated with 'async' keyword
+    // the response has a property called 'data' which has this posts that we get from the server
+    // here we use object destructuring and rename to 'posts'
     const { data: posts } = await axios.get(apiEndpoint);
     this.setState({ posts });
   }
@@ -49,8 +51,30 @@ class App extends Component {
     this.setState({ posts });
   };
 
-  handleDelete = post => {
-    console.log("Delete", post);
+  handleDelete = async post => {
+    const originalPosts = this.state.posts;
+
+    // switching order here gives the illusion of a fast application
+    const posts = this.state.posts.filter(p => p.id !== post.id);
+    this.setState({ posts });
+
+    // for deleting all we need is the url that identifies this resource
+    try {
+      await axios.delete(apiEndpoint + "/abc"); // expected error simulation
+      // await axios.delete("s" + apiEndpoint + post.id);  // unexpected error simulation
+    } catch (ex) {
+      // this exception(ex) object has 2 properties:
+      // ex.request; if we can succesfully submit a request to the server - otherwise it is null
+      // ex.response; set if we succesfully get a response from the server - if server crashes or no response then it will be null
+      if (ex.response && ex.response.status === 404)
+        alert("This post has already been deleted");
+      else {
+        console.log("logging the error", ex);
+        alert("an unexpected error occurred");
+      }
+
+      this.setState({ posts: originalPosts });
+    }
   };
 
   render() {

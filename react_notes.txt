@@ -271,4 +271,20 @@ Request Payload: shows the object that we sent to the server
 Response Tab: the response the API returned to us
 
 
-Updating data:
+Optimistic vs Pessimistic Updates
+
+Optimistic:
+- keep reference to the original state
+- update UI before calling the server
+- wrap the call to the server in a try/catch block
+- in catch block we should display an error and update state to previous state
+
+Expected and Unexpected Errors:
+
+Expected: API endpoints predict and return (400, 404)
+Unexpected: network down, server down, db down, bug
+  - Log these Errors
+  - Displays a generic and friendly error message
+
+
+Acios Interceptors
