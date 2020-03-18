@@ -287,4 +287,6 @@ Unexpected: network down, server down, db down, bug
   - Displays a generic and friendly error message
 
 
-Acios Interceptors
+Axios Interceptors
+- able to intercept requests and responses
+- if there is an unexpected error we can handle that error in one place - display error message to user

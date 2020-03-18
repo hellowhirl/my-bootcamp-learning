@@ -2,6 +2,21 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./App.css";
 
+// with axios interceptor we are able to handle unexpected errors globally
+
+// axios.interceptors.response.use(success, error)
+axios.interceptors.response.use(null, error => {
+  const expectedError =
+    error.response && error.response >= 400 && error.response < 500;
+
+  if (!expectedError) {
+    console.log("logging the error", error);
+    alert("an unexpected error occurred");
+  }
+
+  return Promise.reject(error);
+});
+
 const apiEndpoint = "https://jsonplaceholder.typicode.com/posts";
 
 class App extends Component {
@@ -9,6 +24,7 @@ class App extends Component {
     posts: []
   };
 
+  // if unable to get posts from the server then our interceptor should kick in
   async componentDidMount() {
     // axios.get() - sends HTTP request to get some data, first arg is url
     // this method restores a promise
@@ -58,9 +74,11 @@ class App extends Component {
     const posts = this.state.posts.filter(p => p.id !== post.id);
     this.setState({ posts });
 
-    // for deleting all we need is the url that identifies this resource
+    // only need try/catch block if we need to do something specific as result of a failure,
+    // otherwise, leave handling of unexpected error to the interceptor
     try {
-      await axios.delete(apiEndpoint + "/abc"); // expected error simulation
+      // for deleting all we need is the url that identifies this resource
+      await axios.delete("s" + apiEndpoint + "/abc"); // expected error simulation
       // await axios.delete("s" + apiEndpoint + post.id);  // unexpected error simulation
     } catch (ex) {
       // this exception(ex) object has 2 properties:
@@ -68,10 +86,6 @@ class App extends Component {
       // ex.response; set if we succesfully get a response from the server - if server crashes or no response then it will be null
       if (ex.response && ex.response.status === 404)
         alert("This post has already been deleted");
-      else {
-        console.log("logging the error", ex);
-        alert("an unexpected error occurred");
-      }
 
       this.setState({ posts: originalPosts });
     }
