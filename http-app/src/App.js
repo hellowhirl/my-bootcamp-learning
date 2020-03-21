@@ -1,23 +1,11 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { ToastContainer } from "react-toastify";
+import config from "./config.json";
+import httpOrWhatever from "./services/httpService";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 // with axios interceptor we are able to handle unexpected errors globally
-
-// axios.interceptors.response.use(success, error)
-axios.interceptors.response.use(null, error => {
-  const expectedError =
-    error.response && error.response >= 400 && error.response < 500;
-
-  if (!expectedError) {
-    console.log("logging the error", error);
-    alert("an unexpected error occurred");
-  }
-
-  return Promise.reject(error);
-});
-
-const apiEndpoint = "https://jsonplaceholder.typicode.com/posts";
 
 class App extends Component {
   state = {
@@ -40,14 +28,14 @@ class App extends Component {
     // the outter function must also be decorated with 'async' keyword
     // the response has a property called 'data' which has this posts that we get from the server
     // here we use object destructuring and rename to 'posts'
-    const { data: posts } = await axios.get(apiEndpoint);
+    const { data: posts } = await httpOrWhatever.get(config.apiEndpoint);
     this.setState({ posts });
   }
 
   // handleAdd is a property that we are setting to a function so we apply 'async' in front of arrow function paramter
   handleAdd = async () => {
     const obj = { title: "a", body: "b" };
-    const { data: post } = await axios.post(apiEndpoint, obj);
+    const { data: post } = await httpOrWhatever.post(config.apiEndpoint, obj);
 
     const posts = [post, ...this.state.posts];
     this.setState({ posts });
@@ -56,7 +44,7 @@ class App extends Component {
   handleUpdate = async post => {
     post.title = "Updated";
     // axios.put(1st arg: specific url that includes post id, 2nd arg: data to send to server),
-    await axios.put(apiEndpoint + "/" + post.id, post);
+    await httpOrWhatever.put(config.apiEndpoint + "/" + post.id, post);
 
     // axios.patch(), sending only properties that should be updated
     // await axios.put(apiEndpoint + "/" + post.id, { title: post.title });
@@ -78,7 +66,7 @@ class App extends Component {
     // otherwise, leave handling of unexpected error to the interceptor
     try {
       // for deleting all we need is the url that identifies this resource
-      await axios.delete("s" + apiEndpoint + "/abc"); // expected error simulation
+      await httpOrWhatever.delete("s" + config.apiEndpoint + "/abc"); // expected error simulation
       // await axios.delete("s" + apiEndpoint + post.id);  // unexpected error simulation
     } catch (ex) {
       // this exception(ex) object has 2 properties:
@@ -94,6 +82,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
+        <ToastContainer />
         <button className="btn btn-primary" onClick={this.handleAdd}>
           Add
         </button>
