@@ -290,3 +290,26 @@ Unexpected: network down, server down, db down, bug
 Axios Interceptors
 - able to intercept requests and responses
 - if there is an unexpected error we can handle that error in one place - display error message to user
+
+
+Sentry.io: Logging as a service provider (processing error exceptions from websites)
+
+
+Backend stack for Vidly
+- Node: runtime environment for executing JavaScript code outside of a browser (we can build a web server that responds to http requests)
+- Express: framework for building RESTful API's
+- MongoDB: database management system for storing our data (run with npm or yarn)
+
+vidly-api-node
+- change to: 
+"bcrypt": "^3.0.6"
+
+JSON format:
+- all 'keys' should be in "quotes"
+{
+  "example": "test",
+  "foo": bar,
+  "whatever": true,
+  "number": 2,
+  "stringNumber": "123"
+}
