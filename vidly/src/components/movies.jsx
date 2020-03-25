@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import MoviesTable from "./moviesTable";
 import Pagination from "./common/pagination";
 import ListGroup from "./listGroup";
 import SearchForm from "./common/searchForm";
 import { Link } from "react-router-dom";
-import { getMovies } from "../services/fakeMovieService";
+import { getMovies, deleteMovie } from "../services/movieService";
 import { getGenres } from "../services/genreService";
 import { paginate } from "../utils/paginate";
 import _ from "lodash";
@@ -26,18 +27,28 @@ class Movies extends Component {
     const { data: genresList } = await getGenres();
     const genres = [{ name: "All Genres", _id: "" }, ...genresList];
 
-    this.setState({ movies: getMovies(), genres });
+    const { data: movies } = await getMovies();
+    this.setState({ movies, genres });
   }
 
-  handleDelete = movie => {
+  handleDelete = async movie => {
     // const movieIndex = this.state.movies.indexOf(movie);
     // this.setState({ movie: this.state.movies.splice(movieIndex, 1) }); // my fitst solution: somehow this worked too?
 
+    const originalMovies = this.state.movies;
     // create new array of movies that contains all movies except the movie we have passed here, targetng with '._id' property
-    const movies = this.state.movies.filter(m => m._id !== movie._id);
+    const movies = originalMovies.filter(m => m._id !== movie._id);
     // should not directly update state, instead should use 'setState' method of component
     // this.setState({ movies: movies }); // this works too, but better implementation is below
     this.setState({ movies }); // in modern JS if key and value are same name we can simplify code by removing repitition, only passing 'movies'
+    try {
+      await deleteMovie(movie._id);
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404)
+        toast.error("this movie has already been deleted");
+
+      this.setState({ movies: originalMovies });
+    }
   };
 
   handleLike = movie => {

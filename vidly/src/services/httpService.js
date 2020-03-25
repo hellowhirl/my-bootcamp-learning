@@ -1,4 +1,5 @@
 import axios from "axios";
+import logger from "./logService";
 import { toast } from "react-toastify";
 // if in the future we want to change the library for sending http requests,
 // then we just have to make the changes in this module
@@ -6,10 +7,12 @@ import { toast } from "react-toastify";
 // axios.interceptors.response.use(success, error)
 axios.interceptors.response.use(null, error => {
   const expectedError =
-    error.response && error.response >= 400 && error.response < 500;
+    error.response &&
+    error.response.status >= 400 &&
+    error.response.status < 500;
 
   if (!expectedError) {
-    console.log("logging the error", error);
+    logger.log(error);
     toast.error("An unexpected error occurred, dude!");
     // also able to use as a function - more colorful display
     // toast("An unexpected error occurred, dude!");
