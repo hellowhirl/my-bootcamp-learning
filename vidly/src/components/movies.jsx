@@ -44,6 +44,7 @@ class Movies extends Component {
     try {
       await deleteMovie(movie._id);
     } catch (ex) {
+      // ????? why doesn't this catch block get activated?
       if (ex.response && ex.response.status === 404)
         toast.error("this movie has already been deleted");
 
