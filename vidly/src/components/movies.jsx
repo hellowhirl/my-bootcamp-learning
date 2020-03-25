@@ -1,13 +1,15 @@
 import React, { Component } from "react";
+import { ToastContainer } from "react-toastify";
 import MoviesTable from "./moviesTable";
 import Pagination from "./common/pagination";
 import ListGroup from "./listGroup";
 import SearchForm from "./common/searchForm";
 import { Link } from "react-router-dom";
 import { getMovies } from "../services/fakeMovieService";
-import { getGenres } from "../services/fakeGenreService";
+import { getGenres } from "../services/genreService";
 import { paginate } from "../utils/paginate";
 import _ from "lodash";
+import "react-toastify/dist/ReactToastify.css";
 
 class Movies extends Component {
   state = {
@@ -20,8 +22,9 @@ class Movies extends Component {
     searchWord: ""
   };
 
-  componentDidMount() {
-    const genres = [{ name: "All Genres", _id: "" }, ...getGenres()];
+  async componentDidMount() {
+    const { data: genresList } = await getGenres();
+    const genres = [{ name: "All Genres", _id: "" }, ...genresList];
 
     this.setState({ movies: getMovies(), genres });
   }
@@ -111,6 +114,7 @@ class Movies extends Component {
 
     return (
       <div>
+        <ToastContainer />
         <div className="row">
           <div className="col-3">
             <ListGroup
