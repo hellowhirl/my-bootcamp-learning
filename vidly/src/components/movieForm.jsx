@@ -2,7 +2,7 @@ import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import { saveMovie, getMovie } from "../services/movieService";
-import { getGenres } from "../services/fakeGenreService";
+import { getGenres } from "../services/genreService";
 
 class MovieForm extends Form {
   state = {
@@ -38,7 +38,7 @@ class MovieForm extends Form {
 
   async componentDidMount() {
     // get genres from fakeMovieService and then update the state
-    const genres = getGenres();
+    const { data: genres } = await getGenres();
     this.setState({ genres });
 
     // read the 'id' parameter in the route and store in a constant
@@ -46,7 +46,7 @@ class MovieForm extends Form {
     if (movieId === "new") return;
 
     // if movie is not new then get the movie with given id - and check to see if that movie exists
-    const movie = await getMovie(movieId);
+    const { data: movie } = await getMovie(movieId);
     if (!movie) return this.props.history.replace("/not-found");
 
     // update the state - but not to movie object we got on server
@@ -60,11 +60,11 @@ class MovieForm extends Form {
   mapToViewModel = movie => {
     // debugger;
     return {
-      _id: movie.data._id,
-      title: movie.data.title,
-      genreId: movie.data.genre._id,
-      numberInStock: movie.data.numberInStock,
-      dailyRentalRate: movie.data.dailyRentalRate
+      _id: movie._id,
+      title: movie.title,
+      genreId: movie.genre._id,
+      numberInStock: movie.numberInStock,
+      dailyRentalRate: movie.dailyRentalRate
     };
   };
 
