@@ -20,7 +20,8 @@ class MovieForm extends Form {
     _id: Joi.string(),
     title: Joi.string()
       .required()
-      .label("Title"),
+      .label("Title")
+      .min(5),
     genreId: Joi.string()
       .required()
       .label("Genre"),
@@ -84,9 +85,9 @@ class MovieForm extends Form {
   };
 
   // when form is submitted this method is called
-  doSubmit = () => {
+  doSubmit = async () => {
     // we pass movie object to method in our fakeMovioeService
-    saveMovie(this.state.data);
+    await saveMovie(this.state.data);
 
     this.props.history.push("/movies");
   };

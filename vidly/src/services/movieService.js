@@ -14,23 +14,18 @@ export function getMovie(id) {
 
 // export function saveMovie() {}
 
-export async function saveMovie(movie) {
-  let { data: movies } = await http.get(apiEndpoint);
-  const { data: genres } = await http.get(apiUrl + "/genres");
-  let movieInDb = movies.find(m => m._id === movie._id) || {};
-  delete movieInDb._id;
-  movieInDb.title = movie.title;
-  movieInDb.genre = genres.find(g => g._id === movie.genreId);
-  movieInDb.genreId = movieInDb.genre._id;
-  delete movieInDb.genre;
-  movieInDb.numberInStock = movie.numberInStock;
-  movieInDb.dailyRentalRate = movie.dailyRentalRate;
+// in this function we should either update (PUT) a movie or create (POST) a new movie
+export function saveMovie(movie) {
+  // check to see if movie exist in database
+  if (movie._id) {
+    // the movie object we're passing is part of our state, so we don't want to directly modify it
+    const body = { ...movie };
+    delete body._id; // our restful API doesn't like the id property to be in the body of the request - so we remove it
+    // it's confusing if we have '_id' in the url and '_id' in the body of request
+    return http.put(apiEndpoint + "/" + movie._id, body);
+  }
 
-  console.log(movieInDb);
-  // debugger;
-
-  // return movieInDb;
-  return http.put(apiEndpoint + "/" + movie._id, movieInDb);
+  return http.post(apiEndpoint, movie);
 }
 
 export function deleteMovie(movieId) {
