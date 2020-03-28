@@ -4,12 +4,17 @@ import { apiUrl } from "../config.json";
 
 const apiEndpoint = apiUrl + "/movies";
 
+// this is an implementation detail for this module only, so don't need 'export'
+function movieUrl(id) {
+  return `${apiEndpoint}/${id}`;
+}
+
 export function getMovies() {
   return http.get(apiEndpoint);
 }
 
 export function getMovie(id) {
-  return http.get(apiEndpoint + "/" + id);
+  return http.get(movieUrl(id));
 }
 
 // export function saveMovie() {}
@@ -22,14 +27,14 @@ export function saveMovie(movie) {
     const body = { ...movie };
     delete body._id; // our restful API doesn't like the id property to be in the body of the request - so we remove it
     // it's confusing if we have '_id' in the url and '_id' in the body of request
-    return http.put(apiEndpoint + "/" + movie._id, body);
+    return http.put(movieUrl(movie._id), body);
   }
 
   return http.post(apiEndpoint, movie);
 }
 
 export function deleteMovie(movieId) {
-  http.delete(apiEndpoint + "/" + movieId);
+  http.delete(movieUrl(movieId));
   //   let movieInDb = movies.find(m => m._id === id);
   //   movies.splice(movies.indexOf(movieInDb), 1);
   //   return movieInDb;
