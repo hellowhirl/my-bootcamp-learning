@@ -36,17 +36,19 @@ class MovieForm extends Form {
       .max(10)
   };
 
-  async componentDidMount() {
+  async populateGenres() {
     // get genres from movieService and then update the state
     const { data: genres } = await getGenres();
     this.setState({ genres });
+  }
 
-    // read the 'id' parameter in the route and store in a constant
-    const movieId = this.props.match.params.id;
-    if (movieId === "new") return;
-
-    // if movie is not new then get the movie with given id - and check to see if that movie exists
+  async populateMovie() {
+    // better to move everything within the 'try' block so 'try' starts at beginning of method
     try {
+      // if movie is not new then get the movie with given id - and check to see if that movie exists
+      const movieId = this.props.match.params.id; // read the 'id' parameter in the route and store in a constant
+      if (movieId === "new") return;
+
       const { data: movie } = await getMovie(movieId);
       this.setState({ data: this.mapToViewModel(movie) });
     } catch (ex) {
@@ -55,11 +57,18 @@ class MovieForm extends Form {
         // return this.props.history.replace("/not-found");
         return this.props.history.replace("/not-found");
     }
-
-    // update the state - but not to movie object we got on server
-    // the restful API's that we have on the server are general purpose - not built for a specific page
-    // what we display on the page is different from the structure of data on the server
   }
+
+  // now our code is telling a story:
+  // whenever a component mounts there are 2 things that should happen
+  // the details of these methods are somewhere else - not poluting cdm
+  async componentDidMount() {
+    await this.populateGenres();
+    await this.populateMovie();
+  }
+  // update the state - but not to movie object we got on server
+  // the restful API's that we have on the server are general purpose - not built for a specific page
+  // what we display on the page is different from the structure of data on the server
 
   // here we get use 'movie' object that we get from server and map it to a 'movie' object we can use on this form
   // this method refers to a model with a view
