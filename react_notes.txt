@@ -286,6 +286,8 @@ Unexpected: network down, server down, db down, bug
   - Log these Errors
   - Displays a generic and friendly error message
 
+Toastify install:
+    npm i react-toastify@4.1
 
 Axios Interceptors
 - able to intercept requests and responses
@@ -303,6 +305,9 @@ Backend stack for Vidly
 vidly-api-node
 - change to: 
 "bcrypt": "^3.0.6"
+
+Start API server:
+node index.js
 
 JSON format:
 - all 'keys' should be in "quotes"

@@ -37,7 +37,7 @@ class MovieForm extends Form {
   };
 
   async componentDidMount() {
-    // get genres from fakeMovieService and then update the state
+    // get genres from movieService and then update the state
     const { data: genres } = await getGenres();
     this.setState({ genres });
 
@@ -46,13 +46,19 @@ class MovieForm extends Form {
     if (movieId === "new") return;
 
     // if movie is not new then get the movie with given id - and check to see if that movie exists
-    const { data: movie } = await getMovie(movieId);
-    if (!movie) return this.props.history.replace("/not-found");
+    try {
+      const { data: movie } = await getMovie(movieId);
+      this.setState({ data: this.mapToViewModel(movie) });
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404)
+        // here we are at end of this method so we don't need 'return' keyword
+        // return this.props.history.replace("/not-found");
+        return this.props.history.replace("/not-found");
+    }
 
     // update the state - but not to movie object we got on server
     // the restful API's that we have on the server are general purpose - not built for a specific page
     // what we display on the page is different from the structure of data on the server
-    this.setState({ data: this.mapToViewModel(movie) });
   }
 
   // here we get use 'movie' object that we get from server and map it to a 'movie' object we can use on this form
