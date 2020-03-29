@@ -56,7 +56,7 @@ class MovieForm extends Form {
       if (ex.response && ex.response.status === 404)
         // here we are at end of this method so we don't need 'return' keyword
         // return this.props.history.replace("/not-found");
-        return this.props.history.replace("/not-found");
+        this.props.history.replace("/not-found");
     }
   }
 
