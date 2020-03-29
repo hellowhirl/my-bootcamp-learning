@@ -4,9 +4,10 @@ import Input from "./input";
 import Select from "./select";
 
 class Form extends Component {
+  // every Form should have a state, and it should have 'data' and 'errors' properties
   state = {
-    data: {},
-    errors: {}
+    data: {}, // initialized as empty object
+    errors: {} // initialized as empty object
   };
 
   validate = () => {
@@ -72,7 +73,7 @@ class Form extends Component {
   }
 
   renderSelect(name, label, options) {
-    const { data, errors } = this.state;
+    const { data, errors } = this.state; // 'data' and 'errors' are extracted from 'state'
 
     return (
       <Select
@@ -87,7 +88,7 @@ class Form extends Component {
   }
 
   renderInput(name, label, type = "text") {
-    const { data, errors } = this.state;
+    const { data, errors } = this.state; // 'data' and 'errors' are extracted from 'state'
 
     return (
       <Input
