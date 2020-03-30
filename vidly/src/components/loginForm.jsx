@@ -29,10 +29,24 @@ class LoginForm extends Form {
   //   }
 
   doSubmit = async () => {
-    const { data } = this.state;
-    await login(data.username, data.password);
-    // if this request is successful then we can see the body of Response in dev tools Network tab
-    // it will be our JSON web token
+    try {
+      const { data } = this.state;
+      const { data: jwt } = await login(data.username, data.password); // at this point we should store JWT on the client
+      // with this we can the value of the jwt in the body of the response
+      // console.log(jwt);
+      localStorage.setItem("token", jwt);
+      this.props.history.push("/"); // to make this process complete, navigate user back to homepage
+
+      // if this request is successful then we can see the body of Response in dev tools Network tab
+      // it will be our JSON web token
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        const errors = { ...this.state.errors };
+        errors.username = "custom error message for invalid email or password";
+        // errors.username = ex.response.data; // OR this error we get from the server
+        this.setState({ errors });
+      }
+    }
   };
 
   render() {

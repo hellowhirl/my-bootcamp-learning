@@ -330,9 +330,13 @@ Authentication and Authorization
 
 In Chrome Dev tools under Network there is a Preview tab - shows us the body of the reponse from the server
 
-JSON web token:
+JSON web token (JWT):
 - an identification card (like a driver's license)
 - at first if client sends a valid username and password then the server will give the client an identificaiton card
 - the server will then validate - if the JSON web token is valid then it will execute the client's request
 
 authService.js - responsible for login and logout
+
+Local Storage
+- every browser has a small local database called 'Local Storage' - and here we can store key value pairs
+- in dev tools under Application tab / Storage / Local Storage / specific domain
