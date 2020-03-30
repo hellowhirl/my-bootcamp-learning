@@ -1,6 +1,7 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
+import { login } from "../services/authService";
 
 class LoginForm extends Form {
   // accessing a DOM element in React: defining a property for 'ref' by creating a ref object
@@ -27,9 +28,11 @@ class LoginForm extends Form {
   //     this.username.current.focus();
   //   }
 
-  doSubmit = () => {
-    // call the server
-    console.log("submitted");
+  doSubmit = async () => {
+    const { data } = this.state;
+    await login(data.username, data.password);
+    // if this request is successful then we can see the body of Response in dev tools Network tab
+    // it will be our JSON web token
   };
 
   render() {
