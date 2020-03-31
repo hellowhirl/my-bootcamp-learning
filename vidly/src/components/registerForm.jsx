@@ -5,6 +5,7 @@ import Form from "./common/form";
 // or we can import all functions in this module with below syntax
 // we'll have the 'userService' object in this module and all the functions we export will be methods of this object
 import * as userService from "../services/userService";
+import auth from "../services/authService";
 
 class RegisterForm extends Form {
   state = {
@@ -29,9 +30,10 @@ class RegisterForm extends Form {
   doSubmit = async () => {
     try {
       const response = await userService.register(this.state.data);
-      localStorage.setItem("token", response.headers["x-auth-token"]);
+      auth.loginWithJwt(response.headers["x-auth-token"]);
       // and now our user will be automatically logged in upon registration
-      this.props.history.push("/");
+      // this.props.history.push("/"); // we use same technique here
+      window.location = "/";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors }; // clone errors object

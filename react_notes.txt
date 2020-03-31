@@ -327,6 +327,7 @@ Authentication and Authorization
     - should respond with either 200 or 400
 
 - If we make data object names consistent between frontend and backend then our code will be cleaner and easier to maintain
+- Best to have a single module that is responsible for knowing how authentication is implemented (as opposed to scattered all over the place)
 
 In Chrome Dev tools under Network there is a Preview tab - shows us the body of the reponse from the server
 
