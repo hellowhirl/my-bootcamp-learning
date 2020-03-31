@@ -340,3 +340,17 @@ authService.js - responsible for login and logout
 Local Storage
 - every browser has a small local database called 'Local Storage' - and here we can store key value pairs
 - in dev tools under Application tab / Storage / Local Storage / specific domain
+
+Headers
+- after we send a request the server will send back http headers
+- whenever a header starts with "x" it will be treated as a custom header (as it's not a part of standard http protocol)
+
+Vidly API
+- note: shut down API service before we make any changes to its code
+- routes/users.js: contains implementation of our user endpoint. Refer to router.post()
+- .header() method: make change so that server will whitelist headers that browser or client is allowed to access
+- we are using Node for backend in this case
+
+.header("access-control-expose-headers", "x-auth-token")
+
+- then we will be able to get our custom header
