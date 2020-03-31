@@ -354,3 +354,12 @@ Vidly API
 .header("access-control-expose-headers", "x-auth-token")
 
 - then we will be able to get our custom header
+
+
+JWT.io - Debugger
+
+- able to debug a JSON token and look at its content
+- 3 parts:
+    - Header: standard, all tokens have it
+    - Payload: encoded version of our JSON object (decode with base64 algorithm), - content has various attributes about the user (claims)
+    - Digital Signature: generated based on the header, payload, and a secret that is only available on the server
