@@ -116,6 +116,7 @@ class Movies extends Component {
     // object destructuring and give it alias like 'moviesCount'
     const { length: moviesCount } = this.state.movies; // refactoring this number into a separate constant
     const { pageSize, currentPage, sortColumn, searchWord } = this.state;
+    const { user } = this.props;
 
     if (moviesCount === 0) return <p>There are no movies in the database</p>;
 
@@ -136,9 +137,12 @@ class Movies extends Component {
             />
           </div>
           <div className="col">
-            <Link to="movies/new" className="btn btn-primary mb-3">
-              New Movie
-            </Link>
+            {/* we are using 'user' object to check if it's truth or falsy to show below Link component */}
+            {user && (
+              <Link to="movies/new" className="btn btn-primary mb-3">
+                New Movie
+              </Link>
+            )}
             {/* for returning multiple elements we should wrap with a parent like 'div */}
             <p>Showing {totalCount} movies in the database</p>
             {/* here we are using a controlled 'component' */}
