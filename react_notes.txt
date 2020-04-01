@@ -367,6 +367,8 @@ JWT.io - Debugger
     - Header: standard, all tokens have it
     - Payload: encoded version of our JSON object (decoded with base64 algorithm) - for example, content has various attributes about the user (claims)
     - Digital Signature: generated based on the header, payload, and a secret that is only available on the server
+    
+    - if we make any changes to the Payload (adding or removing characters) then the Digital Signature needs to be regenerated (but needs the private key which is stored on the server)
 
 
 Calling protected API Endpoints
@@ -378,3 +380,12 @@ Removing bi-directional dependency
 
 - first, determine which module is more essential (a core module) - it's our http module
 - our auth module should be on top of http module
+
+
+Backend implementation for delete function in vidly API
+
+- if there is a request to delete a movie make sure the user is authenticated and is an admin
+- [auth, admin] are functions: refered to as Middleware Functions
+- first node backend will run auth middleware function, then admin middleware function - using next()
+- when we overcome all these middleware function checks then we can perform delete action (we assign property 'isAdmin' to 'true')
+- this 
