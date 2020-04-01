@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 // with this we can set headers on all kinds of http requests (get, post, etc.)
 axios.defaults.headers.common["x-auth-token"] = auth.getJwt(); // using bracket notation here to set a common header
 // now whenever we have an http request, this token will be included
+// if the user is not logged in the token wlll be undefined, so this header will not be set
 
 // axios.interceptors.response.use(success, error)
 axios.interceptors.response.use(null, error => {
