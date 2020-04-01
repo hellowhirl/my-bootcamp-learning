@@ -6,6 +6,8 @@ import { apiUrl } from "../config.json";
 const apiEndpoint = apiUrl + "/auth";
 const tokenKey = "token";
 
+http.setJwt(getJwt()); // instead we call this method from our http module, and pass 'getJwt' method to get value of jwt
+
 export async function login(email, password) {
   // instead of returning promise from this function, we need to await to get the response
   const { data: jwt } = await http.post(apiEndpoint, { email, password }); // in body we pass an object with 2 properties
