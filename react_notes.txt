@@ -8,7 +8,7 @@
 
 // Both below are similar in component based architecture;
 // Angular is a complete solution framework
-// Reach is simply a library that handles the View - making sure view is in sync with the state
+// React is simply a library that handles the View - making sure view is in sync with the state
 
 // create-react-app
 // installs Web Development Server, Webpack, Babel
@@ -18,7 +18,7 @@
 // JSX: JavaScript XML
 // Babel converts JSX code to browser readable JavaScript
 
-Helpful plugins
+Helpful plugins:
 - Prettier
 - Simple React Snippets
     shortcuts like: imrc, cc
@@ -26,6 +26,9 @@ Helpful plugins
 - Auto Import - ES6, TS, JSX
 - File utils
 - Live Server
+
+Nifty libraries:
+- nodemon (automatically restarts node server on & off between changes)
 
 // id="root" is container for our React app
 
@@ -362,5 +365,10 @@ JWT.io - Debugger
 - able to debug a JSON token and look at its content
 - 3 parts:
     - Header: standard, all tokens have it
-    - Payload: encoded version of our JSON object (decode with base64 algorithm), - content has various attributes about the user (claims)
+    - Payload: encoded version of our JSON object (decoded with base64 algorithm) - for example, content has various attributes about the user (claims)
     - Digital Signature: generated based on the header, payload, and a secret that is only available on the server
+
+Calling protected API Endpoints
+
+- Fixing 401 error in our application
+- 401 Unauthorized: API endpoint required the client to send a JSON web token but the client didn't send that

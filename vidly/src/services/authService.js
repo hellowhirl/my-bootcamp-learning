@@ -30,11 +30,16 @@ export function loginWithJwt(jwt) {
   localStorage.setItem(tokenKey, jwt);
 }
 
+export function getJwt() {
+  return localStorage.getItem(tokenKey);
+}
+
 // this approach is for implementing object-oriented syntax
 export default {
   login,
   logout,
   getCurrentUser,
-  loginWithJwt
+  loginWithJwt,
+  getJwt
 };
 // technicallly we don't need to above indiviual functions - because we are exporting a default object we can access any of the functions using the exported default object. But we can keep them there in case we want import only a single function in another module

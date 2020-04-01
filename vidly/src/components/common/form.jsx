@@ -88,7 +88,7 @@ class Form extends Component {
   }
 
   renderInput(name, label, type = "text") {
-    const { data, errors } = this.state; // 'data' and 'errors' are extracted from 'state'
+    const { data, errors } = this.state; // ????? 'data' and 'errors' are extracted from 'state'
 
     return (
       <Input
