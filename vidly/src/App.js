@@ -42,7 +42,7 @@ class App extends Component {
 
     return (
       <React.Fragment>
-        <NavBar user={this.state.user} />
+        <NavBar user={user} />
         <main className="container">
           <Switch>
             {/* for MovieForm we are using route parameter (match.params) */}

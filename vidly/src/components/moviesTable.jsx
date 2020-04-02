@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Table from "./common/table";
 import { Link } from "react-router-dom";
 import Like from "./common/like";
+import auth from "../services/authService";
+
+// const { isAdmin } = auth.getCurrentUser();
 
 class MoviesTable extends Component {
   // in this method we will have the logic for determining the sort order
@@ -33,19 +36,26 @@ class MoviesTable extends Component {
     {
       key: "delete",
       // here we set 'content' to a function (instead of React element) that takes a parameter like 'movie' and returns a React element
-      content: movie => (
-        <button
-          // should raise events here and let Movies component delete a given movie
-          onClick={() => this.props.onDelete(movie)} // to pass an argument we use an arrow function, pass "movie"
-          className="btn btn-danger btn-sm"
-        >
-          Delete
-        </button>
-      )
+      content: auth.getCurrentUser()
+        ? movie => (
+            <button
+              // should raise events here and let Movies component delete a given movie
+              onClick={
+                this.props.user.isAdmin
+                  ? () => this.props.onDelete(movie)
+                  : null
+              } // to pass an argument we use an arrow function, pass "movie"
+              className="btn btn-danger btn-sm"
+            >
+              Delete
+            </button>
+          )
+        : null
     }
   ];
 
   render() {
+    console.log(auth.getCurrentUser());
     // since we are passing movies via props, we are not supposed to modify the props,
     // because actual state is stored in the Movies component
     const { movies, onSort, sortColumn } = this.props;
