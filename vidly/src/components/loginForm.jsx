@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import auth from "../services/authService";
@@ -39,7 +40,9 @@ class LoginForm extends Form {
       // this.props.history.push("/"); // to make this process complete, navigate user back to homepage
       // in order to call cdm() on App.js we need to do full reload of entire application
       // so instead of just redirecting the user to homepage we will use the 'window' object in the browser
-      window.location = "/";
+
+      const { state } = this.props.location; // this 'location' might have a 'state' property
+      window.location = state ? state.from.pathname : "/"; // if state is defined then set url to that 'location.pathname', otherwise "/"
       // what happens after the user is logged in is not the responsibility of the login function
 
       // if this request is successful then we can see the body of Response in dev tools Network tab
@@ -55,6 +58,7 @@ class LoginForm extends Form {
   };
 
   render() {
+    if (auth.getCurrentUser()) return <Redirect to="/" />; // to prevent user from accessing Login page, despite already being logged in
     return (
       <div>
         <h1>Login</h1>

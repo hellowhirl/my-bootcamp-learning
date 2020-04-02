@@ -10,8 +10,18 @@ const ProtectedRoute = ({ component: Component, render, ...rest }) => {
       //   path={path}
       {...rest}
       render={props => {
-        if (!auth.getCurrentUser()) return <Redirect to="/login" />;
-        console.log(props);
+        console.log(props); // 'location' object represents the current location before we get redirected
+        if (!auth.getCurrentUser())
+          return (
+            <Redirect
+              // refering to docs, 'to' can also pass an object - including 'state' which we can use to pass any additional data in the componenet we are redirecting the user too (in this case our login component)
+              to={{
+                pathname: "/login",
+                // here we are setting a property like 'from' to a 'location' object - which represents current location before we get redirected
+                state: { from: props.location }
+              }}
+            />
+          );
         // if Component is truthy render the passed Componenet, if not then we will call the render function and pass 'props'
         return Component ? <Component {...props} /> : render(props);
       }}
