@@ -11,6 +11,7 @@ import NotFound from "./components/notFound";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
 import Logout from "./components/logout";
+import ProtectedRoute from "./components/common/protectedRoute";
 // above are components from our application
 import auth from "./services/authService";
 // above are any services that we need
@@ -45,14 +46,15 @@ class App extends Component {
         <main className="container">
           <Switch>
             {/* for MovieForm we are using route parameter (match.params) */}
-            {/* below we use 'render' and check for 'user' in order to protect this Route */}
-            <Route
+            {/* below we were using 'render' and checking for 'user' in order to protect this Route */}
+            {/* <Route
               path="/movies/:id"
               render={props => {
                 if (!user) return <Redirect to="login" />;
                 return <Movies {...props} />;
               }}
-            />
+            /> */}
+            <ProtectedRoute path="/movies/:id" component={MovieForm} />
             <Route
               path="/movies"
               render={props => <Movies {...props} user={this.state.user} />}
