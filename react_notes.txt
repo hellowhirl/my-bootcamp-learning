@@ -388,4 +388,3 @@ Backend implementation for delete function in vidly API
 - [auth, admin] are functions: refered to as Middleware Functions
 - first node backend will run auth middleware function, then admin middleware function - using next()
 - when we overcome all these middleware function checks then we can perform delete action (we assign property 'isAdmin' to 'true')
-- this 
