@@ -32,30 +32,32 @@ class MoviesTable extends Component {
           onClick={() => this.props.onLike(movie)}
         />
       )
-    },
-    {
-      key: "delete",
-      // here we set 'content' to a function (instead of React element) that takes a parameter like 'movie' and returns a React element
-      content: auth.getCurrentUser()
-        ? movie => (
-            <button
-              // should raise events here and let Movies component delete a given movie
-              onClick={
-                this.props.user.isAdmin
-                  ? () => this.props.onDelete(movie)
-                  : null
-              } // to pass an argument we use an arrow function, pass "movie"
-              className="btn btn-danger btn-sm"
-            >
-              Delete
-            </button>
-          )
-        : null
     }
   ];
 
+  // here we define another property instead of polluting our constructor
+  deleteColumn = {
+    key: "delete",
+    // here we set 'content' to a function (instead of React element) that takes a parameter like 'movie' and returns a React element
+    content: movie => (
+      <button
+        // should raise events here and let Movies component delete a given movie
+        onClick={() => this.props.onDelete(movie)} // to pass an argument we use an arrow function, pass "movie"
+        className="btn btn-danger btn-sm"
+      >
+        Delete
+      </button>
+    )
+  };
+
+  // keep the constructor clean
+  constructor() {
+    super(); // need to also call constructor to the parent class and add 'super()' - because we have added a custom constructor
+    const user = auth.getCurrentUser();
+    if (user && user.isAdmin) this.columns.push(this.deleteColumn); // push this delete column to our 'columns' array
+  }
+
   render() {
-    console.log(auth.getCurrentUser());
     // since we are passing movies via props, we are not supposed to modify the props,
     // because actual state is stored in the Movies component
     const { movies, onSort, sortColumn } = this.props;

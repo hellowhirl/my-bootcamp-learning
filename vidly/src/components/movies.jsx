@@ -156,7 +156,6 @@ class Movies extends Component {
               onLike={this.handleLike}
               onDelete={this.handleDelete}
               onSort={this.handleSort}
-              user={user}
             />
             <Pagination
               itemsCount={totalCount}
