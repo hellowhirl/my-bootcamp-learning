@@ -388,3 +388,14 @@ Backend implementation for delete function in vidly API
 - [auth, admin] are functions: refered to as Middleware Functions
 - first node backend will run auth middleware function, then admin middleware function - using next()
 - when we overcome all these middleware function checks then we can perform delete action (we assign property 'isAdmin' to 'true')
+
+
+Deployment
+
+Environment Variables for different environments:
+Dev - Test - Production (sometimes we want them to be different)
+    For example when we are doing development we want to use a real production backend with real data (so config.json isn't going to help us with production builds)
+
+.env files (.env.development, .env.test, .env.production)
+    - all environment variables have a key and a value
+    - the key start with 'REACT_APP_' (REACT_APP_NAME =Vidly in Dev OR REACT_APP_VERSION=1)
