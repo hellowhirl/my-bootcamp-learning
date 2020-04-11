@@ -399,3 +399,11 @@ Dev - Test - Production (sometimes we want them to be different)
 .env files (.env.development, .env.test, .env.production)
     - all environment variables have a key and a value
     - the key start with 'REACT_APP_' (REACT_APP_NAME =Vidly in Dev OR REACT_APP_VERSION=1)
+
+When we deploy our application to production we want an optimized production build (without all the extra code in our development build)
+We can get an optimized production build (and then contents of the folder to our web server wiht FTP, etc) with:
+    $ npm run build
+Simple lightweight server can be installed with:
+    $ npm install -g server
+Then we can serve content of target folder (build) with:
+    $ serve -s build 
