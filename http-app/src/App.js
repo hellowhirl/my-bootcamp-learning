@@ -45,6 +45,7 @@ class App extends Component {
     post.title = "Updated";
     // axios.put(1st arg: specific url that includes post id, 2nd arg: data to send to server),
     await httpOrWhatever.put(config.apiEndpoint + "/" + post.id, post);
+    // here we are not using 'data' object so we don't need to store in a constant with object destructuring
 
     // axios.patch(), sending only properties that should be updated
     // await axios.put(apiEndpoint + "/" + post.id, { title: post.title });
