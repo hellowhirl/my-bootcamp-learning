@@ -410,10 +410,12 @@ Then we can serve content of target folder (build) with:
 
 Heroku - a cloud service for deploying an application and its backend 
 
-To login we use:
+to login we use:
     $ heroku login
 
 if login fails try below and then logging in:
-
     $ export HTTP_PROXY=http://proxy.server.com:1234
 
+to create a Heroku app:
+    $ heroku create
+    $ heroku create project-name-vidly (also possible to provide name - if this is left out then one will be auto-genereated)
