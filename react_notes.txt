@@ -416,6 +416,15 @@ to login we use:
 if login fails try below and then logging in:
     $ export HTTP_PROXY=http://proxy.server.com:1234
 
-to create a Heroku app:
-    $ heroku create
-    $ heroku create project-name-vidly (also possible to provide name - if this is left out then one will be auto-genereated)
+to create a Heroku app, go inside api project folder and enter:
+    $ heroku create (if this is left out then one will be auto-genereated))
+    $ heroku create project-name-vidly (also possible to provide name)
+
+    - we will see address of our application on herokuapp.com (our backend will be hosted here)
+    - our frontend should send requests to this address/api/whatever
+    - we will also the address of a git repository under heroku.com (name-of-application.git)
+
+Adding to a Git Repository
+
+.gitignore file
+    good to add: node_modules/ ('/' represents a folder)
