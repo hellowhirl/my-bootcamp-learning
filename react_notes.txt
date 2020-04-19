@@ -173,7 +173,7 @@ object destructuring should be done at the beginning of every functional compone
 
 
 
-React Router
+===== React Router =====
 
 - to add routing to our project we need to use following command
 
@@ -300,7 +300,9 @@ Axios Interceptors
 Sentry.io: Logging as a service provider (processing error exceptions from websites)
 
 
-Backend stack for Vidly
+
+===== Backend stack for Vidly =====
+
 - Node: runtime environment for executing JavaScript code outside of a browser (we can build a web server that responds to http requests)
 - Express: framework for building RESTful API's
 - MongoDB: database management system for storing our data (run with npm or yarn)
@@ -323,7 +325,8 @@ JSON format:
 }
 
 
-Authentication and Authorization
+
+===== Authentication and Authorization =====
 
 - In our applications our backend should behave like this: 
     - have an endpoint for registering users - the endpoint should receive a http POST request
@@ -390,7 +393,8 @@ Backend implementation for delete function in vidly API
 - when we overcome all these middleware function checks then we can perform delete action (we assign property 'isAdmin' to 'true')
 
 
-Deployment
+
+===== Deployment =====
 
 Environment Variables for different environments:
 Dev - Test - Production (sometimes we want them to be different)
@@ -408,7 +412,23 @@ Simple lightweight server can be installed with:
 Then we can serve content of target folder (build) with:
     $ serve -s build 
 
-Heroku - a cloud service for deploying an application and its backend 
+
+== Flow for Adding to a git Repository ==
+
+add a .gitignore file
+    good to add: node_modules/ ('/' at end represents a folder)
+
+initializes a git repositiory in a folder
+    $ git init
+
+stage all files to be commited to repository and commit
+    $ git add .
+    $ git commit -m "Iniital commit"
+
+
+== Deploying to Heroku == 
+
+Heroku is a cloud service for deploying an application and its backend
 
 to login we use:
     $ heroku login
@@ -422,9 +442,12 @@ to create a Heroku app, go inside api project folder and enter:
 
     - we will see address of our application on herokuapp.com (our backend will be hosted here)
     - our frontend should send requests to this address/api/whatever
-    - we will also the address of a git repository under heroku.com (name-of-application.git)
+    - we will also see the address of a git repository under heroku.com (https://git.heroku.com/name-of-application.git)
+    - whenever we push new code to above git repository the practice of continuous integration happens as below:
+        heroku will be notified, download latest source code, build it, then deploy to our backend heroku address
 
-Adding to a Git Repository
+to push code that we have in our local repository to the remote repository:
+    $ git push heroku master
 
-.gitignore file
-    good to add: node_modules/ ('/' represents a folder)
+to open heroku app (launches browser pointing to our application on Heroku):
+    $ heroku open
