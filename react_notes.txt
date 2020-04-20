@@ -451,3 +451,20 @@ to push code that we have in our local repository to the remote repository:
 
 to open heroku app (launches browser pointing to our application on Heroku):
     $ heroku open
+
+check logs on why our application crashed
+    $ heroku logs
+
+We get an error:
+MongoNetworkError: failed to connect to server [localhost:27017] on first connect [Error: connect ECONNREFUSED 127.0.0.1:27017
+
+- 27017 is the default port for MongoDB. In our backend project in the config folder, in default.json:
+    "db": "mongodb://localhost/vidly" does not exist on the heroku server that is hosting our application
+    - so we need to change this to the address of our MongoDB on MLab
+    - we don't want to store it in the config file because it will be stored as text in a .git repository
+    - never store secrets in your config files (they can be open to anybody - security risk)
+    - for a production environment we should use environment variables
+    - these env variables are not part of the source code - we need to set them in the terminal
+
+store a variable on Heroku
+    $ heroku config:set vidly_db=mongodb://vidlyuser:password@blahblahblah
