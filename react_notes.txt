@@ -466,5 +466,5 @@ MongoNetworkError: failed to connect to server [localhost:27017] on first connec
     - for a production environment we should use environment variables
     - these env variables are not part of the source code - we need to set them in the terminal
 
-store a variable on Heroku
-    $ heroku config:set vidly_db=mongodb://vidlyuser:password@blahblahblah
+how to store a variable on Heroku:
+    $ heroku config:set project_db=mongodb://someuser:password@blahblahblah
