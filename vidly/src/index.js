@@ -9,7 +9,11 @@ import { BrowserRouter } from "react-router-dom";
 
 // the expressions that represent an environmental variable are replaced by the actual value of that env variable during build time
 // all the env variables that we store directly in the shell or configuration files are extracted and 'process.env.WHATEVER' is replaced with an actual value
-console.log("SUPERMAN", process.env.REACT_APP_NAME);
+console.log(
+  "SUPERMAN",
+  process.env.REACT_APP_NAME,
+  `version: ${process.env.REACT_APP_VERSION}`
+);
 
 ReactDOM.render(
   <BrowserRouter>

@@ -17,7 +17,9 @@ class MoviesTable extends Component {
       path: "title",
       title: "Title",
       // here we set 'content' to a function (instead of React element) that takes a parameter like 'movie' and returns a React element
-      content: movie => <Link to={`/movies/${movie._id}`}>{movie.title}</Link>
+      content: (movie) => (
+        <Link to={`/movies/${movie._id}`}>{movie.title}</Link>
+      ),
     },
     { path: "genre.name", title: "Genre" },
     { path: "numberInStock", title: "Stock" },
@@ -25,21 +27,21 @@ class MoviesTable extends Component {
     {
       key: "like",
       // here we set 'content' to a function (instead of React element) that takes a parameter like 'movie' and returns a React element
-      content: movie => (
+      content: (movie) => (
         <Like
           liked={movie.liked}
           // should raise events here and let Movies component like a given movie
           onClick={() => this.props.onLike(movie)}
         />
-      )
-    }
+      ),
+    },
   ];
 
   // here we define another property instead of polluting our constructor
   deleteColumn = {
     key: "delete",
     // here we set 'content' to a function (instead of React element) that takes a parameter like 'movie' and returns a React element
-    content: movie => (
+    content: (movie) => (
       <button
         // should raise events here and let Movies component delete a given movie
         onClick={() => this.props.onDelete(movie)} // to pass an argument we use an arrow function, pass "movie"
@@ -47,13 +49,14 @@ class MoviesTable extends Component {
       >
         Delete
       </button>
-    )
+    ),
   };
 
   // keep the constructor clean
   constructor() {
     super(); // need to also call constructor to the parent class and add 'super()' - because we have added a custom constructor
     const user = auth.getCurrentUser();
+    // if the user is an admin then add the delete column to the columns array
     if (user && user.isAdmin) this.columns.push(this.deleteColumn); // push this delete column to our 'columns' array
   }
 
