@@ -1,57 +1,71 @@
-// React notes
+## React Fundamentals Notes
 
-// Each component is a piece of UI - build them in isolation and then put them together to build complex UI's
-// React elements are just JS objects that maps to a DOM elements (just represents DOM elememnt in memory)
+Each component is a piece of UI - build them in isolation and then put them together to build complex UI's
 
-// Don't need to write code to query and manipulate DOM or attach event handlers to DOM elements
+React elements are just JS objects that maps to a DOM elements (just represents DOM elememnt in memory)
 
+Don't need to write code to query and manipulate DOM or attach event handlers to DOM elements
 
-// Both below are similar in component based architecture;
-// Angular is a complete solution framework
-// React is simply a library that handles the View - making sure view is in sync with the state
+Both below are similar in component based architecture;
 
-// create-react-app
-// installs Web Development Server, Webpack, Babel
-// zero config setup - but possible with running command
-    $ npm run eject
+Angular is a complete solution framework
 
-// JSX: JavaScript XML
-// Babel converts JSX code to browser readable JavaScript
+React is simply a library that handles the View - making sure view is in sync with the state
 
-Helpful plugins:
+```
+$ create-react-app
+```
+
+- install Web Development Server, Webpack, Babel (zero config setup)
+
+```
+$ npm run eject
+```
+
+- but possible with running below command
+
+JSX: JavaScript XML
+
+Babel converts JSX code to browser readable JavaScript
+
+### Helpful plugins:
+
 - Prettier
 - Simple React Snippets
-    shortcuts like: imrc, cc
+  shortcuts like: imrc, cc
 - Code Runner
 - Auto Import - ES6, TS, JSX
 - File utils
 - Live Server
 
-Nifty libraries:
+### Nifty libraries:
+
 - nodemon (automatically restarts node server on & off between changes)
 
 // id="root" is container for our React app
 
-- react-scripts:
+### react-scripts:
 
-"start": "react-scripts start", // start dev server 
-    $ npm start
+"start": "react-scripts start", // start dev server
+\$ npm start
 "build": "react-scripts build", // build application for production for optimized package
 "test": "react-scripts test", // for running unit tests
 "eject": "react-scripts eject" // eject from create-react app and customize configs for this project
 
 - all the complex configs (babel, webpack, etc.) are hidden
 
-*only use if you know what you're doing*
-    $ npm run eject
-- this will make all dependencies visible and you can also see 'config' folder
+only use if you know what you're doing
 
+- `$ npm run eject`
+
+- this will make all dependencies visible and you can also see 'config' folder
 
 - Full-stack: JavaScript / Node + Express + MongoDB
 
 - better to use .jsx for file names in 'components' - we get better code completion
 
 Simple React Snippets
+
 - imrc: import React / Component
 - cc: Class Coomponent
 
@@ -63,71 +77,72 @@ we can't use 'class' because it's a reserved keyword in JS, so we use 'className
 refactor shortcut in VS code : CTRL + SHIFT + R
 
 alias for npm install
-    $ npm i
+\$ npm i
 
 - when we build an application webpack will pull in files that we have specified on index.js with 'import' and put them in a final bundle
 
-
-- real world applications consist of a "tree of components"
+* real world applications consist of a "tree of components"
 
 Zen coding with Emmet: create table with class "container" with <thead> enclosing <tr> enclosing 4 <td> tags
-table.container>thead>tr>td*4
-
+table.container>thead>tr>td\*4
 
 Correct vs Incorrect ES6 syntax for JSX React components:
 
 // Correct: when we are returning an object from an arrow function we need to put that object in parenthesis - otherwise JavaScript enging will parse {} as a code block instead of as an object
 {this.state.counters.map(c => (
-    <Counter key={c.id} />
+<Counter key={c.id} />
 ))}
 
 // Incorrect
 {this.state.counters.map(c => {
-    <Counter key={c.id} />;
+<Counter key={c.id} />;
 })}
 
+- In developer tools '\$0' indicates the latest element we have selected in dev tools
+- For example, on <button> we can use \$0.click() and activate the button
 
-- In developer tools '$0' indicates the latest element we have selected in dev tools
-- For example, on <button> we can use $0.click() and activate the button 
-
-Props vs State
+### Props vs State
 
 - props is data that we give to a component - eg. input to component like value={counter.value} - cannot access the state of other component
-    - props is read-only: we cannot change input to component inside of the component
-    Cannot do this code within a component:
-        this.props.value = 0;
-        (will get error: "Cannot assign to read only property 'value' of object '#<Object>')
-        - instead we should use state and 'setState' creating method within the life cycle of the component
+
+- props is read-only: we cannot change input to component inside of the component
+  Cannot do this code within a component:
+  this.props.value = 0;
+  (will get error: "Cannot assign to read only property 'value' of object '#<Object>') - instead we should use state and 'setState' creating method within the life cycle of the component
 
 - state is data that is local (private) to a component (not accessible to other components)
-    - sometimes a component will not have a state, it may get all of its data through props
+
+  - sometimes a component will not have a state, it may get all of its data through props
 
 - "The component that owns a piece of the state, should be the one modifying it"
 
 - The whole point of using objects is to encapsulate related values
 
 Local state is different from outside components problem:
+
 - Single source of truth: remove the local state in the child component and have a single source of truth
 - if we don't have a single source of truth, state can be changed but it won't be reflected in the DOM
 - each component have their own local state - so values are disconnected
 
-
-- Controlled Componnet: has no local state but receives data via props and raises events when data needs to be changed - it is entirely controlled by its parent
+* Controlled Componnet: has no local state but receives data via props and raises events when data needs to be changed - it is entirely controlled by its parent
 
 Keeping multple components in sync:
+
 - "lift the state up": when there is no parent/child relationship between 2 componenets and you want to share data between them
 - if we lift state up to <App /> then it can be parent to other child components, then state can be passed using props
 
 Lifting the state up:
+
 - lifted up state from counters componenet to its parent (App componenet) - now we can share state with chilren of this component via props, and with this technique now we have multiple componenets in sync
 
 Stateless Functional Components:
+
 - Zen coding shortcut: sfc
 
 - for classes that have a single method (like return()) and no state we can convert into a Stateless Functional Component
 - simply define a function that returns a React element (instead of using class that extends Component class with render method
 
-Lifecycle Hooks* (below are used 90% of time)
+Lifecycle Hooks\* (below are used 90% of time)
 
 == MOUNT ==
 constructor
@@ -141,16 +156,15 @@ componentDidUpdate - used for if we want to make ajax call to get new data based
 == UNMOUNT ==
 componentWillUnmount - gives us opportunity to do clean up (timers and listeneres) and prevent memory leaks
 
-* cannot use lifecycle hooks in stateless functional components - they can only be used with class components
+- cannot use lifecycle hooks in stateless functional components - they can only be used with class components
 
-- when a component is rendered we get a React element which updates virtual DOM - so we have 2 object references in memory for old virtual DOM and new virtual DOM, then React will update DOM based on the difference only
+* when a component is rendered we get a React element which updates virtual DOM - so we have 2 object references in memory for old virtual DOM and new virtual DOM, then React will update DOM based on the difference only
 
-- when writing code, go step by step. Write a little bit of code, test to see if it works, then move on. Don't go for "big moves"
-
+* when writing code, go step by step. Write a little bit of code, test to see if it works, then move on. Don't go for "big moves"
 
 Steps for when building a new component:
-1) Determine interface with inputs and/or events
 
+1. Determine interface with inputs and/or events
 
 folders in React project:
 "common": components that can be used across other projects
@@ -161,7 +175,6 @@ folders in React project:
 VS Code shortcut:
 command + P and type '@': look at members of a class, and search from that
 
-
 levels of components:
 
 high level: simplified, abstract
@@ -171,9 +184,7 @@ symetry/consistency is when high level or low level components are grouped toget
 
 object destructuring should be done at the beginning of every functional component
 
-
-
-===== React Router =====
+## React Router
 
 - to add routing to our project we need to use following command
 
@@ -182,41 +193,44 @@ npm i react-router-dom
 <Route> component looks at the current URL and if it matches 'path' attribute then it will return the component that is in the 'component' attribute - these attributes are passed as props
 
 props wrapped with a Route component:
+
 - history: to work with history object in the browser - with this we can send user to a different page
 - location: represents where app is at now
 - match: contains info about about how URL matches path we set in our route
 
 How to pass/retrieve route parameters
+
 - to define a parameter in URL path we should prefix that parameter with a colon
 - fetch from 'match.params'
 
 - when we define parameters in our route by detault those parameters are required
 - to make then not required we append a '?'
 
-- programmatic navigation: 
+- programmatic navigation:
 
 - nested routing: for example routing on top and bottom
 
 Zen coding trick:
-    Route[path][component]*4
-    form>(div.form-group>label+input.form-control)*2
+Route[path][component]*4
+form>(div.form-group>label+input.form-control)*2
 
 Shortcut to tab through all methods in a component
-    SHIFT + CMD + >
+SHIFT + CMD + >
 
 Shortcut from command palette (SHIFT + CMD + P)
-    Wrap with abbreviation (to surround selected text with a tag - also possible to do zen coding)
+Wrap with abbreviation (to surround selected text with a tag - also possible to do zen coding)
 
 Shortcut for editing multiple places in VS Code:
-    Hold ALT while selecting different places
+Hold ALT while selecting different places
 
 In React we should never work with the 'document' object - we are abstracting from it
+
 - also it makes our applications easier to maintain and unit test
 
-onChange event: 
+onChange event:
 occurs when the value of an element has been changed.
 
-currentTarget event property: 
+currentTarget event property:
 returns the element whose event listeners triggered the event.
 
 - Rule of thumb: when building a form we should set initialize the properties of state objects to empty string '' or some value from the server, otherwise we'll get an error
@@ -232,15 +246,15 @@ by default terminates validation as soon as it finds an error
 
 - when setting up validation for a form all we usually need to do is set up the schema
 
+* in React we can substitute 'extends Component' for our own custom class,
+  then we can have a class we define inherit all the methods we have defined in the custom base class
 
-- in React we can substitute 'extends Component' for our own custom class,
-then we can have a class we define inherit all the methods we have defined in the custom base class 
-
-- class components don't always need to have a render() method
+* class components don't always need to have a render() method
 
 REST API's
-REST: Representational State Transfer 
+REST: Representational State Transfer
 API's: endpoints (Application Programming Interfaces), an interface for our applications
+
 - JSONPlaceholder website provides endpoints that are publicly accessible over the Internet
 - We can set HTTP requests to these endpoints to get, create, update, delete data (CRUD operations)
 
@@ -252,7 +266,6 @@ jQuery AJAX (just like the old days)
 Axios (popular - Greek word that means "suitable")
 
 promise: an object that holds the result of an asynchronous operation (will complete in the future)
-
 
 Lifecycle of an HTTP request:
 
@@ -273,10 +286,10 @@ Request Payload: shows the object that we sent to the server
 
 Response Tab: the response the API returned to us
 
-
 Optimistic vs Pessimistic Updates
 
 Optimistic:
+
 - keep reference to the original state
 - update UI before calling the server
 - wrap the call to the server in a try/catch block
@@ -286,51 +299,51 @@ Expected and Unexpected Errors:
 
 Expected: API endpoints predict and return (400, 404)
 Unexpected: network down, server down, db down, bug
-  - Log these Errors
-  - Displays a generic and friendly error message
+
+- Log these Errors
+- Displays a generic and friendly error message
 
 Toastify install:
-    npm i react-toastify@4.1
+npm i react-toastify@4.1
 
 Axios Interceptors
+
 - able to intercept requests and responses
 - if there is an unexpected error we can handle that error in one place - display error message to user
 
-
 Sentry.io: Logging as a service provider (processing error exceptions from websites)
 
-
-
-===== Backend stack for Vidly =====
+### Backend stack for Vidly
 
 - Node: runtime environment for executing JavaScript code outside of a browser (we can build a web server that responds to http requests)
 - Express: framework for building RESTful API's
 - MongoDB: database management system for storing our data (run with npm or yarn)
 
 vidly-api-node
-- change to: 
-"bcrypt": "^3.0.6"
+
+- change to:
+  "bcrypt": "^3.0.6"
 
 Start API server:
 node index.js
 
 JSON format:
+
 - all 'keys' should be in "quotes"
-{
+  {
   "example": "test",
   "foo": bar,
   "whatever": true,
   "number": 2,
   "stringNumber": "123"
-}
+  }
 
+## Authentication and Authorization
 
+- In our applications our backend should behave like this:
 
-===== Authentication and Authorization =====
-
-- In our applications our backend should behave like this: 
-    - have an endpoint for registering users - the endpoint should receive a http POST request
-    - should respond with either 200 or 400
+  - have an endpoint for registering users - the endpoint should receive a http POST request
+  - should respond with either 200 or 400
 
 - If we make data object names consistent between frontend and backend then our code will be cleaner and easier to maintain
 - Best to have a single module that is responsible for knowing how authentication is implemented (as opposed to scattered all over the place)
@@ -338,6 +351,7 @@ JSON format:
 In Chrome Dev tools under Network there is a Preview tab - shows us the body of the reponse from the server
 
 JSON web token (JWT):
+
 - an identification card (like a driver's license)
 - at first if client sends a valid username and password then the server will give the client an identificaiton card
 - the server will then validate - if the JSON web token is valid then it will execute the client's request
@@ -345,14 +359,17 @@ JSON web token (JWT):
 authService.js - responsible for login and logout
 
 Local Storage
+
 - every browser has a small local database called 'Local Storage' - and here we can store key value pairs
 - in dev tools under Application tab / Storage / Local Storage / specific domain
 
 Headers
+
 - after we send a request the server will send back http headers
 - whenever a header starts with "x" it will be treated as a custom header (as it's not a part of standard http protocol)
 
 Vidly API
+
 - note: shut down API service before we make any changes to its code
 - routes/users.js: contains implementation of our user endpoint. Refer to router.post()
 - .header() method: make change so that server will whitelist headers that browser or client is allowed to access
@@ -362,17 +379,16 @@ Vidly API
 
 - then we will be able to get our custom header
 
-
 JWT.io - Debugger
 
 - able to debug a JSON token and look at its content
 - 3 parts:
-    - Header: standard, all tokens have it
-    - Payload: encoded version of our JSON object (decoded with base64 algorithm) - for example, content has various attributes about the user (claims)
-    - Digital Signature: generated based on the header, payload, and a secret that is only available on the server
-    
-    - if we make any changes to the Payload (adding or removing characters) then the Digital Signature needs to be regenerated (but needs the private key which is stored on the server)
 
+  - Header: standard, all tokens have it
+  - Payload: encoded version of our JSON object (decoded with base64 algorithm) - for example, content has various attributes about the user (claims)
+  - Digital Signature: generated based on the header, payload, and a secret that is only available on the server
+
+  - if we make any changes to the Payload (adding or removing characters) then the Digital Signature needs to be regenerated (but needs the private key which is stored on the server)
 
 Calling protected API Endpoints
 
@@ -384,7 +400,6 @@ Removing bi-directional dependency
 - first, determine which module is more essential (a core module) - it's our http module
 - our auth module should be on top of http module
 
-
 Backend implementation for delete function in vidly API
 
 - if there is a request to delete a movie make sure the user is authenticated and is an admin
@@ -392,54 +407,48 @@ Backend implementation for delete function in vidly API
 - first node backend will run auth middleware function, then admin middleware function - using next()
 - when we overcome all these middleware function checks then we can perform delete action (we assign property 'isAdmin' to 'true')
 
-
-
-===== Deployment =====
+## Deployment
 
 Environment Variables for different environments:
 Dev - Test - Production (sometimes we want them to be different)
-    For example when we are doing development we want to use a real production backend with real data (so config.json isn't going to help us with production builds)
+For example when we are doing development we want to use a real production backend with real data (so config.json isn't going to help us with production builds)
 
-.env files (.env.development, .env.test, .env.production)
-    - all environment variables have a key and a value
-    - the key start with 'REACT_APP_' (REACT_APP_NAME =Vidly in Dev OR REACT_APP_VERSION=1)
+.env files (.env.development, .env.test, .env.production) - all environment variables have a key and a value - the key start with 'REACT*APP*' (REACT_APP_NAME =Vidly in Dev OR REACT_APP_VERSION=1)
 
 When we deploy our application to production we want an optimized production build (without all the extra code in our development build)
 We can get an optimized production build (and then contents of the folder to our web server wiht FTP, etc) with:
-    $ npm run build
+$ npm run build
 Simple lightweight server can be installed with:
     $ npm install -g server
 Then we can serve content of target folder (build) with:
-    $ serve -s build 
+\$ serve -s build
 
 - During the build time expressions like "process.env.REACT_APP_NAME" that reference an environement variable are replaced with the value of that envvironment variable
-
 
 == Flow for Adding to a git Repository ==
 
 add a .gitignore file
-    good to add: node_modules/ ('/' at end represents a folder)
+good to add: node_modules/ ('/' at end represents a folder)
 
 initializes a git repositiory in a folder
-    $ git init
+\$ git init
 
 stage all files to be commited to repository and commit
-    $ git add .
+$ git add .
     $ git commit -m "Iniital commit"
 
-
-== Deploying to Heroku == 
+== Deploying to Heroku ==
 
 Heroku is a cloud service for deploying an application and its backend
 
 to login we use:
-    $ heroku login
+\$ heroku login
 
 if login fails try below and then logging in:
-    $ export HTTP_PROXY=http://proxy.server.com:1234
+\$ export HTTP_PROXY=http://proxy.server.com:1234
 
 to create a Heroku app, go inside api project folder and enter:
-    $ heroku create (if this is left out then one will be auto-genereated))
+$ heroku create (if this is left out then one will be auto-genereated))
     $ heroku create project-name-vidly (also possible to provide name)
 
     - we will see address of our application on herokuapp.com (our backend will be hosted here)
@@ -449,24 +458,26 @@ to create a Heroku app, go inside api project folder and enter:
         heroku will be notified, download latest source code, build it, then deploy to our backend heroku address
 
 to push code that we have in our local repository to the remote repository:
-    $ git push heroku master
+\$ git push heroku master
 
 to open heroku app (launches browser pointing to our application on Heroku):
-    $ heroku open
+\$ heroku open
 
 check logs on why our application crashed
-    $ heroku logs
+\$ heroku logs
 
 We get an error:
 MongoNetworkError: failed to connect to server [localhost:27017] on first connect [Error: connect ECONNREFUSED 127.0.0.1:27017
 
 - 27017 is the default port for MongoDB. In our backend project in the config folder, in default.json:
-    "db": "mongodb://localhost/vidly" does not exist on the heroku server that is hosting our application
-    - so we need to change this to the address of our MongoDB on MLab
-    - we don't want to store it in the config file because it will be stored as text in a .git repository
-    - never store secrets in your config files (they can be open to anybody - security risk)
-    - for a production environment we should use environment variables
-    - these env variables are not part of the source code - we need to set them in the terminal
+  "db": "mongodb://localhost/vidly" does not exist on the heroku server that is hosting our application
+  - so we need to change this to the address of our MongoDB on MLab
+  - we don't want to store it in the config file because it will be stored as text in a .git repository
+  - never store secrets in your config files (they can be open to anybody - security risk)
+  - for a production environment we should use environment variables
+  - these env variables are not part of the source code - we need to set them in the terminal
 
 how to store a variable on Heroku:
-    $ heroku config:set project_db=mongodb://someuser:password@blahblahblah
+\$ heroku config:set project_db=mongodb://someuser:password@blahblahblah
+
+## React Advanced Notes
