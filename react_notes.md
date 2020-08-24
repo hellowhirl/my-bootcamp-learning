@@ -1,4 +1,7 @@
-## React Fundamentals Notes
+<header>
+React Fundamentals Notes
+============
+</header>
 
 Each component is a piece of UI - build them in isolation and then put them together to build complex UI's
 
@@ -99,16 +102,19 @@ Correct vs Incorrect ES6 syntax for JSX React components:
 })}
 
 - In developer tools '\$0' indicates the latest element we have selected in dev tools
-- For example, on <button> we can use \$0.click() and activate the button
+- For example, on `<button>` we can use \$0.click() and activate the button
 
 ### Props vs State
 
 - props is data that we give to a component - eg. input to component like value={counter.value} - cannot access the state of other component
 
 - props is read-only: we cannot change input to component inside of the component
-  Cannot do this code within a component:
-  this.props.value = 0;
-  (will get error: "Cannot assign to read only property 'value' of object '#<Object>') - instead we should use state and 'setState' creating method within the life cycle of the component
+
+Cannot do this code within a component:
+
+this.props.value = 0;
+
+(will get error: "Cannot assign to read only property 'value' of object '#<Object>') - instead we should use state and 'setState' creating method within the life cycle of the component
 
 - state is data that is local (private) to a component (not accessible to other components)
 
@@ -184,7 +190,7 @@ symetry/consistency is when high level or low level components are grouped toget
 
 object destructuring should be done at the beginning of every functional component
 
-## React Router
+# React Router
 
 - to add routing to our project we need to use following command
 
@@ -338,7 +344,7 @@ JSON format:
   "stringNumber": "123"
   }
 
-## Authentication and Authorization
+# Authentication and Authorization
 
 - In our applications our backend should behave like this:
 
@@ -407,7 +413,7 @@ Backend implementation for delete function in vidly API
 - first node backend will run auth middleware function, then admin middleware function - using next()
 - when we overcome all these middleware function checks then we can perform delete action (we assign property 'isAdmin' to 'true')
 
-## Deployment
+# Deployment
 
 Environment Variables for different environments:
 Dev - Test - Production (sometimes we want them to be different)
@@ -480,4 +486,15 @@ MongoNetworkError: failed to connect to server [localhost:27017] on first connec
 how to store a variable on Heroku:
 \$ heroku config:set project_db=mongodb://someuser:password@blahblahblah
 
-## React Advanced Notes
+# React Advanced Notes
+
+## Higher Order Components
+
+We use higher order components to reuse logic across components
+
+- We create a tooltip component and pass it as an argument to a function. In that function we will return a new component
+- In the new bigger component we're going to implement all the common functionality (like showing a tooltip)
+
+`rcc`: shortcut to create React Class Component
+
+- by convention we prefix files with the word "with"
