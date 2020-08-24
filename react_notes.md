@@ -25,7 +25,7 @@ $ create-react-app
 $ npm run eject
 ```
 
-- but possible with running below command
+- above command makes config possible
 
 JSX: JavaScript XML
 
@@ -35,7 +35,7 @@ Babel converts JSX code to browser readable JavaScript
 
 - Prettier
 - Simple React Snippets
-  shortcuts like: imrc, cc
+  - shortcuts like: imrc, cc
 - Code Runner
 - Auto Import - ES6, TS, JSX
 - File utils
@@ -45,27 +45,33 @@ Babel converts JSX code to browser readable JavaScript
 
 - nodemon (automatically restarts node server on & off between changes)
 
-// id="root" is container for our React app
+`id="root"` is container for our React app
 
 ### react-scripts:
 
-"start": "react-scripts start", // start dev server
-\$ npm start
-"build": "react-scripts build", // build application for production for optimized package
-"test": "react-scripts test", // for running unit tests
-"eject": "react-scripts eject" // eject from create-react app and customize configs for this project
+`"start"`: "react-scripts start", // start dev server
+
+```
+$ npm start
+```
+
+`"build"`: "react-scripts build", // build application for production for optimized package
+
+`"test"`: "react-scripts test", // for running unit tests
+
+`"eject"`: "react-scripts eject" // eject from create-react app and customize configs for this project
 
 - all the complex configs (babel, webpack, etc.) are hidden
 
 only use if you know what you're doing
 
-- `$ npm run eject`
+`$ npm run eject`
 
 - this will make all dependencies visible and you can also see 'config' folder
 
-- Full-stack: JavaScript / Node + Express + MongoDB
+Full-stack: JavaScript / Node + Express + MongoDB
 
-- better to use .jsx for file names in 'components' - we get better code completion
+better to use .jsx for file names in 'components' - we get better code completion
 
 Simple React Snippets
 
@@ -73,18 +79,22 @@ Simple React Snippets
 - cc: Class Coomponent
 
 Setting attribute:
-<img src={this.state.imageUrl} alt="" />
+
+```html
+<img src="{this.state.imageUrl}" alt="" />
+```
 
 we can't use 'class' because it's a reserved keyword in JS, so we use 'className' in JSX
 
 refactor shortcut in VS code : CTRL + SHIFT + R
 
 alias for npm install
-\$ npm i
 
-- when we build an application webpack will pull in files that we have specified on index.js with 'import' and put them in a final bundle
+- `$ npm i`
 
-* real world applications consist of a "tree of components"
+When we build an application webpack will pull in files that we have specified on index.js with 'import' and put them in a final bundle
+
+Real world applications consist of a "tree of components"
 
 Zen coding with Emmet: create table with class "container" with <thead> enclosing <tr> enclosing 4 <td> tags
 table.container>thead>tr>td\*4
@@ -488,13 +498,14 @@ how to store a variable on Heroku:
 
 # React Advanced Notes
 
-## Higher Order Components
+## Higher Order Components (HOC)
 
 We use higher order components to reuse logic across components
 
 - We create a tooltip component and pass it as an argument to a function. In that function we will return a new component
 - In the new bigger component we're going to implement all the common functionality (like showing a tooltip)
-
-`rcc`: shortcut to create React Class Component
-
+  - in our example, all we're doing is implementing some logic and we're sharing this logic across different components
+- `rcc`: shortcut to create React Class Component
 - by convention we prefix files with the word "with"
+- To implement a HOC we create a new function that takes an existing component and return a new componetn
+  - can return a class component or a functional component

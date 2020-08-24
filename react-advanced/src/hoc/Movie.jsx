@@ -12,4 +12,5 @@ class Movie extends Component {
   }
 }
 
+// instead of just exporting our Movie class, here we wrap it with our higher order component function
 export default withTooltip(Movie);

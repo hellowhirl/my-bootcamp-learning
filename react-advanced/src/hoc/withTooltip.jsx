@@ -1,6 +1,9 @@
 import React from "react";
 
+// takes an existing component as an argument
 function withTooltip(Component) {
+  // make sure to capitalize this argument because we are rendering a component
+  // return a new component that wraps our original component (it will enhance it)
   return class WithTooltip extends React.Component {
     state = {
       showTooltip: false,
@@ -16,7 +19,10 @@ function withTooltip(Component) {
     render() {
       return (
         <div onMouseOver={this.mouseOver} onMouseOut={this.mouseOut}>
-          <Component {...this.props} showTooltip={this.state.showTooltip} />
+          <Component
+            {...this.props} // how we pass any existing props from the outside
+            showTooltip={this.state.showTooltip}
+          />
         </div>
       );
     }
