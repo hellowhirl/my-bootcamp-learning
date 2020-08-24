@@ -97,108 +97,128 @@ When we build an application webpack will pull in files that we have specified o
 Real world applications consist of a "tree of components"
 
 Zen coding with Emmet: create table with class "container" with <thead> enclosing <tr> enclosing 4 <td> tags
-table.container>thead>tr>td\*4
 
-Correct vs Incorrect ES6 syntax for JSX React components:
+- `table.container>thead>tr>td\*4`
 
-// Correct: when we are returning an object from an arrow function we need to put that object in parenthesis - otherwise JavaScript enging will parse {} as a code block instead of as an object
-{this.state.counters.map(c => (
-<Counter key={c.id} />
-))}
+### Correct vs Incorrect ES6 syntax for JSX React components:
 
-// Incorrect
-{this.state.counters.map(c => {
-<Counter key={c.id} />;
-})}
+- Correct:
 
-- In developer tools '\$0' indicates the latest element we have selected in dev tools
-- For example, on `<button>` we can use \$0.click() and activate the button
+  - when we are returning an object from an arrow function we need to put that object in parenthesis
+  - otherwise JavaScript enging will parse {} as a code block instead of as an object
 
-### Props vs State
+  ```jsx
+  {
+    this.state.counters.map((c) => <Counter key={c.id} />);
+  }
+  ```
+
+- Incorrect
+
+  ```jsx
+  {
+    this.state.counters.map((c) => {
+      <Counter key={c.id} />;
+    });
+  }
+  ```
+
+\*In developer tools '\$0' indicates the latest element we have selected in dev tools
+
+\*For example, on `<button>` we can use \$0.click() and activate the button
+
+## Props vs State
 
 - props is data that we give to a component - eg. input to component like value={counter.value} - cannot access the state of other component
 
 - props is read-only: we cannot change input to component inside of the component
 
-Cannot do this code within a component:
+Cannot do this code within a component: `this.props.value = 0;`
 
-this.props.value = 0;
-
-(will get error: "Cannot assign to read only property 'value' of object '#<Object>') - instead we should use state and 'setState' creating method within the life cycle of the component
+will get error: "Cannot assign to read only property 'value' of object '#<Object>' - instead we should use state and 'setState' creating method within the life cycle of the component
 
 - state is data that is local (private) to a component (not accessible to other components)
 
   - sometimes a component will not have a state, it may get all of its data through props
 
-- "The component that owns a piece of the state, should be the one modifying it"
+💡 "The component that owns a piece of the state, should be the one modifying it"
 
-- The whole point of using objects is to encapsulate related values
+The whole point of using objects is to encapsulate related values
 
-Local state is different from outside components problem:
+### Local state is different from outside components problem:
 
 - Single source of truth: remove the local state in the child component and have a single source of truth
+
 - if we don't have a single source of truth, state can be changed but it won't be reflected in the DOM
+
 - each component have their own local state - so values are disconnected
 
 * Controlled Componnet: has no local state but receives data via props and raises events when data needs to be changed - it is entirely controlled by its parent
 
-Keeping multple components in sync:
+### Keeping multple components in sync:
 
 - "lift the state up": when there is no parent/child relationship between 2 componenets and you want to share data between them
+
 - if we lift state up to <App /> then it can be parent to other child components, then state can be passed using props
 
-Lifting the state up:
+### Lifting the state up:
 
-- lifted up state from counters componenet to its parent (App componenet) - now we can share state with chilren of this component via props, and with this technique now we have multiple componenets in sync
+- lifted up state from counters componenet to its parent (App componenet)
 
-Stateless Functional Components:
+- now we can share state with chilren of this component via props, and with this technique now we have multiple componenets in sync
+
+### Stateless Functional Components:
 
 - Zen coding shortcut: sfc
 
 - for classes that have a single method (like return()) and no state we can convert into a Stateless Functional Component
+
 - simply define a function that returns a React element (instead of using class that extends Component class with render method
 
-Lifecycle Hooks\* (below are used 90% of time)
+### Lifecycle Hooks\*
 
-== MOUNT ==
+(below are used 90% of time)
+
+```
+// MOUNT //
 constructor
 render
-componentDidMount - App gets mounted and goes into DOM
+componentDidMount // App gets mounted and goes into DOM
 
-== UPDATE ==
+// UPDATE //
 render
-componentDidUpdate - used for if we want to make ajax call to get new data based on changes to state and props objects
+componentDidUpdate // used for if we want to make ajax call to get new data based on changes to state and props objects
 
-== UNMOUNT ==
-componentWillUnmount - gives us opportunity to do clean up (timers and listeneres) and prevent memory leaks
+// UNMOUNT //
+componentWillUnmount // gives us opportunity to do clean up (timers and listeneres) and prevent memory leaks
+```
 
 - cannot use lifecycle hooks in stateless functional components - they can only be used with class components
 
-* when a component is rendered we get a React element which updates virtual DOM - so we have 2 object references in memory for old virtual DOM and new virtual DOM, then React will update DOM based on the difference only
+- when a component is rendered we get a React element which updates virtual DOM - so we have 2 object references in memory for old virtual DOM and new virtual DOM, then React will update DOM based on the difference only
 
-* when writing code, go step by step. Write a little bit of code, test to see if it works, then move on. Don't go for "big moves"
+💡 When writing code, go step by step. Write a little bit of code, test to see if it works, then move on. Don't go for "big moves"
 
-Steps for when building a new component:
+### A way to organize folders in a React project
 
-1. Determine interface with inputs and/or events
+| folders |                     Contetns                      |
+| ------- | :-----------------------------------------------: |
+| common  | components that can be used across other projects |
+| utlis   |           utility classes and functions           |
 
-folders in React project:
-"common": components that can be used across other projects
-"utils": utility classes and functions
-
-- in order to chain methods in lodash we need to convert array into lodash wrapper
+in order to chain methods in lodash we need to convert array into lodash wrapper
 
 VS Code shortcut:
-command + P and type '@': look at members of a class, and search from that
+`command + P and type '@'`: look at members of a class, and search from that
 
-levels of components:
+### Levels of components:
 
-high level: simplified, abstract
-low level: detailed, elements
+- high level: simplified, abstract
+- low level: detailed, elements
 
-symetry/consistency is when high level or low level components are grouped together - should be same level of abstraction
+Symetry/consistency is when high level or low level components are grouped together - should be same level of abstraction
 
-object destructuring should be done at the beginning of every functional component
+Object destructuring should be done at the beginning of every functional component
 
 # React Router
 
