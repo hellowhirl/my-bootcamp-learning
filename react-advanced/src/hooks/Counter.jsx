@@ -1,4 +1,5 @@
 import React, { useState, Fragment, useEffect } from "react";
+import useDocumentTitle from "./useDocumentTitle";
 
 function Counter(props) {
   const [count, setCount] = useState(0); // 0 is initial value for "count" variable
@@ -13,14 +14,17 @@ function Counter(props) {
   // componentDidUpdate (rerenders or when we get new data based on changes to state and props objects)
 
   useEffect(() => {
-    document.title = `${name} has clicked ${count} times`;
+    // document.title = `${name} has clicked ${count} times`;
 
     // componentWillUnmount lifecycle methods will up in this return function; we can put our cleanup code in here
     return () => {
-      console.log("Clean up");
+      console.log("Main - Clean up");
     };
   }, [count]); // sometime we may want to do only update based on depending on certain dependencies for performance reasons
   // otherwise it will get called every time our component gets rerendered
+
+  // if there is some trouble with below logic now there is a single place to make necessary changes
+  useDocumentTitle(`${name} has clicked ${count} times`); // how we pass our custom title
 
   return (
     <Fragment>

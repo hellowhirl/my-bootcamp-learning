@@ -559,3 +559,7 @@ One rule: we can't call hooks inside loops, conditions, or nested functions
 ### useEffect hook
 
 - problem with class lifecycle methods is that we have to go back and forth between components to see what is going on
+
+- with useEffect hook we can encapsulate all the logic around a certain piece of functinality in a single place
+
+  - this gives us extra benefit: we can extract this logic, put it in its own module, and use it across different compomenets
