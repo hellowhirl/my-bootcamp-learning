@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 
 function Counter(props) {
   const [count, setCount] = useState(0); // 0 is initial value for "count" variable
@@ -7,6 +7,20 @@ function Counter(props) {
   //   const count = array[0]; // equivalent to this.state.count
   //   const setCount = array[1]; // 2nd item is a function for updating the value
   const [name, setName] = useState("");
+
+  // all logic for below lifecycle methods will end up in a single place
+  // componentDidMount (first render)
+  // componentDidUpdate (rerenders or when we get new data based on changes to state and props objects)
+
+  useEffect(() => {
+    document.title = `${name} has clicked ${count} times`;
+
+    // componentWillUnmount lifecycle methods will up in this return function; we can put our cleanup code in here
+    return () => {
+      console.log("Clean up");
+    };
+  }, [count]); // sometime we may want to do only update based on depending on certain dependencies for performance reasons
+  // otherwise it will get called every time our component gets rerendered
 
   return (
     <Fragment>

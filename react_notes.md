@@ -544,6 +544,8 @@ In React 16.8 we got a new feature called "hooks" in functional components
 
 ALl functions that start with "use" are examples of hooks in React
 
+### useState hook
+
 ```jsx
 import React, { useState } from "react";
 // we can pass any initial value like a number, string, boolean, object, etc. (no limitations)
@@ -553,3 +555,7 @@ const [count, setCount] = useState(0);
 One rule: we can't call hooks inside loops, conditions, or nested functions
 
 - React creates state variables based on order we call each hook funcition; above will mess up order of calls to hook functions
+
+### useEffect hook
+
+- problem with class lifecycle methods is that we have to go back and forth between components to see what is going on
