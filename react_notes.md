@@ -564,11 +564,11 @@ One rule: we can't call hooks inside loops, conditions, or nested functions
 
   - this gives us extra benefit: we can extract this logic, put it in its own module, and use it across different compomenets as a custom hook
 
-## Context
+## Context (shared data)
 
-Solving the problem of "prop drilling" which is passing an object down our component tree multiple times
+Solving the problem of "prop drilling" which is drilling a hole at every level to pass a prop down our component tree
 
-- up until recently Redux has handled this problem, but now Context can do the same thing
+- up until recently Redux has handled this problem with Store, but now Context (shared data) can do the same thing
 
 2 ways to deliver context: Class components and Functional Components
 
@@ -597,3 +597,17 @@ Solving the problem of "prop drilling" which is passing an object down our compo
   - finally we can render the value that we are passing from the provider in this consumer like `currentUser.name`
 
 - it's a good practice to give each context an explicit nmae; use the 'displayName' property
+
+If we want to consume context outside of the render method like lifecycle methods then we just set a class componetns static properties, using 1 of 2 methods:
+
+```jsx
+// Method 1 - before class is defined
+static contextType = userContext;
+//
+// class MovieList { render() {} }
+//
+// Method 2 - after class is defined
+MovieList.contextType = userContext;
+```
+
+- then we can get the context by using `this.context`
