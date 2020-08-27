@@ -14,7 +14,10 @@ class MovieList extends Component {
       <UserContext.Consumer>
         {(valueOrAnything) => (
           <div>
-            Movie List: {valueOrAnything.name}
+            Movie List:{" "}
+            {valueOrAnything.currentUser // check to see if "currentUser" is null or not
+              ? valueOrAnything.currentUser.name // changing structure of Context object here
+              : ""}
             <MovieRow />
           </div>
         )}

@@ -624,3 +624,13 @@ Advanges:
 - don't have to use function to return content within the Consumer component (less complexity)
 
 Going forward let's prefer functional components over class components
+
+## Updating the Context object - steps:
+
+1 - add a method in our ContextApp component: it is responsible for updating the state
+
+2 - pass this method down using our `<SomethingContext.Provider>` object
+
+3 - add a new component like `<Login>` and call our new method by declaring an object equal to `useContext(UserContext)`
+
+4 - Finally, upon clicking the button that calls this new event handler method, the Provider will provide a new context ojbect to our component tree. Then all consumers will be notified and they will refresh themselves.
