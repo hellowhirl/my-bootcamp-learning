@@ -564,4 +564,36 @@ One rule: we can't call hooks inside loops, conditions, or nested functions
 
   - this gives us extra benefit: we can extract this logic, put it in its own module, and use it across different compomenets as a custom hook
 
-### Fetching Data with Hooks
+## Context
+
+Solving the problem of "prop drilling" which is passing an object down our component tree multiple times
+
+- up until recently Redux has handled this problem, but now Context can do the same thing
+
+2 ways to deliver context: Class components and Functional Components
+
+### Class Components - steps:
+
+1 - Create a context object
+
+- In our "context" folder we add a new file called "userContext.js"
+
+- we could have different context for sharing different things like "themeContext.js"
+
+2 - Provide this context in a top component
+
+- wrap an element with our `<SomethingContext.Provider>` component
+
+  - this component has a special prop called 'value' where we can pass an object down our component tree
+
+3 - Consume this context somewhere in our component tree
+
+- wrap an element with our `<SomethingContext.Consumer>` component
+
+  - but this component expects a function as a child, so we should pass a lambda expression () => {}, otherwise will get error
+
+  - we can call that value we pass anything like "value", "userContext" or "currentUser"
+
+  - finally we can render the value that we are passing from the provider in this consumer like `currentUser.name`
+
+- it's a good practice to give each context an explicit nmae; use the 'displayName' property
