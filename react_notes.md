@@ -634,3 +634,13 @@ Going forward let's prefer functional components over class components
 3 - add a new component like `<Login>` and call our new method by declaring an object equal to `useContext(UserContext)`
 
 4 - Finally, upon clicking the button that calls this new event handler method, the Provider will provide a new context ojbect to our component tree. Then all consumers will be notified and they will refresh themselves.
+
+## Consuming multiple contexts
+
+As our application grows we may want to create different types of context, like a "cart"
+
+- the concept of a shopping cart is differnt than userContext, so we should create separate context for it
+
+Just wrap with another `<SomethingContext.Provider>` wrapper where we want to pass down any specific value props
+
+- then we can go to any child component and consume this other context object
