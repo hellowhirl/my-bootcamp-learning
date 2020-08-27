@@ -611,3 +611,16 @@ MovieList.contextType = userContext;
 ```
 
 - then we can get the context by using `this.context`
+
+### Functional Components - steps:
+
+1 - call the `useContext` hook
+
+Advanges:
+
+- We don't have a Consumer component under our component
+- no extra chunks of components (less convoluted)
+- don't have to set static property
+- don't have to use function to return content within the Consumer component (less complexity)
+
+Going forward let's prefer functional components over class components

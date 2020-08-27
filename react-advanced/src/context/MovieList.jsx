@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import UserContext from "./userContext";
+import MovieRow from "./MovieRow";
 
 class MovieList extends Component {
   static contextType = UserContext;
@@ -11,12 +12,17 @@ class MovieList extends Component {
   render() {
     return (
       <UserContext.Consumer>
-        {(valueOrAnything) => <div>Movie List: {valueOrAnything.name}</div>}
+        {(valueOrAnything) => (
+          <div>
+            Movie List: {valueOrAnything.name}
+            <MovieRow />
+          </div>
+        )}
       </UserContext.Consumer>
     );
   }
 }
 
-// MovieList.contextType = UserContext;
+// MovieList.contextType = UserContext; // an alternative way to pass context outside of render method
 
 export default MovieList;
