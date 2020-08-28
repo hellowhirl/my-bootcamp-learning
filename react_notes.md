@@ -527,7 +527,7 @@ We use higher order components to reuse logic across components
   - in our example, all we're doing is implementing some logic and we're sharing this logic across different components
 - `rcc`: shortcut to create React Class Component
 - by convention we prefix files with the word "with"
-- To implement a HOC we create a new function that takes an existing component and return a new componetn
+- To implement a HOC we create a new function that takes an existing component and return a new bigger component
   - can return a class component or a functional component
 
 ## Hooks
