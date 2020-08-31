@@ -4,6 +4,7 @@ import UserContext from "./context/userContext";
 import Login from "./context/Login";
 import CartContext from "./context/cartContext";
 
+// demonstrating context in class components and functional components
 class ContextApp extends Component {
   state = { currentUser: null };
 
@@ -15,9 +16,8 @@ class ContextApp extends Component {
 
   render() {
     return (
+      // passing down state in this component through value prop, that has 2 properties
       <CartContext.Provider value={{ cart: [] }}>
-        // passing down state in this component through value prop, that has 2
-        properties
         <UserContext.Provider
           // the moment the state is updated then "currentUser" in this value prop will also be updated
           value={{

@@ -193,9 +193,9 @@ componentDidUpdate // used for if we want to make ajax call to get new data base
 componentWillUnmount // gives us opportunity to do clean up (timers and listeneres) and prevent memory leaks
 ```
 
-- cannot use lifecycle hooks in stateless functional components - they can only be used with class components
+(\*) We cannot use lifecycle hooks in stateless functional components - they can only be used with class components; unless we use React hooks with functional components
 
-- when a component is rendered we get a React element which updates virtual DOM - so we have 2 object references in memory for old virtual DOM and new virtual DOM, then React will update DOM based on the difference only
+When a component is rendered we get a React element which updates virtual DOM - so we have 2 object references in memory for old virtual DOM and new virtual DOM, then React will update DOM based on the difference only
 
 💡 When writing code, go step by step. Write a little bit of code, test to see if it works, then move on. Don't go for "big moves"
 
@@ -208,8 +208,9 @@ componentWillUnmount // gives us opportunity to do clean up (timers and listener
 
 in order to chain methods in lodash we need to convert array into lodash wrapper
 
-VS Code shortcut:
-`command + P and type '@'`: look at members of a class, and search from that
+VS Code shortcut to look at members of a class, and search from that
+
+- `command + P and type '@'`
 
 ### Levels of components:
 
@@ -222,11 +223,13 @@ Object destructuring should be done at the beginning of every functional compone
 
 # React Router
 
-- to add routing to our project we need to use following command
+To add routing to our project we need to use the following command
 
+```
 npm i react-router-dom
+```
 
-<Route> component looks at the current URL and if it matches 'path' attribute then it will return the component that is in the 'component' attribute - these attributes are passed as props
+The `<Route>` component looks at the current URL and if it matches 'path' attribute then it will return the component that is in the 'component' attribute - these attributes are passed as props
 
 props wrapped with a Route component:
 
@@ -236,28 +239,35 @@ props wrapped with a Route component:
 
 How to pass/retrieve route parameters
 
-- to define a parameter in URL path we should prefix that parameter with a colon
-- fetch from 'match.params'
+- to define a parameter in URL path we should prefix that parameter with a colon (:)
+- retrieve from the property 'match.params'
 
-- when we define parameters in our route by detault those parameters are required
-- to make then not required we append a '?'
+When we define parameters in our route by detault those parameters are required
 
-- programmatic navigation:
+To make then not required we append a '?'
 
-- nested routing: for example routing on top and bottom
+Programmatic navigation: when the user does some action (clikcs on a button) we redirect them to another page
 
-Zen coding trick:
-Route[path][component]*4
-form>(div.form-group>label+input.form-control)*2
+Nested routing: for example routing on top of page and a side bar
+
+- to implement we use `<Route>` components insdie of another component that will render based on the current 'path' url
+
+Zen coding tricks:
+
+- Route[path][component]\*4
+- form>(div.form-group>label+input.form-control)\*2
 
 Shortcut to tab through all methods in a component
-SHIFT + CMD + >
+
+- SHIFT + CMD + >
 
 Shortcut from command palette (SHIFT + CMD + P)
-Wrap with abbreviation (to surround selected text with a tag - also possible to do zen coding)
+
+- Wrap with abbreviation (to surround selected text with a tag - also possible to do zen coding)
 
 Shortcut for editing multiple places in VS Code:
-Hold ALT while selecting different places
+
+- Hold ALT while selecting different places
 
 In React we should never work with the 'document' object - we are abstracting from it
 
