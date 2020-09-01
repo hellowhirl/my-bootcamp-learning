@@ -254,16 +254,19 @@ Nested routing: for example routing on top of page and a side bar
 
 Zen coding tricks:
 
-- Route[path][component]\*4
-- form>(div.form-group>label+input.form-control)\*2
+- `Route[path][component]*4`
+
+- `form>(div.form-group>label+input.form-control)*2`
 
 Shortcut to tab through all methods in a component
 
 - SHIFT + CMD + >
 
-Shortcut from command palette (SHIFT + CMD + P)
+Shortcut for command palette
 
-- Wrap with abbreviation (to surround selected text with a tag - also possible to do zen coding)
+- (SHIFT + CMD + P)
+
+Wrap with abbreviation (to surround selected text with a tag - also possible to do zen coding)
 
 Shortcut for editing multiple places in VS Code:
 
@@ -274,21 +277,24 @@ In React we should never work with the 'document' object - we are abstracting fr
 - also it makes our applications easier to maintain and unit test
 
 onChange event:
-occurs when the value of an element has been changed.
+
+- occurs when the value of an element has been changed.
 
 currentTarget event property:
-returns the element whose event listeners triggered the event.
 
-- Rule of thumb: when building a form we should set initialize the properties of state objects to empty string '' or some value from the server, otherwise we'll get an error
+- returns the element whose event listeners triggered the event.
+
+Rule of thumb: when building a form we should set initial properties of state objects to an empty string '' or some value from the server, otherwise we'll get an error
 
 VS code shortcut - Select all occurences
-CMD + SHIFT + L
+
+- CMD + SHIFT + L
 
 VS code shortcut - indenting line
-CMD + { OR }
 
-abort early:
-by default terminates validation as soon as it finds an error
+- CMD + { OR }
+
+abort early: by default terminates validation as soon as it finds an error
 
 - when setting up validation for a form all we usually need to do is set up the schema
 
