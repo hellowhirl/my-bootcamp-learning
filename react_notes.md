@@ -133,15 +133,15 @@ Zen coding with Emmet: create table with class "container" with <thead> enclosin
 
 - props is read-only: we cannot change input to component inside of the component
 
-Cannot do this code within a component: `this.props.value = 0;`
-
-will get error: "Cannot assign to read only property 'value' of object '#<Object>' - instead we should use state and 'setState' creating method within the life cycle of the component
-
 - state is data that is local (private) to a component (not accessible to other components)
 
-  - sometimes a component will not have a state, it may get all of its data through props
+- sometimes a component will not have a state, it may get all of its data through props
 
-💡 "The component that owns a piece of the state, should be the one modifying it"
+Cannot do this code within a component: `this.props.value = 0;`
+
+- will get this error: "Cannot assign to read only property 'value' of object `<Object>` - instead we should use 'state' and 'setState' when creating method within the life cycle of the component
+
+💡"The component that owns a piece of the state, should be the one modifying it"
 
 The whole point of using objects is to encapsulate related values
 
@@ -153,7 +153,7 @@ The whole point of using objects is to encapsulate related values
 
 - each component have their own local state - so values are disconnected
 
-* Controlled Componnet: has no local state but receives data via props and raises events when data needs to be changed - it is entirely controlled by its parent
+- Controlled Componnet: has no local state but receives data via props and raises events when data needs to be changed - it is entirely controlled by its parent
 
 ### Keeping multple components in sync:
 
@@ -163,13 +163,15 @@ The whole point of using objects is to encapsulate related values
 
 ### Lifting the state up:
 
-- lifted up state from counters componenet to its parent (App componenet)
+- in our example we lifted up state from the Counters componenet to its parent (App componenet)
 
 - now we can share state with chilren of this component via props, and with this technique now we have multiple componenets in sync
 
 ### Stateless Functional Components:
 
-- Zen coding shortcut: sfc
+- Zen coding shortcut for stateless functional component:
+
+  - `sfc`
 
 - for classes that have a single method (like return()) and no state we can convert into a Stateless Functional Component
 
@@ -197,7 +199,7 @@ componentWillUnmount // gives us opportunity to do clean up (timers and listener
 
 When a component is rendered we get a React element which updates virtual DOM - so we have 2 object references in memory for old virtual DOM and new virtual DOM, then React will update DOM based on the difference only
 
-💡 When writing code, go step by step. Write a little bit of code, test to see if it works, then move on. Don't go for "big moves"
+💡When writing code, go step by step. Write a little bit of code, test to see if it works, then move on. Don't go for "big moves"
 
 ### A way to organize folders in a React project
 
@@ -244,7 +246,7 @@ How to pass/retrieve route parameters
 
 When we define parameters in our route by detault those parameters are required
 
-To make then not required we append a '?'
+To make them not required we append a '?'
 
 Programmatic navigation: when the user does some action (clikcs on a button) we redirect them to another page
 
@@ -298,47 +300,60 @@ abort early: by default terminates validation as soon as it finds an error
 
 - when setting up validation for a form all we usually need to do is set up the schema
 
-* in React we can substitute 'extends Component' for our own custom class,
-  then we can have a class we define inherit all the methods we have defined in the custom base class
+In React we can substitute 'extends Component' for our own custom class,
+then we can have a class we define inherit all the methods we have defined in the custom base class
 
-* class components don't always need to have a render() method
+Class components don't always need to have a render() method
 
 REST API's
-REST: Representational State Transfer
-API's: endpoints (Application Programming Interfaces), an interface for our applications
 
-- JSONPlaceholder website provides endpoints that are publicly accessible over the Internet
+- REST: Representational State Transfer
+- API's: endpoints (Application Programming Interfaces), an interface for our applications
+
+JSONPlaceholder website provides endpoints that are publicly accessible over the Internet
+
 - We can set HTTP requests to these endpoints to get, create, update, delete data (CRUD operations)
 
 endpoint for 'posts':
-https://jsonplaceholder.typicode.com/posts
 
-Fetch API (browsers can natively send HTTP requests)
-jQuery AJAX (just like the old days)
-Axios (popular - Greek word that means "suitable")
+`https://jsonplaceholder.typicode.com/posts`
+
+3 common ways to send HTTP requests:
+
+- Fetch API (browsers can natively send HTTP requests)
+- jQuery AJAX (just like the old days)
+- Axios (popular - Greek word that means "suitable")
 
 promise: an object that holds the result of an asynchronous operation (will complete in the future)
 
 Lifecycle of an HTTP request:
 
-201 Created
-The request has been fulfilled, resulting in the creation of a new resource.
+201, Created
 
-204 No Content
-The server successfully processed the request and is not returning any content.
+- The request has been fulfilled, resulting in the creation of a new resource.
+
+204, No Content
+
+- The server successfully processed the request and is not returning any content.
 
 Request Method (in Headers): determines intent of the request
-GET (getting data)
-POST (creating data)
-PUT (updating data)
-DELETE (deleting data)
-OPTIONS (whenver an application sends an AJAX request to a different domain the browser will send an OPTIONS request)
+
+- GET (getting data)
+- POST (creating data)
+- PUT (updating data)
+- DELETE (deleting data)
+- OPTIONS (whenver an application sends an AJAX request to a different domain the browser will send an OPTIONS request)
 
 Request Payload: shows the object that we sent to the server
 
 Response Tab: the response the API returned to us
 
 Optimistic vs Pessimistic Updates
+
+Pessimistic:
+
+- updating the data first then updating the view (UI)
+- with this implementaiton if an error occrus while calling the server then the rest of the function will not be executed
 
 Optimistic:
 
@@ -347,16 +362,17 @@ Optimistic:
 - wrap the call to the server in a try/catch block
 - in catch block we should display an error and update state to previous state
 
-Expected and Unexpected Errors:
+Expected vs Unexpected Errors:
 
-Expected: API endpoints predict and return (400, 404)
-Unexpected: network down, server down, db down, bug
-
-- Log these Errors
-- Displays a generic and friendly error message
+- Expected: API endpoints predict and return (400, 404)
+  - should display something specific (which fields were invalid, etc.)
+- Unexpected: network down, server down, db down, bug (shouldn't happen under normal circumstances)
+  - should log these errors
+  - display a generic and friendly error message
 
 Toastify install:
-npm i react-toastify@4.1
+
+`npm i react-toastify@4.1`
 
 Axios Interceptors
 
@@ -377,18 +393,24 @@ vidly-api-node
   "bcrypt": "^3.0.6"
 
 Start API server:
+
+```
 node index.js
+```
 
 JSON format:
 
 - all 'keys' should be in "quotes"
+
+```
   {
-  "example": "test",
-  "foo": bar,
-  "whatever": true,
-  "number": 2,
-  "stringNumber": "123"
+    "example": "test",
+    "foo": bar,
+    "whatever": true,
+    "number": 2,
+    "stringNumber": "123"
   }
+```
 
 # Authentication and Authorization
 
