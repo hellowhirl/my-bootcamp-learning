@@ -328,11 +328,11 @@ promise: an object that holds the result of an asynchronous operation (will comp
 
 Lifecycle of an HTTP request:
 
-201, Created
+201 - Created
 
 - The request has been fulfilled, resulting in the creation of a new resource.
 
-204, No Content
+204 - No Content
 
 - The server successfully processed the request and is not returning any content.
 
@@ -414,13 +414,14 @@ JSON format:
 
 # Authentication and Authorization
 
-- In our applications our backend should behave like this:
+In our applications our backend should behave like this:
 
-  - have an endpoint for registering users - the endpoint should receive a http POST request
-  - should respond with either 200 or 400
+- have an endpoint for registering users - the endpoint should receive a http POST request
+- should respond with either 200 or 400
 
-- If we make data object names consistent between frontend and backend then our code will be cleaner and easier to maintain
-- Best to have a single module that is responsible for knowing how authentication is implemented (as opposed to scattered all over the place)
+If we make data object names consistent between frontend and backend then our code will be cleaner and easier to maintain
+
+Best to have a single module that is responsible for knowing how authentication is implemented (as opposed to scattered all over the place)
 
 In Chrome Dev tools under Network there is a Preview tab - shows us the body of the reponse from the server
 
@@ -453,16 +454,17 @@ Vidly API
 
 - then we will be able to get our custom header
 
-JWT.io - Debugger
+"JWT.io" is an online Debugger (decoder as well)
 
 - able to debug a JSON token and look at its content
-- 3 parts:
 
-  - Header: standard, all tokens have it
-  - Payload: encoded version of our JSON object (decoded with base64 algorithm) - for example, content has various attributes about the user (claims)
-  - Digital Signature: generated based on the header, payload, and a secret that is only available on the server
+3 parts to a JSON web token:
 
-  - if we make any changes to the Payload (adding or removing characters) then the Digital Signature needs to be regenerated (but needs the private key which is stored on the server)
+- Header: standard, all tokens have it
+- Payload: encoded version of our JSON object (decoded with base64 algorithm) - for example, content has various attributes about the user (claims)
+- Digital Signature: generated based on the header, payload, and a secret that is only available on the server
+
+If we make any changes to the Payload (adding or removing characters) then the Digital Signature needs to be regenerated (but needs the private key which is stored on the server)
 
 Calling protected API Endpoints
 
