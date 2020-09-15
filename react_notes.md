@@ -486,12 +486,28 @@ Backend implementation for delete function in vidly API
 # Deployment
 
 Environment Variables for different environments:
-Dev - Test - Production (sometimes we want them to be different)
-For example when we are doing development we want to use a real production backend with real data (so config.json isn't going to help us with production builds)
 
-.env files (.env.development, .env.test, .env.production) - all environment variables have a key and a value - the key start with 'REACT*APP*' (REACT_APP_NAME =Vidly in Dev OR REACT_APP_VERSION=1)
+- Dev - Test - Production (sometimes we want them to be different)
+
+For example when we deploy our application to production we want to use a real production backend with real data (so config.json is OK for development environment but isn't going to help us with production builds)
+
+'.env' files (.env.development, .env.test, .env.production)
+
+all environment variables have a key and a value - in React the keys should be prefixed with "REACT _ APP _"
+
+- REACT_APP_NAME=Vidly in Dev
+- REACT_APP_VERSION=1
+
+We can see the environment variables in any JS file with:
+
+- `console.log(process.env)`
+
+Environemnt variables can be set direclty in terminal or our '.env' configuration files
+
+- everytime we make changes to environemnt files we need to restart our application (because they are not watched)
 
 When we deploy our application to production we want an optimized production build (without all the extra code in our development build)
+
 We can get an optimized production build (and then contents of the folder to our web server wiht FTP, etc) with:
 $ npm run build
 Simple lightweight server can be installed with:
