@@ -21,12 +21,6 @@ $ create-react-app
 
 - install Web Development Server, Webpack, Babel (zero config setup)
 
-```
-$ npm run eject
-```
-
-- above command makes config possible
-
 JSX: JavaScript XML
 
 Babel converts JSX code to browser readable JavaScript
@@ -63,7 +57,7 @@ $ npm start
 
 - all the complex configs (babel, webpack, etc.) are hidden
 
-only use if you know what you're doing
+only use if you know what you're doing (makes custom config possible)
 
 `$ npm run eject`
 
@@ -90,7 +84,9 @@ refactor shortcut in VS code : CTRL + SHIFT + R
 
 alias for npm install
 
-- `$ npm i`
+```
+$ npm i
+```
 
 When we build an application webpack will pull in files that we have specified on index.js with 'import' and put them in a final bundle
 
@@ -372,7 +368,9 @@ Expected vs Unexpected Errors:
 
 Toastify install:
 
-`npm i react-toastify@4.1`
+```
+npm i react-toastify@4.1
+```
 
 Axios Interceptors
 
@@ -509,68 +507,108 @@ Environemnt variables can be set direclty in terminal or our '.env' configuratio
 When we deploy our application to production we want an optimized production build (without all the extra code in our development build)
 
 We can get an optimized production build (and then contents of the folder to our web server wiht FTP, etc) with:
+
+```
 $ npm run build
+```
+
 Simple lightweight server can be installed with:
-    $ npm install -g server
+
+```
+$ npm install -g server
+```
+
 Then we can serve content of target folder (build) with:
-\$ serve -s build
 
-- During the build time expressions like "process.env.REACT_APP_NAME" that reference an environement variable are replaced with the value of that envvironment variable
+```
+$ serve -s build
+```
 
-== Flow for Adding to a git Repository ==
+During the build time expressions like `process.env.REACT_APP_NAME` that reference an environement variable are replaced with the value of that envvironment variable
 
-add a .gitignore file
-good to add: node_modules/ ('/' at end represents a folder)
+## Flow for Adding to a git Repository
+
+add a `.gitignore` file
+
+- good to add: `node_modules/`
+- ('/' at end represents a folder)
 
 initializes a git repositiory in a folder
-\$ git init
+
+```
+$ git init
+```
 
 stage all files to be commited to repository and commit
-$ git add .
-    $ git commit -m "Iniital commit"
 
-== Deploying to Heroku ==
+```
+$ git add .
+$ git commit -m "Iniital commit"
+```
+
+## Deploying to Heroku
 
 Heroku is a cloud service for deploying an application and its backend
 
 to login we use:
-\$ heroku login
+
+```
+$ heroku login
+```
 
 if login fails try below and then logging in:
-\$ export HTTP_PROXY=http://proxy.server.com:1234
+
+```
+$ export HTTP_PROXY=http://proxy.server.com:1234
+```
 
 to create a Heroku app, go inside api project folder and enter:
-$ heroku create (if this is left out then one will be auto-genereated))
-    $ heroku create project-name-vidly (also possible to provide name)
 
-    - we will see address of our application on herokuapp.com (our backend will be hosted here)
-    - our frontend should send requests to this address/api/whatever
-    - we will also see the address of a git repository under heroku.com (https://git.heroku.com/name-of-application.git)
-    - whenever we push new code to above git repository the practice of continuous integration happens as below:
-        heroku will be notified, download latest source code, build it, then deploy to our backend heroku address
+```
+$ heroku create (if this is left out then one will be auto-genereated))
+
+$ heroku create project-name-vidly (also possible to provide name)
+```
+
+- we will see address of our application on herokuapp.com (our backend will be hosted here)
+  - our frontend should send requests to this address/api/whatever
+- we will also see the address of a git repository under heroku.com (https://git.heroku.com/name-of-application.git)
+  - whenever we push new code to above git repository the practice of continuous integration happens as below:
+    heroku will be notified, download latest source code, build it, then deploy to our backend heroku address
 
 to push code that we have in our local repository to the remote repository:
-\$ git push heroku master
+
+```
+$ git push heroku master
+```
 
 to open heroku app (launches browser pointing to our application on Heroku):
-\$ heroku open
+
+```
+$ heroku open
+```
 
 check logs on why our application crashed
-\$ heroku logs
 
-We get an error:
-MongoNetworkError: failed to connect to server [localhost:27017] on first connect [Error: connect ECONNREFUSED 127.0.0.1:27017
+```
+$ heroku logs
+```
 
-- 27017 is the default port for MongoDB. In our backend project in the config folder, in default.json:
-  "db": "mongodb://localhost/vidly" does not exist on the heroku server that is hosting our application
+We get an error: `MongoNetworkError: failed to connect to server [localhost:27017] on first connect [Error: connect ECONNREFUSED 127.0.0.1:27017`
+
+- '27017' is the default port for MongoDB. In our backend project in the config folder, in default.json:
+- `"db": "mongodb://localhost/vidly"` does not exist on the heroku server that is hosting our application
   - so we need to change this to the address of our MongoDB on MLab
-  - we don't want to store it in the config file because it will be stored as text in a .git repository
+- we don't want to store it in the config file because it will be stored as text in a .git repository
   - never store secrets in your config files (they can be open to anybody - security risk)
-  - for a production environment we should use environment variables
+- for a production environment we should use environment variables
   - these env variables are not part of the source code - we need to set them in the terminal
 
 how to store a variable on Heroku:
-\$ heroku config:set project_db=mongodb://someuser:password@blahblahblah
+
+```
+$ heroku config:set project_db=mongodb://someuser:password@blahblahblah
+```
 
 # React Advanced Notes
 
